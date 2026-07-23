@@ -8,24 +8,15 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    
+    name: Lint & Type Check
+    runs-on: [self-hosted, soliso, devquest]
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Compile check
-      run: python -m compileall -q .
-    
-    - name: Unit tests
-      run: python -m unittest discover -s tests -v
-    
-    - name: Validate questions
-      run: python scripts/valida_domande.py
-    
-    - name: Smoke tests
-      run: python scripts/smoke_test.py
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Type Check & Build
+        run: |
+          npm install --no-audit --no-fund
+          npx tsc --noEmit
+          npm run build

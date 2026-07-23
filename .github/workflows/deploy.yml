@@ -7,13 +7,13 @@ on:
 jobs:
   deploy:
     name: Build & Deploy Container
-    runs-on: [self-hosted, devquest]
+    runs-on: [self-hosted, soliso, devquest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Build and restart Docker container
         run: |
-          docker compose build --progress=plain
-          docker compose up -d
+          docker compose down --remove-orphans || true
+          docker compose up -d --build --force-recreate
           docker compose ps
