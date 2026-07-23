@@ -1,0 +1,37 @@
+services:
+  devquest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+        GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+        GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+    image: devquest:latest
+    container_name: devquest-app
+    restart: unless-stopped
+    # Porta host non-standard: 4242 → 3000 nel container
+    ports:
+      - "4242:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+    env_file:
+      - path: .env
+        required: false
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000 > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - devquest-net
+
+networks:
+  devquest-net:
+    driver: bridge

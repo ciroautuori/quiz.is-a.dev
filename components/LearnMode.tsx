@@ -1,0 +1,162 @@
+'use client';
+
+import React, { useState } from 'react';
+import { getConceptsForTrack } from '../lib/concepts';
+import { getTrackById } from '../lib/tracks';
+import { TrackId, Concetto } from '../lib/types';
+import { useLanguage } from '../lib/LanguageContext';
+import { BookOpen, Search, Filter, Lightbulb, ChevronRight, Sparkles } from 'lucide-react';
+
+interface LearnModeProps {
+  activeTrackId?: TrackId;
+  onOpenAiTutorWithConcept?: (concetto: Concetto) => void;
+}
+
+export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithConcept }: LearnModeProps) {
+  const { t } = useLanguage();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [chapterFilter, setChapterFilter] = useState<number | 'tutti'>('tutti');
+  const [selectedConcept, setSelectedConcept] = useState<string | null>(null);
+
+  const track = getTrackById(activeTrackId);
+  const concetti = getConceptsForTrack(activeTrackId);
+
+  const filtered = concetti.filter((c) => {
+    const matchesSearch = 
+      c.titolo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      c.testo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      c.nome.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesChapter = chapterFilter === 'tutti' || c.capitolo === chapterFilter;
+
+    return matchesSearch && matchesChapter;
+  });
+
+  return (
+    <div className="max-w-4xl mx-auto py-8 px-4">
+      {/* Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 rounded-xl border flex items-center justify-center text-xl shrink-0" style={{ backgroundColor: 'var(--ctp-surface0)', borderColor: 'var(--ctp-surface1)' }}>
+            {track.icon}
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
+                {t.learnTab} ({track.title})
+              </h2>
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border font-mono" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface1)' }}>
+                {track.badge}
+              </span>
+            </div>
+            <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
+              Esplora e ripassa le nozioni fondamentali basate su {track.bookRef}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        {/* Search */}
+        <div className="sm:col-span-2 relative">
+          <Search className="w-4 h-4 absolute left-3.5 top-3 pointer-events-none" style={{ color: 'var(--ctp-subtext0)' }} />
+          <input
+            type="text"
+            placeholder={t.searchPlaceholder}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full ctp-input rounded-xl pl-10 pr-4 py-2.5 text-xs border focus:outline-none transition-colors"
+          />
+        </div>
+
+        {/* Chapter filter */}
+        <div className="relative">
+          <Filter className="w-4 h-4 absolute left-3 top-3 pointer-events-none" style={{ color: 'var(--ctp-subtext0)' }} />
+          <select
+            value={chapterFilter}
+            onChange={(e) => setChapterFilter(e.target.value === 'tutti' ? 'tutti' : Number(e.target.value))}
+            className="w-full ctp-input rounded-xl pl-9 pr-3 py-2.5 text-xs border focus:outline-none transition-colors appearance-none"
+          >
+            <option value="tutti">{t.allChapters}</option>
+            {Array.from(new Set(concetti.map(c => c.capitolo))).sort((a,b)=>a-b).map(cap => (
+              <option key={cap} value={cap}>{t.chapter} {cap}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Concepts List */}
+      <div className="space-y-3">
+        {filtered.map((concetto) => {
+          const isOpen = selectedConcept === concetto.nome;
+
+          return (
+            <div
+              key={concetto.nome}
+              className="ctp-card border rounded-xl overflow-hidden transition-all"
+              style={{
+                borderColor: isOpen ? 'var(--ctp-peach)' : 'var(--ctp-border)'
+              }}
+            >
+              <button
+                onClick={() => setSelectedConcept(isOpen ? null : concetto.nome)}
+                className="w-full p-4 text-left flex items-center justify-between gap-4 cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-mono font-bold shrink-0"
+                    style={{
+                      backgroundColor: isOpen ? 'var(--ctp-peach)' : 'var(--ctp-surface0)',
+                      color: isOpen ? 'var(--ctp-crust)' : 'var(--ctp-peach)'
+                    }}
+                  >
+                    C{concetto.capitolo}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold font-mono" style={{ color: 'var(--ctp-text)' }}>
+                      {concetto.titolo}
+                    </h3>
+                    <span className="text-[11px]" style={{ color: 'var(--ctp-subtext0)' }}>{t.chapter} {concetto.capitolo} • {track.name}</span>
+                  </div>
+                </div>
+
+                <ChevronRight className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} style={{ color: isOpen ? 'var(--ctp-peach)' : 'var(--ctp-subtext0)' }} />
+              </button>
+
+              {isOpen && (
+                <div className="px-4 pb-4 pt-2 border-t ctp-card-mantle text-xs leading-relaxed space-y-3" style={{ borderColor: 'var(--ctp-border)', color: 'var(--ctp-text)' }}>
+                  <div className="flex items-start gap-2 pt-1">
+                    <Lightbulb className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--ctp-peach)' }} />
+                    <p className="flex-1">{concetto.testo}</p>
+                  </div>
+
+                  {onOpenAiTutorWithConcept && (
+                    <div className="flex justify-end pt-2">
+                      <button
+                        onClick={() => onOpenAiTutorWithConcept(concetto)}
+                        className="flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 text-white shadow hover:scale-105 transition-transform"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-pulse" />
+                        <span>{t.explainWithAI}</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {filtered.length === 0 && (
+          <div className="p-8 text-center ctp-card rounded-xl border text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
+            Nessun concetto trovato per la ricerca inserita.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+

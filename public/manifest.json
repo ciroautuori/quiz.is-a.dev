@@ -1,0 +1,24 @@
+{
+  "name": "DevQuest: Multi-Track Developer Lab",
+  "short_name": "DevQuest",
+  "description": "La piattaforma interattiva per padroneggiare Python, TypeScript e Git & GitHub con sfide pratiche e AI Tutor.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d1117",
+  "theme_color": "#cba6f7",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

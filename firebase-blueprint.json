@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "LeaderboardRecord": {
+      "title": "LeaderboardRecord",
+      "description": "High scores and completion records for the leaderboard",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique score record ID" },
+        "nomeUtente": { "type": "string", "maxLength": 50, "description": "Display username" },
+        "punteggio": { "type": "number", "description": "Score points" },
+        "data": { "type": "string", "description": "Date string ISO format" },
+        "trackId": { "type": "string", "maxLength": 30, "description": "Track ID (python, typescript, git)" },
+        "userId": { "type": "string", "maxLength": 128, "description": "Author auth UID if signed in" }
+      },
+      "required": ["id", "nomeUtente", "punteggio", "data"]
+    },
+    "CustomQuestion": {
+      "title": "CustomQuestion",
+      "description": "User created custom quiz questions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "description": "Question ID" },
+        "categoria": { "type": "string", "maxLength": 100, "description": "Category name" },
+        "domanda": { "type": "string", "maxLength": 1000, "description": "Question body text" },
+        "opzioni": { "type": "array", "description": "List of 4 options" },
+        "rispostaCorretta": { "type": "number", "description": "Correct option index 0-3" },
+        "spiegazione": { "type": "string", "maxLength": 1000, "description": "Explanation text" },
+        "livello": { "type": "string", "maxLength": 20, "description": "base, intermedio, avanzato" },
+        "trackId": { "type": "string", "maxLength": 30, "description": "python, typescript, git" },
+        "authorId": { "type": "string", "maxLength": 128, "description": "Creator Auth UID" },
+        "createdAt": { "type": "string", "description": "Timestamp ISO" }
+      },
+      "required": ["id", "categoria", "domanda", "opzioni", "rispostaCorretta", "spiegazione", "livello", "trackId"]
+    },
+    "UserProgress": {
+      "title": "UserProgress",
+      "description": "Cloud synced progress for authenticated user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "description": "User Auth UID" },
+        "completedQuestionIds": { "type": "array", "description": "Array of completed challenge IDs" },
+        "streakCount": { "type": "number", "description": "Consecutive days streak count" },
+        "lastActiveDate": { "type": "string", "description": "Date YYYY-MM-DD" },
+        "unlockedBadges": { "type": "array", "description": "Unlocked badge IDs" },
+        "updatedAt": { "type": "string", "description": "Timestamp ISO" }
+      },
+      "required": ["userId", "completedQuestionIds", "streakCount"]
+    }
+  },
+  "firestore": {
+    "/leaderboard/{recordId}": {
+      "schema": { "$ref": "#/entities/LeaderboardRecord" },
+      "description": "Public leaderboard scores"
+    },
+    "/custom_questions/{questionId}": {
+      "schema": { "$ref": "#/entities/CustomQuestion" },
+      "description": "Community & user-created questions"
+    },
+    "/users/{userId}/progress/main": {
+      "schema": { "$ref": "#/entities/UserProgress" },
+      "description": "Synced user progress and stats"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+# ── Build artifacts ──────────────────────────
+.next/
+out/
+
+# ── Dependencies (rebuildate nel container) ──
+node_modules/
+
+# ── Dev / test ───────────────────────────────
+.env.local
+.env.development
+*.test.*
+__tests__/
+coverage/
+
+# ── Version control & tooling ────────────────
+.git/
+.gitignore
+.github/
+
+# ── IDE / OS ─────────────────────────────────
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# ── Docker stessa ────────────────────────────
+Dockerfile
+docker-compose.yml
+docker-compose*.yml
+
+# ── Docs / markdown (non serve in prod) ──────
+README.md
+CHANGELOG.md
+HANDOFF.md
+ATTRIBUTION.md
+PRODUCT.md
+DESIGN.md
+IDEA.md
