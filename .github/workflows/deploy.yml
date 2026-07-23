@@ -1,0 +1,19 @@
+name: Deploy to Soliso VPS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Build & Deploy Container
+    runs-on: [self-hosted, devquest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and restart Docker container
+        run: |
+          docker compose build --progress=plain
+          docker compose up -d
+          docker compose ps
