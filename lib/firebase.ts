@@ -15,7 +15,21 @@ import {
   onSnapshot,
   updateDoc
 } from 'firebase/firestore';
-import firebaseConfig from '../firebase-applet-config.json';
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyDemoKeyForPublicQuizPlatform",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "quiz-is-a-dev.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "quiz-is-a-dev",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "quiz-is-a-dev.appspot.com",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "123456789",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:123456789:web:abcdef123456",
+  firestoreDatabaseId: "(default)",
+};
+
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
 
 export const duelMatchmaking = {
   create: async (id: string) => setDoc(doc(db, 'duels', id), { p1Hp: 100, p2Hp: 100, status: 'waiting' }),
@@ -23,11 +37,6 @@ export const duelMatchmaking = {
   syncHp: async (id: string, p1Hp: number, p2Hp: number) => updateDoc(doc(db, 'duels', id), { p1Hp, p2Hp }).catch(() => {}),
   subscribe: (id: string, cb: (d: any) => void) => onSnapshot(doc(db, 'duels', id), (s) => s.exists() && cb(s.data()))
 };
-
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
 
 export enum OperationType {
   CREATE = 'create',

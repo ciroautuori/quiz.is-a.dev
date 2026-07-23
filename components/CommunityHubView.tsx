@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, ThumbsUp, Plus, Code, Play, CheckCircle2, Search, Sparkles, Send } from 'lucide-react';
-import { Sfida } from '../lib/types';
+import { Sfida, normalizeChallenge } from '../lib/types';
 import { soundEngine } from '../lib/soundEngine';
 
 interface CommunityChallenge extends Sfida {
@@ -14,7 +14,7 @@ interface CommunityChallenge extends Sfida {
 }
 
 const INITIAL_COMMUNITY_CHALLENGES: CommunityChallenge[] = [
-  {
+  normalizeChallenge({
     id: 'ugc_1',
     capitolo: 99,
     argomento: 'Trappola delle Liste Mutabili',
@@ -34,8 +34,8 @@ print(add_item(2))`,
     author: 'DevPython_99',
     upvotes: 42,
     isCreator: true
-  },
-  {
+  }) as CommunityChallenge,
+  normalizeChallenge({
     id: 'ugc_2',
     capitolo: 99,
     argomento: 'Inversione di una Stringa con Slicing',
@@ -50,7 +50,7 @@ print(add_item(2))`,
     trackId: 'python',
     author: 'CodeGirl_IT',
     upvotes: 68
-  }
+  }) as CommunityChallenge
 ];
 
 interface CommunityHubViewProps {
@@ -101,7 +101,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
     if (!newQuestion || !newAns0 || !newAns1) return;
 
     console.log("Mock Firestore: Saving to 'quests' collection...");
-    const newSfida: CommunityChallenge = {
+    const newSfida: CommunityChallenge = normalizeChallenge({
       id: `ugc_custom_${Date.now()}`,
       capitolo: 99,
       argomento: newTopic || 'Community Challenge',
@@ -115,7 +115,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
       trackId: 'python',
       author: 'Tu (Community)',
       upvotes: 1
-    };
+    }) as CommunityChallenge;
 
     setChallenges([newSfida, ...challenges]);
     setShowCreateModal(false);
@@ -131,10 +131,12 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
     setNewAns3('');
   };
 
-  const filtered = challenges.filter(c =>
-    c.argomento.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    c.domanda.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filtered = challenges.filter(c => {
+    const topic = (c.topic || c.argomento || '').toLowerCase();
+    const question = (c.question || c.domanda || '').toLowerCase();
+    const query = searchQuery.toLowerCase();
+    return topic.includes(query) || question.includes(query);
+  });
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6 p-2 sm:p-4 font-mono">

@@ -22,15 +22,22 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
   const concetti = getConceptsForTrack(activeTrackId);
 
   const filtered = concetti.filter((c) => {
-    const matchesSearch = 
-      c.titolo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.testo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.nome.toLowerCase().includes(searchTerm.toLowerCase());
+    const title = (c.title || c.titolo || c.nome || '').toLowerCase();
+    const text = (c.text || c.testo || '').toLowerCase();
+    const name = (c.nome || c.title || '').toLowerCase();
+    const query = searchTerm.toLowerCase();
+
+    const matchesSearch = title.includes(query) || text.includes(query) || name.includes(query);
     
-    const matchesChapter = chapterFilter === 'tutti' || c.capitolo === chapterFilter;
+    const chapter = c.chapter ?? c.capitolo ?? 1;
+    const matchesChapter = chapterFilter === 'tutti' || chapter === chapterFilter;
 
     return matchesSearch && matchesChapter;
   });
+
+  const availableChapters = Array.from(new Set(concetti.map(c => c.chapter ?? c.capitolo ?? 1)))
+    .filter((ch): ch is number => ch !== undefined)
+    .sort((a, b) => a - b);
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
@@ -79,7 +86,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
             className="w-full ctp-input rounded-xl pl-9 pr-3 py-2.5 text-xs border focus:outline-none transition-colors appearance-none"
           >
             <option value="tutti">{t.allChapters}</option>
-            {Array.from(new Set(concetti.map(c => c.capitolo))).sort((a,b)=>a-b).map(cap => (
+            {availableChapters.map(cap => (
               <option key={cap} value={cap}>{t.chapter} {cap}</option>
             ))}
           </select>
@@ -89,18 +96,19 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
       {/* Concepts List */}
       <div className="space-y-3">
         {filtered.map((concetto) => {
-          const isOpen = selectedConcept === concetto.nome;
+          const conceptId = concetto.id || concetto.title || concetto.nome || String(Math.random());
+          const isOpen = selectedConcept === conceptId;
 
           return (
             <div
-              key={concetto.nome}
+              key={conceptId}
               className="ctp-card border rounded-xl overflow-hidden transition-all"
               style={{
                 borderColor: isOpen ? 'var(--ctp-peach)' : 'var(--ctp-border)'
               }}
             >
               <button
-                onClick={() => setSelectedConcept(isOpen ? null : concetto.nome)}
+                onClick={() => setSelectedConcept(isOpen ? null : conceptId)}
                 className="w-full p-4 text-left flex items-center justify-between gap-4 cursor-pointer"
               >
                 <div className="flex items-center gap-3">
@@ -111,13 +119,13 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                       color: isOpen ? 'var(--ctp-crust)' : 'var(--ctp-peach)'
                     }}
                   >
-                    C{concetto.capitolo}
+                    C{concetto.chapter ?? concetto.capitolo ?? 1}
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold font-mono" style={{ color: 'var(--ctp-text)' }}>
-                      {concetto.titolo}
+                      {concetto.title || concetto.titolo || concetto.nome || 'Concept'}
                     </h3>
-                    <span className="text-[11px]" style={{ color: 'var(--ctp-subtext0)' }}>{t.chapter} {concetto.capitolo} • {track.name}</span>
+                    <span className="text-[11px]" style={{ color: 'var(--ctp-subtext0)' }}>{t.chapter} {concetto.chapter ?? concetto.capitolo ?? 1} • {track.name}</span>
                   </div>
                 </div>
 
@@ -128,7 +136,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                 <div className="px-4 pb-4 pt-2 border-t ctp-card-mantle text-xs leading-relaxed space-y-3" style={{ borderColor: 'var(--ctp-border)', color: 'var(--ctp-text)' }}>
                   <div className="flex items-start gap-2 pt-1">
                     <Lightbulb className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--ctp-peach)' }} />
-                    <p className="flex-1">{concetto.testo}</p>
+                    <p className="flex-1">{concetto.text || concetto.testo || ''}</p>
                   </div>
 
                   {onOpenAiTutorWithConcept && (

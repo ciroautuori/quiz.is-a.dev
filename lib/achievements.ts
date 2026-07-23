@@ -62,13 +62,13 @@ export function evaluateAchievements(): { achievements: Achievement[]; newlyUnlo
   let hardCount = 0;
   completedIds.forEach((id) => {
     const q = allQuestionsMap.get(id);
-    if (q && q.difficolta === 'difficile') {
+    if (q && (q.difficolta === 'difficile' || q.difficulty === 'hard')) {
       hardCount++;
     }
   });
 
   // Highest score in leaderboard
-  const maxScore = punteggi.length > 0 ? Math.max(...punteggi.map((p) => p.punti)) : 0;
+  const maxScore = punteggi.length > 0 ? Math.max(...punteggi.map((p) => p.score ?? p.punti ?? 0)) : 0;
 
   const rawAchievements: Omit<Achievement, 'unlocked' | 'unlockedAt'>[] = [
     {

@@ -116,11 +116,13 @@ export default function GameMode({
 
   // Shuffle answers & select question
   const prepareQuestion = (sfida: Sfida) => {
-    const indexed = sfida.risposte.map((r, i) => ({ text: r, originalIndex: i }));
+    const rawOptions = sfida.options || sfida.risposte || [];
+    const correctIdx = sfida.correctIndex ?? sfida.indice_corretto ?? 0;
+    const indexed = rawOptions.map((r, i) => ({ text: r, originalIndex: i }));
     // Shuffle
     const shuffled = [...indexed].sort(() => Math.random() - 0.5);
     const newOptions = shuffled.map((item) => item.text);
-    const newCorrectIdx = shuffled.findIndex((item) => item.originalIndex === sfida.indice_corretto);
+    const newCorrectIdx = shuffled.findIndex((item) => item.originalIndex === correctIdx);
 
     setShuffledOptions(newOptions);
     setCorrectOptionIndex(newCorrectIdx);

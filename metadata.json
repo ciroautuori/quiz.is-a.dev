@@ -1,6 +1,0 @@
-{
-  "name": "DevQuest: Multi-Track Developer Lab",
-  "description": "La piattaforma interattiva per padroneggiare Python, TypeScript e Git & GitHub con sfide pratiche e apprendimento guidato.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

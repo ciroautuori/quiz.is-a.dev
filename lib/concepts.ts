@@ -1,4 +1,4 @@
-import { Concetto, TrackId } from './types';
+import { Concetto, TrackId, normalizeConcept } from './types';
 import { CONCETTI_TYPESCRIPT } from './data/concepts_typescript';
 import { CONCETTI_GIT } from './data/concepts_git';
 
@@ -129,19 +129,25 @@ export const CONCETTI_PYTHON: Concetto[] = [
     capitolo: 1,
     testo: "Il debug è il processo di individuazione e correzione degli errori nel codice (SyntaxError, NameError, TypeError, ecc.). In include leggere i messaggi di errore e ispezionare il flusso delle istruzioni."
   }
-].map((c: any) => ({ ...c, trackId: (c.trackId || 'python') as TrackId }));
+].map((c: any) => normalizeConcept({ ...c, trackId: c.trackId || 'python' }));
 
 export const CONCETTI: Concetto[] = CONCETTI_PYTHON;
 
 export function getConceptsForTrack(trackId: TrackId): Concetto[] {
+  let list: Concetto[] = [];
   switch (trackId) {
     case 'typescript':
-      return CONCETTI_TYPESCRIPT;
+      list = CONCETTI_TYPESCRIPT;
+      break;
     case 'git':
-      return CONCETTI_GIT;
+      list = CONCETTI_GIT;
+      break;
     case 'python':
     default:
-      return CONCETTI_PYTHON;
+      list = CONCETTI_PYTHON;
+      break;
   }
+  return list.map((c) => normalizeConcept(c));
 }
+
 

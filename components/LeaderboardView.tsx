@@ -79,22 +79,22 @@ export default function LeaderboardView() {
                 <div className="flex items-center gap-3">
                   {rankBadge}
                   <div>
-                    <h3 className="text-sm font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>{record.nome}</h3>
+                    <h3 className="text-sm font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>{record.name || record.nome || 'Developer'}</h3>
                     <div className="flex items-center gap-2 text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>
-                      <span className="capitalize">{record.difficolta}</span>
+                      <span className="capitalize">{record.difficulty || record.difficolta || 'mixed'}</span>
                       <span>•</span>
-                      <span>{record.domande} {t.question}s</span>
+                      <span>{record.questionsCount ?? record.domande ?? 10} {t.question}s</span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {new Date(record.data).toLocaleDateString()}
+                        {record.date || record.data ? new Date(record.date || record.data!).toLocaleDateString() : 'Recent'}
                       </span>
                     </div>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <div className="text-base font-extrabold font-mono" style={{ color: 'var(--ctp-peach)' }}>{record.punti} pt</div>
+                  <div className="text-base font-extrabold font-mono" style={{ color: 'var(--ctp-peach)' }}>{record.score ?? record.punti ?? 0} pt</div>
                 </div>
               </div>
             );

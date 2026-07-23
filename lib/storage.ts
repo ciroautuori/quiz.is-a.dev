@@ -1,4 +1,4 @@
-import { PunteggioRecord, Sfida, TrackId } from './types';
+import { PunteggioRecord, Sfida, TrackId, normalizeScoreRecord } from './types';
 import { calculateSM2, SM2Data } from './spacedRepetition';
 import { db, handleFirestoreError, OperationType, auth } from './firebase';
 import { collection, addDoc, getDocs, query, orderBy, limit, doc, setDoc, getDoc } from 'firebase/firestore';
@@ -37,36 +37,56 @@ const DEFAULT_PUNTEGGI: PunteggioRecord[] = [
   {
     id: 'p1',
     nome: 'Guido',
+    name: 'Guido',
     punti: 180,
+    score: 180,
     data: new Date(Date.now() - 86400000 * 2).toISOString(),
+    date: new Date(Date.now() - 86400000 * 2).toISOString(),
     difficolta: 'miste',
-    domande: 10
+    difficulty: 'mixed',
+    domande: 10,
+    questionsCount: 10
   },
   {
     id: 'p2',
     nome: 'Ada',
+    name: 'Ada',
     punti: 150,
+    score: 150,
     data: new Date(Date.now() - 86400000 * 5).toISOString(),
+    date: new Date(Date.now() - 86400000 * 5).toISOString(),
     difficolta: 'difficile',
-    domande: 10
+    difficulty: 'hard',
+    domande: 10,
+    questionsCount: 10
   },
   {
     id: 'p3',
     nome: 'Pythonista',
+    name: 'Pythonista',
     punti: 120,
+    score: 120,
     data: new Date(Date.now() - 86400000 * 1).toISOString(),
+    date: new Date(Date.now() - 86400000 * 1).toISOString(),
     difficolta: 'media',
-    domande: 10
+    difficulty: 'medium',
+    domande: 10,
+    questionsCount: 10
   },
   {
     id: 'p4',
     nome: 'Thinker',
+    name: 'Thinker',
     punti: 90,
+    score: 90,
     data: new Date(Date.now() - 86400000 * 3).toISOString(),
+    date: new Date(Date.now() - 86400000 * 3).toISOString(),
     difficolta: 'facile',
-    domande: 10
+    difficulty: 'easy',
+    domande: 10,
+    questionsCount: 10
   }
-];
+].map(normalizeScoreRecord);
 
 export function getPunteggi(): PunteggioRecord[] {
   if (typeof window === 'undefined') return DEFAULT_PUNTEGGI;
@@ -77,7 +97,7 @@ export function getPunteggi(): PunteggioRecord[] {
       return DEFAULT_PUNTEGGI;
     }
     const data = JSON.parse(raw);
-    return Array.isArray(data) ? data : DEFAULT_PUNTEGGI;
+    return Array.isArray(data) ? data.map(normalizeScoreRecord) : DEFAULT_PUNTEGGI;
   } catch {
     return DEFAULT_PUNTEGGI;
   }
@@ -90,14 +110,14 @@ export async function syncPunteggiFromCloud(): Promise<PunteggioRecord[]> {
     if (!snapshot.empty) {
       const records: PunteggioRecord[] = snapshot.docs.map(docSnap => {
         const d = docSnap.data();
-        return {
+        return normalizeScoreRecord({
           id: docSnap.id,
           nome: d.nomeUtente || 'Anonimo',
           punti: d.punteggio || 0,
           data: d.data || new Date().toISOString(),
           difficolta: d.trackId || 'miste',
           domande: 10
-        };
+        });
       });
       if (typeof window !== 'undefined') {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
@@ -114,17 +134,17 @@ export function salvaPunteggio(nome: string, punti: number, difficolta: string, 
   if (punti <= 0) return getPunteggi();
   const attuali = getPunteggi();
   const recordId = 'score_' + Date.now();
-  const nuovo: PunteggioRecord = {
+  const nuovo: PunteggioRecord = normalizeScoreRecord({
     id: recordId,
     nome: nome.trim() || 'Anonimo',
     punti,
     data: new Date().toISOString(),
     difficolta,
     domande
-  };
+  });
 
   const aggiornati = [...attuali, nuovo]
-    .sort((a, b) => b.punti - a.punti)
+    .sort((a, b) => (b.score ?? b.punti ?? 0) - (a.score ?? a.punti ?? 0))
     .slice(0, 20);
 
   if (typeof window !== 'undefined') {

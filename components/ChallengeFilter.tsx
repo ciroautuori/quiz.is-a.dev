@@ -40,9 +40,9 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
 
   // Compute total counts per difficulty
   const counts = useMemo(() => {
-    const facile = allQuestions.filter(q => q.difficolta === 'facile').length;
-    const media = allQuestions.filter(q => q.difficolta === 'media').length;
-    const difficile = allQuestions.filter(q => q.difficolta === 'difficile').length;
+    const facile = allQuestions.filter(q => (q.difficulty || q.difficolta) === 'facile' || (q.difficulty || q.difficolta) === 'easy').length;
+    const media = allQuestions.filter(q => (q.difficulty || q.difficolta) === 'media' || (q.difficulty || q.difficolta) === 'medium').length;
+    const difficile = allQuestions.filter(q => (q.difficulty || q.difficolta) === 'difficile' || (q.difficulty || q.difficolta) === 'hard').length;
     return {
       facile,
       media,
@@ -53,7 +53,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
 
   // Compute list of unique chapters present in questions
   const availableChapters = useMemo(() => {
-    const chapters = Array.from(new Set(allQuestions.map(q => q.capitolo))).sort((a, b) => a - b);
+    const chapters = Array.from(new Set(allQuestions.map(q => q.chapter ?? q.capitolo ?? 1))).sort((a, b) => a - b);
     return chapters;
   }, [allQuestions]);
 
@@ -62,44 +62,55 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
     let result = [...allQuestions];
 
     // Filter by difficulty
-    if (selectedDifficulty !== 'miste') {
-      result = result.filter(q => q.difficolta === selectedDifficulty);
+    if (selectedDifficulty !== 'miste' && selectedDifficulty !== 'mixed') {
+      result = result.filter(q => {
+        const d = q.difficulty || q.difficolta;
+        return d === selectedDifficulty;
+      });
     }
 
     // Filter by chapter
     if (selectedChapter !== 'tutti') {
-      result = result.filter(q => q.capitolo === selectedChapter);
+      result = result.filter(q => (q.chapter ?? q.capitolo ?? 1) === selectedChapter);
     }
 
     // Filter by search query (argomento, domanda, codice)
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
-      result = result.filter(q => 
-        q.argomento.toLowerCase().includes(query) ||
-        q.domanda.toLowerCase().includes(query) ||
-        (q.codice && q.codice.toLowerCase().includes(query)) ||
-        `capitolo ${q.capitolo}`.includes(query)
-      );
+      result = result.filter(q => {
+        const topic = (q.topic || q.argomento || '').toLowerCase();
+        const question = (q.question || q.domanda || '').toLowerCase();
+        const code = (q.code || q.codice || '').toLowerCase();
+        const chapterStr = `capitolo ${q.chapter ?? q.capitolo ?? 1}`;
+        return topic.includes(query) || question.includes(query) || code.includes(query) || chapterStr.includes(query);
+      });
     }
 
     // Sorting logic
-    const difficultyWeight = { facile: 1, media: 2, difficile: 3 };
+    const difficultyWeight: Record<string, number> = { facile: 1, easy: 1, media: 2, medium: 2, difficile: 3, hard: 3 };
 
     result.sort((a, b) => {
+      const aCap = a.chapter ?? a.capitolo ?? 1;
+      const bCap = b.chapter ?? b.capitolo ?? 1;
+      const aDiff = a.difficulty || a.difficolta || 'easy';
+      const bDiff = b.difficulty || b.difficolta || 'easy';
+      const aTop = a.topic || a.argomento || '';
+      const bTop = b.topic || b.argomento || '';
+
       if (sortBy === 'capitolo_asc') {
-        return a.capitolo - b.capitolo;
+        return aCap - bCap;
       }
       if (sortBy === 'capitolo_desc') {
-        return b.capitolo - a.capitolo;
+        return bCap - aCap;
       }
       if (sortBy === 'difficolta_asc') {
-        return difficultyWeight[a.difficolta] - difficultyWeight[b.difficolta];
+        return (difficultyWeight[aDiff] || 1) - (difficultyWeight[bDiff] || 1);
       }
       if (sortBy === 'difficolta_desc') {
-        return difficultyWeight[b.difficolta] - difficultyWeight[a.difficolta];
+        return (difficultyWeight[bDiff] || 1) - (difficultyWeight[aDiff] || 1);
       }
       if (sortBy === 'argomento') {
-        return a.argomento.localeCompare(b.argomento);
+        return aTop.localeCompare(bTop);
       }
       return 0;
     });
@@ -437,10 +448,10 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
                       >
                         <div className="flex items-center gap-2 overflow-hidden">
                           <span className="text-[10px] font-mono px-2 py-0.5 rounded border font-semibold shrink-0" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)', borderColor: 'var(--ctp-surface1)' }}>
-                            Cap {sfida.capitolo}
+                            Cap {sfida.chapter ?? sfida.capitolo ?? 1}
                           </span>
                           <span className="text-xs font-medium truncate" style={{ color: 'var(--ctp-text)' }}>
-                            {sfida.argomento} - {sfida.domanda}
+                            {sfida.topic || sfida.argomento} - {sfida.question || sfida.domanda}
                           </span>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
@@ -450,7 +461,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
                               {bestTimeSecs}s
                             </span>
                           )}
-                          {getDifficultyBadge(sfida.difficolta)}
+                          {getDifficultyBadge((sfida.difficulty || sfida.difficolta || 'easy') as any)}
                           <span className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
                             {isOpen ? '▲' : '▼'}
                           </span>

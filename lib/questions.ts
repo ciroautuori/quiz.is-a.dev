@@ -1,4 +1,4 @@
-import { Sfida, TrackId } from './types';
+import { Sfida, TrackId, normalizeChallenge } from './types';
 import { INITIAL_TYPESCRIPT_CHALLENGES, INITIAL_GIT_CHALLENGES } from './content/initial_challenges';
 
 export const SFIDE_PYTHON: Sfida[] = [
@@ -504,24 +504,30 @@ export const SFIDE_PYTHON: Sfida[] = [
     suggerimento: "Il metodo delle stringhe in Python si chiama upper(), non uppercase().",
     spiegazione: "Invocare un metodo o attributo inesistente genera un AttributeError."
   }
-].map((s: any) => ({ ...s, trackId: (s.trackId || 'python') as TrackId }));
+].map((s: any) => normalizeChallenge({ ...s, trackId: s.trackId || 'python' }));
 
 // Backward compatibility export
 export const TUTTE_LE_SFIDE: Sfida[] = SFIDE_PYTHON;
 
 export function getQuestionsForTrack(trackId: TrackId): Sfida[] {
+  let list: Sfida[] = [];
   switch (trackId) {
     case 'typescript':
-      return INITIAL_TYPESCRIPT_CHALLENGES;
+      list = INITIAL_TYPESCRIPT_CHALLENGES;
+      break;
     case 'git':
-      return INITIAL_GIT_CHALLENGES;
+      list = INITIAL_GIT_CHALLENGES;
+      break;
     case 'python':
     default:
-      return SFIDE_PYTHON;
+      list = SFIDE_PYTHON;
+      break;
   }
+  return list.map((q) => normalizeChallenge(q));
 }
 
 export function getAllQuestions(): Sfida[] {
-  return [...SFIDE_PYTHON, ...INITIAL_TYPESCRIPT_CHALLENGES, ...INITIAL_GIT_CHALLENGES];
+  return [...SFIDE_PYTHON, ...INITIAL_TYPESCRIPT_CHALLENGES, ...INITIAL_GIT_CHALLENGES].map((q) => normalizeChallenge(q));
 }
+
 
