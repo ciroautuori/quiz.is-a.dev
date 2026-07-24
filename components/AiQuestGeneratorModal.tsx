@@ -18,7 +18,7 @@ export default function AiQuestGeneratorModal({
   onClose,
   onQuestGenerated
 }: AiQuestGeneratorModalProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [topic, setTopic] = useState('Decoratori e Metaprogrammazione');
   const [difficulty, setDifficulty] = useState<'facile' | 'media' | 'difficile'>('media');
   const [loading, setLoading] = useState(false);
@@ -150,12 +150,12 @@ export default function AiQuestGeneratorModal({
               {loading ? (
                 <>
                   <Sparkles className="w-4 h-4 animate-spin text-amber-300" />
-                  <span>Generazione in corso...</span>
+                  <span>{t.aiThinking || 'Generazione in corso...'}</span>
                 </>
               ) : (
                 <>
                   <Wand2 className="w-4 h-4 text-amber-300" />
-                  <span>Genera Sfida AI ora</span>
+                  <span>{t.generateAiQuestNow || 'Genera Sfida AI ora'}</span>
                 </>
               )}
             </button>

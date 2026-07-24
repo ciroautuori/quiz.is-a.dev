@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../lib/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Flame, Shield, Zap, Award, ShoppingBag, X, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 import { getUserStats, buyStreakFreeze, LEAGUE_CONFIGS, LeagueTier, UserStats } from '../lib/gamification';
@@ -23,6 +24,7 @@ const MOCK_LEAGUE_LEADERBOARD = [
 ];
 
 export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStreakModalProps) {
+  const { t } = useLanguage();
   const [stats, setStats] = useState<UserStats>(getUserStats());
   const [message, setMessage] = useState<string | null>(null);
   const [triggerBurst, setTriggerBurst] = useState(false);
@@ -77,10 +79,10 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
               </div>
               <div>
                 <h2 className="font-mono font-bold text-base flex items-center gap-2" style={{ color: 'var(--ctp-text)' }}>
-                  Leghe & Serie Giornaliera
+                  {t.leaguesStreaks || 'Leghe & Serie'}
                 </h2>
                 <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-                  Gareggia ogni settimana, mantieni lo Streak e sblocca Freeze!
+                  {t.streakSubtitle || 'Gareggia ogni settimana, mantieni lo Streak e sblocca Freeze!'}
                 </p>
               </div>
             </div>
@@ -102,10 +104,10 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-mono font-bold text-[var(--ctp-subtext0)] flex items-center gap-1.5">
                     <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    Serie Attuale
+                    {t.streak || 'Serie Attuale'}
                   </span>
                   <span className="text-2xl font-black font-mono text-[var(--ctp-peach)]">
-                    {stats.streakCount} <span className="text-xs font-normal">giorni</span>
+                    {stats.streakCount} <span className="text-xs font-normal">{t.days || 'giorni'}</span>
                   </span>
                 </div>
 
@@ -129,7 +131,7 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-mono font-bold text-[var(--ctp-subtext0)] flex items-center gap-1.5">
                     <Trophy className="w-4 h-4 text-yellow-400" />
-                    Lega Corrente
+                    {t.selectedTrack || 'Lega Corrente'}
                   </span>
                   <span className="text-sm font-bold font-mono px-2.5 py-0.5 rounded-full border" style={{ color: currentLeagueConfig.color, borderColor: currentLeagueConfig.color + '40', backgroundColor: currentLeagueConfig.color + '15' }}>
                     {currentLeagueConfig.icon} {currentLeagueConfig.name}
@@ -153,8 +155,8 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
             {/* League Leaderboard Table */}
             <div>
               <h3 className="text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center justify-between" style={{ color: 'var(--ctp-subtext0)' }}>
-                <span>Classifica Settimanale - {currentLeagueConfig.name}</span>
-                <span className="text-[10px] text-emerald-400">Promozione: 500 XP | Retrocessione: &lt; 100 XP</span>
+                <span>{t.weeklyLeaderboard || 'Classifica Settimanale'} - {currentLeagueConfig.name}</span>
+                <span className="text-[10px] text-emerald-400">Promotion: 500 XP | Relegation: &lt; 100 XP</span>
               </h3>
 
               <div className="border border-[var(--ctp-surface1)] rounded-xl overflow-hidden divide-y divide-[var(--ctp-surface1)]">

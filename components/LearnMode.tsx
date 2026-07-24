@@ -233,7 +233,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
               <div className="p-4 rounded-xl border ctp-card-mantle text-xs leading-relaxed space-y-3" style={{ borderColor: 'var(--ctp-border)', color: 'var(--ctp-text)' }}>
                 <div className="font-bold text-xs font-mono uppercase tracking-wider flex items-center gap-2 text-[var(--ctp-mauve)]">
                   <BookOpen className="w-4 h-4" />
-                  <span>Spiegazione Teorica</span>
+                  <span>{t.theoryExplanation || 'Spiegazione Teorica'}</span>
                 </div>
                 <div className="whitespace-pre-line font-sans text-xs sm:text-sm">
                   {currentLesson.theory}
@@ -243,12 +243,12 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
               {/* Code Example */}
               <div>
                 <div className="text-xs font-bold font-mono mb-2 text-[var(--ctp-subtext0)]">
-                  Esempio di Codice:
+                  {language === 'en' ? 'Code Example:' : language === 'es' ? 'Ejemplo de Código:' : 'Esempio di Codice:'}
                 </div>
                 <CodeBlock 
                   code={currentLesson.codeExample}
                   language={track.codeLang}
-                  title={`Esempio ${track.name}`}
+                  title={`Code Example (${track.name})`}
                 />
               </div>
             </div>
@@ -258,7 +258,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs font-bold font-mono text-[var(--ctp-mauve)]">
                   <Terminal className="w-4 h-4" />
-                  <span>Sandbox di Codice Live (Esegui e Sperimenta)</span>
+                  <span>{t.liveSandboxTitle || 'Sandbox di Codice Live'}</span>
                 </div>
                 <button
                   onClick={handleRunSandbox}
@@ -267,7 +267,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                   style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>{isRunningCode ? 'Esecuzione...' : 'Esegui Codice'}</span>
+                  <span>{isRunningCode ? (t.executing || 'Esecuzione...') : (t.runCode || 'Esegui Codice')}</span>
                 </button>
               </div>
 
@@ -276,12 +276,12 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                 onChange={(e) => setSandboxCode(e.target.value)}
                 rows={4}
                 className="w-full font-mono text-xs sm:text-sm p-3 rounded-xl border ctp-input focus:outline-none focus:border-[var(--ctp-mauve)] transition-colors"
-                placeholder="Scrivi o modifica il codice qui..."
+                placeholder={t.sandboxPlaceholder || 'Scrivi o modifica il codice qui...'}
               />
 
               {sandboxOutput && (
                 <div className="p-3 rounded-xl border bg-[var(--ctp-crust)] font-mono text-xs text-[var(--ctp-text)] border-[var(--ctp-border)] space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--ctp-subtext0)]">Output Console:</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--ctp-subtext0)]">Console Output:</div>
                   <pre className="whitespace-pre-wrap">{sandboxOutput}</pre>
                 </div>
               )}
@@ -291,7 +291,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
             <div className="p-6 rounded-2xl ctp-card border shadow-md space-y-4">
               <div className="flex items-center gap-2 text-xs font-bold font-mono text-[var(--ctp-peach)]">
                 <Sparkles className="w-4 h-4" />
-                <span>Quiz Checkpoint di Verifica</span>
+                <span>Checkpoint Quiz</span>
               </div>
 
               <h3 className="text-sm font-semibold" style={{ color: 'var(--ctp-text)' }}>
@@ -331,7 +331,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                   style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>Verifica Risposta</span>
+                  <span>{t.verifyAnswer || 'Verifica Risposta'}</span>
                 </button>
               ) : (
                 <div className={`p-4 rounded-xl border text-xs space-y-2 ${
@@ -339,7 +339,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                 }`}>
                   <div className="font-bold flex items-center gap-2 text-sm">
                     {isQuizCorrect ? <CheckCircle2 className="w-5 h-5" /> : <RotateCcw className="w-5 h-5" />}
-                    <span>{isQuizCorrect ? 'Risposta Esatta! Lezione Completata 🎉' : 'Risposta Errata. Riprova!'}</span>
+                    <span>{isQuizCorrect ? (t.correctAnswerMsg || 'Risposta Esatta! 🎉') : (t.wrongAnswerMsg || 'Risposta Errata. Riprova!')}</span>
                   </div>
                   <p className="text-xs text-[var(--ctp-text)] leading-relaxed">
                     {currentLesson.checkpointQuiz.explanation}

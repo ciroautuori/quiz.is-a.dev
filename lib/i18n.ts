@@ -181,6 +181,20 @@ export interface Translations {
   communityHub: string;
   analyticsRadar: string;
   certificateModalBtn: string;
+
+  // Learn Mode Sandbox & Checkpoint
+  theoryExplanation: string;
+  liveSandboxTitle: string;
+  executing: string;
+  runCode: string;
+  sandboxPlaceholder: string;
+  verifyAnswer: string;
+  correctAnswerMsg: string;
+  wrongAnswerMsg: string;
+  weeklyLeaderboard: string;
+  generateAiQuestNow: string;
+  newBadgeUnlocked: string;
+  days: string;
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = {
@@ -350,7 +364,20 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aiQuestGen: "Generatore Quest AI",
     communityHub: "Community Hub",
     analyticsRadar: "Radar Analisi",
-    certificateModalBtn: "Certificato ID"
+    certificateModalBtn: "Certificato ID",
+
+    theoryExplanation: "Spiegazione Teorica",
+    liveSandboxTitle: "Sandbox di Codice Live (Esegui e Sperimenta)",
+    executing: "Esecuzione...",
+    runCode: "Esegui Codice",
+    sandboxPlaceholder: "Scrivi o modifica il codice qui...",
+    verifyAnswer: "Verifica Risposta",
+    correctAnswerMsg: "Risposta Esatta! Lezione Completata 🎉",
+    wrongAnswerMsg: "Risposta Errata. Riprova!",
+    weeklyLeaderboard: "Classifica Settimanale",
+    generateAiQuestNow: "Genera Sfida AI Ora",
+    newBadgeUnlocked: "Nuovo Badge Sbloccato!",
+    days: "giorni"
   },
 
   en: {
@@ -519,7 +546,20 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aiQuestGen: "AI Quest Gen",
     communityHub: "Community Hub",
     analyticsRadar: "Analytics Radar",
-    certificateModalBtn: "Certificate ID"
+    certificateModalBtn: "Certificate ID",
+
+    theoryExplanation: "Theory Explanation",
+    liveSandboxTitle: "Live Code Sandbox (Run & Experiment)",
+    executing: "Executing...",
+    runCode: "Run Code",
+    sandboxPlaceholder: "Write or edit code here...",
+    verifyAnswer: "Check Answer",
+    correctAnswerMsg: "Correct Answer! Lesson Completed 🎉",
+    wrongAnswerMsg: "Incorrect Answer. Try again!",
+    weeklyLeaderboard: "Weekly Leaderboard",
+    generateAiQuestNow: "Generate AI Quest Now",
+    newBadgeUnlocked: "New Badge Unlocked!",
+    days: "days"
   },
 
   es: {
@@ -688,6 +728,19 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aiQuestGen: "Generador Quest IA",
     communityHub: "Centro de Comunidad",
     analyticsRadar: "Radar de Análisis",
-    certificateModalBtn: "ID de Certificado"
+    certificateModalBtn: "ID de Certificado",
+
+    theoryExplanation: "Explicación Teórica",
+    liveSandboxTitle: "Sandbox de Código Live (Ejecuta y Experimenta)",
+    executing: "Ejecutando...",
+    runCode: "Ejecutar Código",
+    sandboxPlaceholder: "Escribe o modifica el código aquí...",
+    verifyAnswer: "Verificar Respuesta",
+    correctAnswerMsg: "¡Respuesta Correcta! Lección Completada 🎉",
+    wrongAnswerMsg: "Respuesta Incorrecta. ¡Inténtalo de nuevo!",
+    weeklyLeaderboard: "Clasificación Semanal",
+    generateAiQuestNow: "Generar Desafío IA Ahora",
+    newBadgeUnlocked: "¡Nueva Insignia Desbloqueada!",
+    days: "días"
   }
 };
