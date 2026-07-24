@@ -18,6 +18,7 @@ export interface UserStats {
   correctAnswers: number;
   averageSpeedSeconds: number;
   unlockedBadges: string[];
+  elo?: number;
 }
 
 export const LEAGUE_CONFIGS: Record<LeagueTier, { name: string; minTrophies: number; color: string; icon: string }> = {
@@ -46,6 +47,8 @@ export function getUserStats(): UserStats {
     if (raw) s = { ...s, ...JSON.parse(raw) };
   } catch {}
   
+  if (!s.elo) s.elo = 1200;
+
   if (Date.now() > s.nextReset) {
     const i = LEAGUE_ORDER.indexOf(s.currentLeague);
     if (s.weeklyXP >= 500 && i < 5) s.currentLeague = LEAGUE_ORDER[i+1];
@@ -82,6 +85,7 @@ function getDefaultStats(): UserStats {
     correctAnswers: 12,
     averageSpeedSeconds: 8.5,
     unlockedBadges: ['first_step', 'streak_3'],
+    elo: 1200,
   };
 }
 
@@ -90,6 +94,36 @@ export function calculateMultiplier(comboCount: number): number {
   if (comboCount >= 5) return 2.0;
   if (comboCount >= 3) return 1.5;
   return 1.0;
+}
+
+// ELO rating calculation (inspired by Clash-of-Code reference pattern)
+export function calculateEloChange(playerElo: number = 1200, opponentElo: number = 1200, won: boolean, kFactor: number = 32): { newElo: number; delta: number } {
+  const expected = 1 / (1 + Math.pow(10, (opponentElo - playerElo) / 400));
+  const actual = won ? 1 : 0;
+  const delta = Math.round(kFactor * (actual - expected));
+  const newElo = Math.max(800, playerElo + delta);
+  return { newElo, delta };
+}
+
+// Jump Out / Skill Level Skip (inspired by Quizzical & Duolingo jump-out pattern)
+export function attemptLeagueJumpOut(targetLeague: LeagueTier, passCount: number, totalQuestions: number): { success: boolean; stats: UserStats; message: string } {
+  const stats = getUserStats();
+  if (passCount >= totalQuestions && totalQuestions >= 3) {
+    stats.currentLeague = targetLeague;
+    stats.trophies += LEAGUE_CONFIGS[targetLeague].minTrophies;
+    stats.xp += 300;
+    saveUserStats(stats);
+    return {
+      success: true,
+      stats,
+      message: `Congratulazioni! Hai superato la prova speciale e sei saltato alla lega ${LEAGUE_CONFIGS[targetLeague].name}!`
+    };
+  }
+  return {
+    success: false,
+    stats,
+    message: `Prova non superata. Servono ${totalQuestions}/${totalQuestions} risposte corrette.`
+  };
 }
 
 export function recordQuestionAnswer(isCorrect: boolean, timeTakenSeconds: number) {

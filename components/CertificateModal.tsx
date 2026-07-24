@@ -41,7 +41,13 @@ export default function CertificateModal({
 
   const issueDate = new Date().toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
   
-  const generateOpenBadgeJSON = () => {
+  const generateOpenBadgeJSON = async () => {
+    const salt = "devquest_salt_2026";
+    const encoder = new TextEncoder();
+    const recipientData = encoder.encode(`${nameInput.toLowerCase()}$${salt}`);
+    const recipientBuffer = await crypto.subtle.digest('SHA-256', recipientData);
+    const recipientHex = Array.from(new Uint8Array(recipientBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
     const badge = {
       "@context": "https://w3id.org/openbadges/v2",
       "type": "Assertion",
@@ -49,8 +55,8 @@ export default function CertificateModal({
       "recipient": {
         "type": "email",
         "hashed": true,
-        "salt": "devquest",
-        "identity": `sha256$${hash}`
+        "salt": salt,
+        "identity": `sha256$${recipientHex}`
       },
       "issuedOn": new Date().toISOString(),
       "badge": {
