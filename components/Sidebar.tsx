@@ -21,7 +21,6 @@ interface SidebarProps {
   onSelectView: (view: 'home' | TrackId | 'classifica') => void;
   onOpenAiTutor: () => void;
   onOpenSettings: () => void;
-  onOpenGithubSync: () => void;
   streakCount: number;
 }
 
@@ -30,7 +29,6 @@ export default function Sidebar({
   onSelectView,
   onOpenAiTutor,
   onOpenSettings,
-  onOpenGithubSync,
   streakCount
 }: SidebarProps) {
   const { t, language } = useLanguage();
@@ -125,14 +123,6 @@ export default function Sidebar({
                 <span>AI Tutor Agent</span>
               </div>
               <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-            </button>
-
-            <button
-              onClick={onOpenGithubSync}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl border border-transparent hover:bg-[var(--ctp-surface0)]/50 text-[var(--ctp-text)] transition-all cursor-pointer"
-            >
-              <Github className="w-4 h-4 text-[var(--ctp-mauve)]" />
-              <span>GitHub Sync</span>
             </button>
           </div>
         </div>

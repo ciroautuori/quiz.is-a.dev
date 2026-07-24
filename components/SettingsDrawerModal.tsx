@@ -28,7 +28,6 @@ interface SettingsDrawerModalProps {
   streakInfo: StreakInfo;
   unlockedBadgesCount: number;
   onOpenAchievements: () => void;
-  onOpenGithubSync: () => void;
 }
 
 export default function SettingsDrawerModal({
@@ -36,8 +35,7 @@ export default function SettingsDrawerModal({
   onClose,
   streakInfo,
   unlockedBadgesCount,
-  onOpenAchievements,
-  onOpenGithubSync
+  onOpenAchievements
 }: SettingsDrawerModalProps) {
   const { syntaxTheme, toggleSyntaxTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
@@ -169,30 +167,6 @@ export default function SettingsDrawerModal({
                   {soundMuted ? t.enable : t.mute}
                 </button>
               </div>
-            </div>
-
-            {/* GitHub Sync */}
-            <div className="p-4 rounded-xl border space-y-3" style={{ backgroundColor: 'var(--ctp-surface0)', borderColor: 'var(--ctp-surface1)' }}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold" style={{ color: 'var(--ctp-mauve)' }}>
-                  <Github className="w-4 h-4" />
-                  <span>{t.githubSyncShort}</span>
-                </div>
-              </div>
-              <p className="text-[11px] leading-relaxed" style={{ color: 'var(--ctp-subtext0)' }}>
-                {t.githubSyncDesc}
-              </p>
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenGithubSync();
-                }}
-                className="w-full py-2.5 rounded-xl border text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer shadow hover:scale-[1.01] transition-transform"
-                style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
-              >
-                <Github className="w-4 h-4" />
-                <span>{t.openGitHubSync}</span>
-              </button>
             </div>
 
             {/* Stats & Badges Quick Overview */}

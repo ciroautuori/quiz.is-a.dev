@@ -12,7 +12,6 @@ import AchievementsModal from '../components/AchievementsModal';
 import AiTutorWidget from '../components/AiTutorWidget';
 import MobileBottomNav from '../components/MobileBottomNav';
 import PwaInstallPrompt from '../components/PwaInstallPrompt';
-import GitHubSyncModal from '../components/GitHubSyncModal';
 import CodeSandboxModal from '../components/CodeSandboxModal';
 import LeaguesAndStreakModal from '../components/LeaguesAndStreakModal';
 import PvPDuelModal from '../components/PvPDuelModal';
@@ -90,7 +89,6 @@ export default function Home() {
 
   // Modals state
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
-  const [isGithubSyncOpen, setIsGithubSyncOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSandboxOpen, setIsSandboxOpen] = useState(false);
   const [isLeaguesOpen, setIsLeaguesOpen] = useState(false);
@@ -197,7 +195,6 @@ export default function Home() {
               onSelectView={handleSelectView}
               onOpenAiTutor={() => openAiTutor()}
               onOpenSettings={() => setIsSettingsOpen(true)}
-              onOpenGithubSync={() => setIsGithubSyncOpen(true)}
               streakCount={streakInfo.count}
             />
           )}
@@ -341,11 +338,6 @@ export default function Home() {
             onClose={() => setIsAnalyticsOpen(false)}
           />
 
-          <GitHubSyncModal
-            isOpen={isGithubSyncOpen}
-            onClose={() => setIsGithubSyncOpen(false)}
-          />
-
           <SettingsDrawerModal
             isOpen={isSettingsOpen}
             onClose={() => setIsSettingsOpen(false)}
@@ -354,10 +346,6 @@ export default function Home() {
             onOpenAchievements={() => {
               setIsSettingsOpen(false);
               setIsAchievementsOpen(true);
-            }}
-            onOpenGithubSync={() => {
-              setIsSettingsOpen(false);
-              setIsGithubSyncOpen(true);
             }}
           />
 
