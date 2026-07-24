@@ -243,6 +243,79 @@ git commit -m "feat: primo commit di progetto"
     summary_en: "Master local version control with Working Directory, Staging, and Commits.",
     title_es: "1. Flujo de Trabajo Git: init, add y commit",
     summary_es: "Aprende las 3 áreas de Git: Working Directory, Staging y Repositorio."
+  },
+
+  // --- DOCKER TRACK ---
+  {
+    id: "docker-l01",
+    trackId: "docker",
+    chapter: 1,
+    title: "1. Fondamenti di Docker & Containerization",
+    summary: "Impara la differenza tra Macchine Virtuali e Container Docker.",
+    theory: `### Cos'è Docker?
+Docker impacchetta il codice e le sue dipendenze in un **container** leggero ed isolato che può essere eseguito ovunque.
+
+### Comandi base per Container
+\`\`\`bash
+docker run -d -p 8080:80 --name webserver nginx
+docker ps
+docker stop webserver
+\`\`\`
+- \`-d\`: esegue in background (detached).
+- \`-p 8080:80\`: mppa la porta 8080 dell'host alla porta 80 del container.`,
+    codeExample: `FROM nginx:alpine\nCOPY . /usr/share/nginx/html\nEXPOSE 80`,
+    sandboxInitialCode: `echo "docker run -d -p 8080:80 nginx:alpine"`,
+    checkpointQuiz: {
+      question: "Quale flag del comando docker run esegue il container in background?",
+      options: ["-d", "-b", "-g", "--background"],
+      correctIndex: 0,
+      explanation: "Il flag -d (o --detach) esegue il container in sottofondo rilasciando il terminale.",
+      question_en: "Which flag in docker run executes the container in detached background mode?",
+      options_en: ["-d", "-b", "-g", "--background"],
+      explanation_en: "The -d flag runs the container detached in the background."
+    },
+    title_en: "1. Docker Fundamentals & Containers",
+    summary_en: "Understand lightweight containerization vs Virtual Machines.",
+    title_es: "1. Fundamentos de Docker y Contenedores",
+    summary_es: "Aprende la diferencia entre Máquinas Virtuales y Contenedores Docker."
+  },
+
+  // --- POSTGRESQL TRACK ---
+  {
+    id: "pg-l01",
+    trackId: "postgres",
+    chapter: 1,
+    title: "1. PostgreSQL SQL: SELECT, WHERE & JOINs",
+    summary: "Interroga database relazionali con clausole di filtraggio e giunzioni tra tabelle.",
+    theory: `### Query SQL & JOIN
+PostgreSQL è un potente RDBMS relazionale basato sullo standard SQL.
+
+\`\`\`sql
+SELECT u.name, o.total, o.created_at
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id
+WHERE o.total > 100
+ORDER BY o.created_at DESC;
+\`\`\`
+
+### Tipi di JOIN principali
+- **INNER JOIN**: solo record presenti in entrambe le tabelle.
+- **LEFT JOIN**: tutti i record della tabella di sinistra + corrispondenze di destra.`,
+    codeExample: `SELECT id, name, email FROM users WHERE active = true ORDER BY name ASC;`,
+    sandboxInitialCode: `SELECT * FROM developers WHERE skill = 'Full-Stack';`,
+    checkpointQuiz: {
+      question: "Quale tipo di JOIN include tutti i record della tabella di sinistra indipendentemente da quella di destra?",
+      options: ["LEFT JOIN", "INNER JOIN", "CROSS JOIN", "RIGHT JOIN"],
+      correctIndex: 0,
+      explanation: "LEFT JOIN mantiene tutte le righe della tabella sinistra e popola con NULL le colonne di destra senza match.",
+      question_en: "Which JOIN includes all rows from the left table regardless of matches on the right?",
+      options_en: ["LEFT JOIN", "INNER JOIN", "CROSS JOIN", "RIGHT JOIN"],
+      explanation_en: "LEFT JOIN retains all rows from the left table."
+    },
+    title_en: "1. PostgreSQL SQL: SELECT, WHERE & JOINs",
+    summary_en: "Query relational databases with conditions and table joins.",
+    title_es: "1. PostgreSQL SQL: SELECT, WHERE y JOINs",
+    summary_es: "Consulta bases de datos relacionales con filtros y giunciones."
   }
 ];
 

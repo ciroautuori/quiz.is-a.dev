@@ -54,6 +54,42 @@ export const TRACKS: LearningTrack[] = [
     title_es: 'DevQuest • Git y GitHub',
     subtitle_es: 'Laboratorio Control de Versiones',
     description_es: 'Aprende control de versiones, staging, commits, ramas, merge, rebase, stash y Pull Requests.'
+  },
+  {
+    id: 'docker',
+    name: 'Docker',
+    title: 'DevQuest • Docker & Containers',
+    subtitle: 'Containerization Lab',
+    icon: '🐳',
+    badge: 'Docker Track',
+    color: 'sky',
+    codeLang: 'dockerfile',
+    bookRef: 'Docker Deep Dive di Nigel Poulton',
+    description: 'Impara la containerizzazione, immagini, Dockerfile, volumi, networking e Docker Compose.',
+    title_en: 'DevQuest • Docker & Containers',
+    subtitle_en: 'Containerization Lab',
+    description_en: 'Learn containerization, images, Dockerfile, volumes, networking, and Docker Compose.',
+    title_es: 'DevQuest • Docker y Contenedores',
+    subtitle_es: 'Laboratorio de Contenedores',
+    description_es: 'Aprende contenedores, imágenes, Dockerfile, volúmenes, redes y Docker Compose.'
+  },
+  {
+    id: 'postgres',
+    name: 'PostgreSQL',
+    title: 'DevQuest • PostgreSQL & DB',
+    subtitle: 'Relational Database Lab',
+    icon: '🐘',
+    badge: 'Postgres Track',
+    color: 'teal',
+    codeLang: 'sql',
+    bookRef: 'PostgreSQL: Up and Running di Regina Obe & Leo Hsu',
+    description: 'Padroneggia il linguaggio SQL, DDL/DML, JOIN complessi, indici, transazioni e schema design.',
+    title_en: 'DevQuest • PostgreSQL & DB',
+    subtitle_en: 'Relational Database Lab',
+    description_en: 'Master SQL syntax, DDL/DML, complex JOINs, indexing, transactions, and schema design.',
+    title_es: 'DevQuest • PostgreSQL y BD',
+    subtitle_es: 'Laboratorio Base de Datos Relacional',
+    description_es: 'Domina SQL, DDL/DML, JOINs complejos, índices, transacciones y diseño de esquemas.'
   }
 ];
 

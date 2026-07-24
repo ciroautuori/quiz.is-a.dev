@@ -95,10 +95,12 @@ const SKILL_NODES: SkillNode[] = [
 ];
 
 interface SkillTreeViewProps {
-  onSelectChapter: (chapter: number) => void;
+  onSelectChapter?: (chapter: number) => void;
+  trackId?: string;
+  completedIds?: string[];
 }
 
-export default function SkillTreeView({ onSelectChapter }: SkillTreeViewProps) {
+export default function SkillTreeView({ onSelectChapter, trackId = 'python', completedIds }: SkillTreeViewProps) {
   const [selectedNode, setSelectedNode] = useState<SkillNode | null>(SKILL_NODES[0]);
 
   return (
@@ -212,7 +214,7 @@ export default function SkillTreeView({ onSelectChapter }: SkillTreeViewProps) {
           </div>
 
           <button
-            onClick={() => onSelectChapter(selectedNode.chapterNumber)}
+            onClick={() => onSelectChapter?.(selectedNode.chapterNumber)}
             className="px-6 py-2.5 rounded-xl bg-[var(--ctp-mauve)] hover:opacity-90 text-white font-mono font-bold text-xs flex items-center gap-2 shadow-lg cursor-pointer shrink-0 transition-transform hover:scale-105 active:scale-95"
           >
             <Play className="w-4 h-4 fill-white" />

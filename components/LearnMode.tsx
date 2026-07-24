@@ -22,7 +22,9 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LearnModeProps {
+  trackId?: TrackId;
   activeTrackId?: TrackId;
+  onOpenAiTutor?: (initialPrompt?: string) => void;
   onOpenAiTutorWithConcept?: (concept: any) => void;
 }
 
@@ -52,10 +54,11 @@ function saveCompletedLesson(lessonId: string): string[] {
   return current;
 }
 
-export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithConcept }: LearnModeProps) {
+export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiTutor, onOpenAiTutorWithConcept }: LearnModeProps) {
   const { t, language } = useLanguage();
-  const track = getTrackById(activeTrackId);
-  const lessons = getLessonsForTrack(activeTrackId);
+  const targetTrackId = trackId || activeTrackId;
+  const track = getTrackById(targetTrackId);
+  const lessons = getLessonsForTrack(targetTrackId);
 
   const [activeLessonId, setActiveLessonId] = useState<string>(lessons[0]?.id || '');
   const [completedLessonIds, setCompletedLessonIds] = useState<string[]>([]);

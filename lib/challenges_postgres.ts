@@ -1,0 +1,72 @@
+import { Challenge } from './types';
+
+export const POSTGRES_CHALLENGES: Challenge[] = [
+  {
+    id: 'pg-1-1',
+    trackId: 'postgres',
+    chapter: 1,
+    topic: 'SQL Basics',
+    difficulty: 'easy',
+    question: 'Quale clausola SQL viene usata per filtrare le righe restituite da una query SELECT?',
+    question_en: 'Which SQL clause is used to filter rows returned by a SELECT query?',
+    question_es: '¿Qué cláusula SQL se utiliza para filtrar las filas devueltas por SELECT?',
+    code: 'SELECT * FROM users _______ age >= 18;',
+    options: ['WHERE', 'HAVING', 'FILTER', 'MATCH'],
+    correctIndex: 0,
+    hint: 'Si usa prima del raggruppamento per filtrare i record di una tabella.',
+    hint_en: 'Used before grouping to filter individual table records.',
+    explanation: '`WHERE` specifica le condizioni di filtro per le singole righe estratte da una tabella.',
+    explanation_en: '`WHERE` filters individual rows based on a specified boolean condition.'
+  },
+  {
+    id: 'pg-1-2',
+    trackId: 'postgres',
+    chapter: 1,
+    topic: 'JOIN Operations',
+    difficulty: 'medium',
+    question: 'Quale tipo di JOIN restituisce solo i record che hanno valori corrispondenti in entrambe le tabelle?',
+    question_en: 'Which JOIN type returns only records with matching values in both tables?',
+    question_es: '¿Qué tipo de JOIN devuelve solo los registros coincidentes en ambas tablas?',
+    code: 'SELECT * FROM orders o _______ JOIN users u ON o.user_id = u.id;',
+    options: ['INNER', 'LEFT', 'RIGHT', 'FULL'],
+    correctIndex: 0,
+    hint: 'Il tipo di JOIN di default quando si scrive semplicemente JOIN.',
+    hint_en: 'The default JOIN behavior when writing standard JOIN.',
+    explanation: '`INNER JOIN` seleziona tutti i record le cui chiavi coincidono sia nella tabella a sinistra sia in quella a destra.',
+    explanation_en: '`INNER JOIN` selects rows where the join predicate matches in both tables.'
+  },
+  {
+    id: 'pg-2-1',
+    trackId: 'postgres',
+    chapter: 2,
+    topic: 'Indexes & Performance',
+    difficulty: 'medium',
+    question: 'Quale istruzione SQL crea un indice B-Tree per velocizzare la ricerca su una colonna email?',
+    question_en: 'Which SQL statement creates a B-Tree index to speed up lookup on an email column?',
+    question_es: '¿Qué instrucción SQL crea un índice para acelerar búsquedas en una columna email?',
+    code: 'CREATE _______ idx_users_email ON users(email);',
+    options: ['INDEX', 'KEY', 'FAST', 'SEARCH'],
+    correctIndex: 0,
+    hint: 'La parola chiave SQL standard per la struttura dati di indicizzazione.',
+    hint_en: 'Standard SQL keyword for database index structure.',
+    explanation: '`CREATE INDEX` aggiunge un indice su una o più colonne di una tabella PostgreSQL per accelerare le query.',
+    explanation_en: '`CREATE INDEX` builds an index data structure over table columns.'
+  },
+  {
+    id: 'pg-3-1',
+    trackId: 'postgres',
+    chapter: 3,
+    topic: 'Transactions & ACID',
+    difficulty: 'hard',
+    question: 'In PostgreSQL, quale istruzione rende permanenti le modifiche apportate all\'interno di una transazione?',
+    question_en: 'In PostgreSQL, which command commits changes made inside a transaction?',
+    question_es: 'En PostgreSQL, ¿qué comando confirma los cambios de una transacción?',
+    code: 'BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\n_______;',
+    options: ['COMMIT', 'SAVE', 'FINALIZE', 'APPLY'],
+    correctIndex: 0,
+    hint: 'La lettera iniziale fa parte dell\'acronimo ACID.',
+    hint_en: 'Part of standard transaction control commands alongside ROLLBACK.',
+    explanation: '`COMMIT` salva permanentemente tutte le modifiche effettuate nella transazione corrente.',
+    explanation_en: '`COMMIT` persists all modifications executed within the active transaction.'
+  }
+];

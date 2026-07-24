@@ -1,7 +1,7 @@
 export type DifficultyType = 'easy' | 'medium' | 'hard' | 'mixed' | 'facile' | 'media' | 'difficile' | 'miste';
 export type DifficoltaType = DifficultyType;
 export type SyntaxTheme = 'mocha' | 'latte';
-export type TrackId = 'python' | 'typescript' | 'git';
+export type TrackId = 'python' | 'typescript' | 'git' | 'docker' | 'postgres';
 
 export interface LearningTrack {
   id: TrackId;
@@ -11,7 +11,7 @@ export interface LearningTrack {
   icon: string;
   badge: string;
   color: string; // Catppuccin color theme key (e.g. 'peach', 'blue', 'mauve')
-  codeLang: 'python' | 'typescript' | 'bash';
+  codeLang: 'python' | 'typescript' | 'bash' | 'sql' | 'dockerfile';
   bookRef: string;
   description: string;
   title_en?: string;
