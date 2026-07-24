@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, Download, Share2, X, ShieldCheck, QrCode, Github } from 'lucide-react';
 import { soundEngine } from '../lib/soundEngine';
+import { useLanguage } from '../lib/LanguageContext';
 
 interface CertificateModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export default function CertificateModal({
   trackName = 'Python Master Developer Track',
   // completedCount and totalCount are optional and kept for interface compliance
 }: CertificateModalProps) {
+  const { language } = useLanguage();
   const [nameInput, setNameInput] = useState(studentName);
   const [isEditing, setIsEditing] = useState(false);
   const [hash, setHash] = useState('');
@@ -39,8 +41,8 @@ export default function CertificateModal({
 
   if (!isOpen) return null;
 
-  const issueDate = new Date().toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
-  
+  const issueDate = new Date().toLocaleDateString(language === 'en' ? 'en-US' : language === 'es' ? 'es-ES' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+
   const generateOpenBadgeJSON = async () => {
     const salt = "devquest_salt_2026";
     const encoder = new TextEncoder();
@@ -97,7 +99,7 @@ export default function CertificateModal({
   const handleGithubShare = () => {
     const md = `[![DevQuest Certificate](https://devquest.app/badge.png)](https://devquest.app/verify/${hash})\n\n**${nameInput}** has completed the **${trackName}** on DevQuest!`;
     navigator.clipboard.writeText(md);
-    alert('Markdown copiata negli appunti! Incollala nel tuo README di GitHub.');
+    alert(language === 'en' ? 'Markdown copied to clipboard! Paste it into your GitHub README.' : language === 'es' ? '¡Markdown copiado al portapapeles! Pégalo en tu README de GitHub.' : 'Markdown copiata negli appunti! Incollala nel tuo README di GitHub.');
   };
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://devquest.app/verify/${hash}`;

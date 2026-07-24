@@ -19,7 +19,7 @@ export default function MobileBottomNav({
   onOpenAiTutor,
   onOpenSettings
 }: MobileBottomNavProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isTechDrawerOpen, setIsTechDrawerOpen] = useState(false);
 
   const isTechActive = activeView !== 'home' && activeView !== 'classifica';
@@ -33,7 +33,7 @@ export default function MobileBottomNav({
             <div className="flex items-center justify-between border-b border-[var(--ctp-surface1)] pb-3">
               <h3 className="font-mono font-bold text-sm text-[var(--ctp-text)] flex items-center gap-2">
                 <Code2 className="w-4 h-4 text-[var(--ctp-mauve)]" />
-                <span>Seleziona Tech Hub (5)</span>
+                <span>{language === 'en' ? 'Select Tech Hub (5)' : language === 'es' ? 'Seleccionar Hub Técnico (5)' : 'Seleziona Tech Hub (5)'}</span>
               </h3>
               <button
                 onClick={() => setIsTechDrawerOpen(false)}
@@ -67,7 +67,7 @@ export default function MobileBottomNav({
                       </div>
                     </div>
                     <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--ctp-surface1)] text-[var(--ctp-subtext0)]">
-                      Entra →
+                      {language === 'en' ? 'Enter →' : language === 'es' ? 'Entrar →' : 'Entra →'}
                     </span>
                   </button>
                 );

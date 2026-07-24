@@ -53,8 +53,11 @@ export default function GeneralHomeView({
             {t.appName || 'DevQuest'} • Developer Platform
           </h1>
           <p className="text-xs sm:text-sm text-[var(--ctp-subtext0)] max-w-2xl leading-relaxed font-sans">
-            Padroneggia il Full-Stack moderno: Python, TypeScript, Git/GitHub, Docker e PostgreSQL. 
-            Impara con lezioni interattive, sandbox in-browser e sfide competitive!
+            {language === 'en' 
+              ? 'Master modern full-stack development: Python, TypeScript, Git/GitHub, Docker, and PostgreSQL. Learn with interactive lessons, in-browser sandbox, and competitive challenges!'
+              : language === 'es'
+              ? 'Domina el desarrollo full-stack moderno: Python, TypeScript, Git/GitHub, Docker y PostgreSQL. ¡Aprende con lecciones interactivas, sandbox en el navegador y desafíos competitivos!'
+              : 'Padroneggia il Full-Stack moderno: Python, TypeScript, Git/GitHub, Docker e PostgreSQL. Impara con lezioni interattive, sandbox in-browser e sfide competitive!'}
           </p>
         </div>
 
@@ -64,7 +67,7 @@ export default function GeneralHomeView({
             className="px-6 py-3.5 rounded-2xl bg-[var(--ctp-mauve)] text-[var(--ctp-crust)] font-mono font-bold text-xs flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <Play className="w-4 h-4 fill-current" />
-            <span>Inizia Sfida Rapida</span>
+            <span>{language === 'en' ? 'Start Quick Quest' : language === 'es' ? 'Iniciar Desafío Rápido' : 'Inizia Sfida Rapida'}</span>
           </button>
         </div>
       </div>
@@ -79,9 +82,9 @@ export default function GeneralHomeView({
         <div className="flex items-center justify-between font-mono">
           <h2 className="text-lg font-bold text-[var(--ctp-text)] flex items-center gap-2">
             <Code2 className="w-5 h-5 text-[var(--ctp-mauve)]" />
-            <span>Tracciati Tecnici Disponibili (5)</span>
+            <span>{language === 'en' ? 'Available Tech Tracks (5)' : language === 'es' ? 'Rutas Técnicas Disponibles (5)' : 'Tracciati Tecnici Disponibili (5)'}</span>
           </h2>
-          <span className="text-xs text-[var(--ctp-subtext0)]">Seleziona una tecnologia per entrare nell'Hub dedicato</span>
+          <span className="text-xs text-[var(--ctp-subtext0)]">{language === 'en' ? 'Select a technology to enter its dedicated Hub' : language === 'es' ? 'Selecciona una tecnología para entrar en su Hub dedicado' : "Seleziona una tecnologia per entrare nell'Hub dedicato"}</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -118,9 +121,9 @@ export default function GeneralHomeView({
                 </div>
 
                 <div className="pt-3 border-t border-[var(--ctp-surface1)] flex items-center justify-between font-mono text-xs text-[var(--ctp-subtext0)]">
-                  <span>{trackCompleted} / {trackQuestions.length} Sfide</span>
+                  <span>{trackCompleted} / {trackQuestions.length} {language === 'en' ? 'Quests' : language === 'es' ? 'Desafíos' : 'Sfide'}</span>
                   <span className="flex items-center gap-1 font-bold text-[var(--ctp-mauve)] group-hover:translate-x-1 transition-transform">
-                    <span>Entra Hub</span>
+                    <span>{language === 'en' ? 'Enter Hub' : language === 'es' ? 'Entrar Hub' : 'Entra Hub'}</span>
                     <ChevronRight className="w-4 h-4" />
                   </span>
                 </div>

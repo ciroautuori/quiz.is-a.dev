@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BarChart3, PieChart, Zap, Clock, Target, Award, X, Sparkles, AlertCircle } from 'lucide-react';
 import { getUserStats, UserStats } from '../lib/gamification';
+import { useLanguage } from '../lib/LanguageContext';
 
 interface AnalyticsDashboardModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface AnalyticsDashboardModalProps {
 }
 
 export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDashboardModalProps) {
+  const { t, language } = useLanguage();
   const [stats, setStats] = useState<UserStats>(getUserStats());
 
   useEffect(() => {
@@ -26,12 +28,12 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
     : 85;
 
   const competencies = [
-    { name: 'Sintassi & Tipi', value: 92, color: '#38bdf8' },
-    { name: 'Controllo Flusso', value: 85, color: '#a855f7' },
-    { name: 'Funzioni & Scope', value: 78, color: '#ec4899' },
-    { name: 'Strutture Dati', value: 64, color: '#f59e0b' },
-    { name: 'Programmazione OOP', value: 45, color: '#10b981' },
-    { name: 'Async & Decoratori', value: 30, color: '#ef4444' }
+    { name: language === 'en' ? 'Syntax & Types' : language === 'es' ? 'Sintaxis y Tipos' : 'Sintassi & Tipi', value: 92, color: '#38bdf8' },
+    { name: language === 'en' ? 'Control Flow' : language === 'es' ? 'Control de Flujo' : 'Controllo Flusso', value: 85, color: '#a855f7' },
+    { name: language === 'en' ? 'Functions & Scope' : language === 'es' ? 'Funciones y Alcance' : 'Funzioni & Scope', value: 78, color: '#ec4899' },
+    { name: language === 'en' ? 'Data Structures' : language === 'es' ? 'Estructuras de Datos' : 'Strutture Dati', value: 64, color: '#f59e0b' },
+    { name: language === 'en' ? 'OOP Programming' : language === 'es' ? 'Programación POO' : 'Programmazione OOP', value: 45, color: '#10b981' },
+    { name: language === 'en' ? 'Async & Decorators' : language === 'es' ? 'Async y Decoradores' : 'Async & Decoratori', value: 30, color: '#ef4444' }
   ];
 
   return (
@@ -51,10 +53,10 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
               </div>
               <div>
                 <h2 className="font-bold text-base text-[var(--ctp-text)]">
-                  Dashboard Analitica & Competence Radar
+                  {language === 'en' ? 'Analytics Dashboard & Competence Radar' : language === 'es' ? 'Panel de Analítica y Radar de Competencias' : 'Dashboard Analitica & Competence Radar'}
                 </h2>
                 <p className="text-xs text-[var(--ctp-subtext0)]">
-                  Analisi delle prestazioni di codifica, accuratezza e punti di forza
+                  {language === 'en' ? 'Analysis of coding performance, accuracy, and strengths' : language === 'es' ? 'Análisis de rendimiento de código, precisión y puntos fuertes' : 'Analisi delle prestazioni di codifica, accuratezza e punti di forza'}
                 </p>
               </div>
             </div>
@@ -72,8 +74,12 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
             {!stats && (
               <div className="p-8 text-center ctp-card border border-[var(--ctp-surface1)] rounded-2xl w-full h-full flex flex-col items-center justify-center">
                 <div className="text-4xl mb-4">📊</div>
-                <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">Dati non disponibili</h3>
-                <p className="text-sm text-[var(--ctp-subtext0)]">Gioca qualche partita per generare le tue statistiche.</p>
+                <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">
+                  {language === 'en' ? 'Data Not Available' : language === 'es' ? 'Datos no Disponibles' : 'Dati non disponibili'}
+                </h3>
+                <p className="text-sm text-[var(--ctp-subtext0)]">
+                  {language === 'en' ? 'Play a few challenges to generate your stats.' : language === 'es' ? 'Juega algunos desafíos para generar tus estadísticas.' : 'Gioca qualche partita per generare le tue statistiche.'}
+                </p>
               </div>
             )}
             {stats && (
@@ -82,28 +88,28 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="p-3.5 rounded-xl border bg-[var(--ctp-surface0)]/60 border-[var(--ctp-surface1)] space-y-1">
                 <span className="text-[10px] text-[var(--ctp-subtext0)] uppercase font-bold flex items-center gap-1">
-                  <Target className="w-3.5 h-3.5 text-emerald-400" /> Accuratezza
+                  <Target className="w-3.5 h-3.5 text-emerald-400" /> {t.accuracy || (language === 'en' ? 'Accuracy' : language === 'es' ? 'Precisión' : 'Accuratezza')}
                 </span>
                 <p className="text-xl font-black text-emerald-400">{accuracyPct}%</p>
               </div>
 
               <div className="p-3.5 rounded-xl border bg-[var(--ctp-surface0)]/60 border-[var(--ctp-surface1)] space-y-1">
                 <span className="text-[10px] text-[var(--ctp-subtext0)] uppercase font-bold flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-cyan-400" /> Velocità Media
+                  <Clock className="w-3.5 h-3.5 text-cyan-400" /> {language === 'en' ? 'Avg Speed' : language === 'es' ? 'Velocidad Media' : 'Velocità Media'}
                 </span>
                 <p className="text-xl font-black text-cyan-400">{stats.averageSpeedSeconds}s</p>
               </div>
 
               <div className="p-3.5 rounded-xl border bg-[var(--ctp-surface0)]/60 border-[var(--ctp-surface1)] space-y-1">
                 <span className="text-[10px] text-[var(--ctp-subtext0)] uppercase font-bold flex items-center gap-1">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" /> XP Totali
+                  <Zap className="w-3.5 h-3.5 text-amber-400" /> {language === 'en' ? 'Total XP' : language === 'es' ? 'XP Total' : 'XP Totali'}
                 </span>
                 <p className="text-xl font-black text-amber-400">{stats.xp}</p>
               </div>
 
               <div className="p-3.5 rounded-xl border bg-[var(--ctp-surface0)]/60 border-[var(--ctp-surface1)] space-y-1">
                 <span className="text-[10px] text-[var(--ctp-subtext0)] uppercase font-bold flex items-center gap-1">
-                  <Award className="w-3.5 h-3.5 text-purple-400" /> Sfide Risolte
+                  <Award className="w-3.5 h-3.5 text-purple-400" /> {language === 'en' ? 'Solved Quests' : language === 'es' ? 'Desafíos Resueltos' : 'Sfide Risolte'}
                 </span>
                 <p className="text-xl font-black text-purple-400">{stats.correctAnswers}</p>
               </div>
@@ -112,8 +118,8 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
             {/* Competence Radar Skill Bars */}
             <div className="p-5 rounded-2xl border bg-[var(--ctp-mantle)] border-[var(--ctp-surface1)] space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--ctp-subtext0)] flex items-center justify-between">
-                <span>Grafico Radar Competenze Per Dominio</span>
-                <span className="text-[10px] text-[var(--ctp-mauve)]">Livello di Padroneggiamento</span>
+                <span>{language === 'en' ? 'Skill Radar Breakdown' : language === 'es' ? 'Gráfico de Competencias por Dominio' : 'Grafico Radar Competenze Per Dominio'}</span>
+                <span className="text-[10px] text-[var(--ctp-mauve)]">{language === 'en' ? 'Mastery Level' : language === 'es' ? 'Nivel de Dominio' : 'Livello di Padroneggiamento'}</span>
               </h3>
 
               <div className="space-y-3">
@@ -138,8 +144,14 @@ export default function AnalyticsDashboardModal({ isOpen, onClose }: AnalyticsDa
             <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
               <div>
-                <strong className="block text-amber-200">Consiglio Personalizzato dell\'AI Tutor:</strong>
-                Hai un\'eccellente precisione nella sintassi base (92%), ma ti consigliamo di allenare maggiormente la sezione <em>"Async & Decoratori"</em> e <em>"OOP"</em>.
+                <strong className="block text-amber-200">
+                  {language === 'en' ? 'AI Tutor Personal Advice:' : language === 'es' ? 'Consejo Personalizado de AI Tutor:' : 'Consiglio Personalizzato dell\'AI Tutor:'}
+                </strong>
+                {language === 'en' 
+                  ? 'You have excellent precision in basic syntax (92%), but we recommend practicing Async & Decorators and OOP topics.'
+                  : language === 'es'
+                  ? 'Tienes una excelente precisión en la sintaxis básica (92%), pero te recomendamos practicar más Async, Decoradores y POO.'
+                  : 'Hai un\'eccellente precisione nella sintassi base (92%), ma ti consigliamo di allenare maggiormente Async, Decoratori e OOP.'}
               </div>
             </div>
             </>

@@ -28,7 +28,7 @@ interface ChallengeFilterProps {
 }
 
 export default function ChallengeFilter({ allQuestions, onStartGame }: ChallengeFilterProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   // Filter states
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficoltaType>('miste');
   const [selectedChapter, setSelectedChapter] = useState<number | 'tutti'>('tutti');
@@ -193,7 +193,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
               className="text-[11px] hover:underline font-mono cursor-pointer"
               style={{ color: 'var(--ctp-peach)' }}
             >
-              Azzera Filtri
+              {language === 'en' ? 'Reset Filters' : language === 'es' ? 'Restablecer Filtros' : 'Azzera Filtri'}
             </button>
           )}
         </div>
@@ -215,13 +215,15 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-emerald-500 uppercase tracking-wider">🌱 {t.beginner || 'Principiante'}</span>
+              <span className="text-xs font-bold font-mono text-emerald-500 uppercase tracking-wider">🌱 {t.beginner || (language === 'en' ? 'Beginner' : language === 'es' ? 'Principiante' : 'Principiante')}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-green)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.facile}
               </span>
             </div>
-            <div className="text-sm font-bold">{t.facile || 'Facile'}</div>
-            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Sintassi base, tipi & print</div>
+            <div className="text-sm font-bold">{t.facile || (language === 'en' ? 'Easy' : language === 'es' ? 'Fácil' : 'Facile')}</div>
+            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>
+              {language === 'en' ? 'Basic syntax, types & print' : language === 'es' ? 'Sintaxis básica, tipos e impresión' : 'Sintassi base, tipi & print'}
+            </div>
           </button>
 
           {/* Media / Intermediate */}
@@ -240,13 +242,15 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-amber-500 uppercase tracking-wider">⚡ {t.intermediate || 'Intermedio'}</span>
+              <span className="text-xs font-bold font-mono text-amber-500 uppercase tracking-wider">⚡ {t.intermediate || (language === 'en' ? 'Intermediate' : language === 'es' ? 'Intermedio' : 'Intermedio')}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-yellow)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.media}
               </span>
             </div>
-            <div className="text-sm font-bold">{t.media || 'Media'}</div>
-            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Liste, cicli & funzioni</div>
+            <div className="text-sm font-bold">{t.media || (language === 'en' ? 'Medium' : language === 'es' ? 'Media' : 'Media')}</div>
+            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>
+              {language === 'en' ? 'Lists, loops & functions' : language === 'es' ? 'Listas, bucles y funciones' : 'Liste, cicli & funzioni'}
+            </div>
           </button>
 
           {/* Difficile / Advanced */}
@@ -265,13 +269,15 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-rose-500 uppercase tracking-wider">🔥 {t.advanced || 'Avanzato'}</span>
+              <span className="text-xs font-bold font-mono text-rose-500 uppercase tracking-wider">🔥 {t.advanced || (language === 'en' ? 'Advanced' : language === 'es' ? 'Avanzado' : 'Avanzato')}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-red)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.difficile}
               </span>
             </div>
-            <div className="text-sm font-bold">{t.difficile || 'Difficile'}</div>
-            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Dizionari, classi & errori</div>
+            <div className="text-sm font-bold">{t.difficile || (language === 'en' ? 'Hard' : language === 'es' ? 'Difícil' : 'Difficile')}</div>
+            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>
+              {language === 'en' ? 'Dictionaries, classes & errors' : language === 'es' ? 'Diccionarios, clases y errores' : 'Dizionari, classi & errori'}
+            </div>
           </button>
 
           {/* Miste / All */}
@@ -290,13 +296,15 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono uppercase tracking-wider" style={{ color: 'var(--ctp-mauve)' }}>🌈 {t.mixed || 'Miste'}</span>
+              <span className="text-xs font-bold font-mono uppercase tracking-wider" style={{ color: 'var(--ctp-mauve)' }}>🌈 {t.mixed || (language === 'en' ? 'Mixed' : language === 'es' ? 'Mixtas' : 'Miste')}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.tutti}
               </span>
             </div>
-            <div className="text-sm font-bold">{t.allLevels || 'Tutti i Livelli'}</div>
-            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Mix casuale equilibrato</div>
+            <div className="text-sm font-bold">{t.allLevels || (language === 'en' ? 'All Levels' : language === 'es' ? 'Todos los Niveles' : 'Tutti i Livelli')}</div>
+            <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>
+              {language === 'en' ? 'Balanced random mix' : language === 'es' ? 'Mezcla aleatoria equilibrada' : 'Mix casuale equilibrato'}
+            </div>
           </button>
         </div>
       </div>
@@ -386,7 +394,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
                 color: numQuestions === n ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)'
               }}
             >
-              {n} Domande
+              {n} {language === 'en' ? 'Questions' : language === 'es' ? 'Preguntas' : 'Domande'}
             </button>
           ))}
           <button
@@ -399,7 +407,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
               color: numQuestions === filteredQuestions.length ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)'
             }}
           >
-            Tutte ({filteredQuestions.length})
+            {language === 'en' ? 'All' : language === 'es' ? 'Todas' : 'Tutte'} ({filteredQuestions.length})
           </button>
         </div>
       </div>
@@ -414,7 +422,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         >
           <span className="flex items-center gap-2">
             <Code className="w-4 h-4" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>Anteprima sfide filtrate ({filteredQuestions.length})</span>
+            <span>{language === 'en' ? 'Filtered challenges preview' : language === 'es' ? 'Vista previa de desafíos filtrados' : 'Anteprima sfide filtrate'} ({filteredQuestions.length})</span>
           </span>
           {showPreviewList ? (
             <ChevronUp className="w-4 h-4" />
@@ -427,7 +435,11 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
           <div className="mt-3 max-h-72 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
             {filteredQuestions.length === 0 ? (
               <div className="p-4 text-center text-xs ctp-card-mantle rounded-xl border">
-                Nessuna sfida trovata con i filtri attuali. Prova a modificare le opzioni o azzerare la ricerca.
+                {language === 'en'
+                  ? 'No challenges found with current filters. Try changing options or resetting search.'
+                  : language === 'es'
+                  ? 'No se encontraron desafíos con los filtros actuales. Intenta modificar las opciones o restablecer la búsqueda.'
+                  : 'Nessuna sfida trovata con i filtri attuali. Prova a modificare le opzioni o azzerare la ricerca.'}
               </div>
             ) : (
               (() => {
@@ -473,7 +485,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
                             <CodeBlock code={sfida.codice} title={`Codice ${sfida.id}`} />
                           )}
                           <div className="italic" style={{ color: 'var(--ctp-subtext0)' }}>
-                            💡 Suggerimento: {sfida.suggerimento}
+                            💡 {t.hint || (language === 'en' ? 'Hint' : language === 'es' ? 'Sugerencia' : 'Suggerimento')}: {sfida.suggerimento}
                           </div>
                         </div>
                       )}
@@ -498,8 +510,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
           <Sparkles className="w-5 h-5" />
           <span>
             {filteredQuestions.length > 0 
-              ? `Inizia Partita con ${Math.min(numQuestions, filteredQuestions.length)} Sfide Selezionate`
-              : 'Nessuna Sfida Trovata'}
+              ? (language === 'en'
+                  ? `Start Game with ${Math.min(numQuestions, filteredQuestions.length)} Selected Challenges`
+                  : language === 'es'
+                  ? `Iniciar Partida con ${Math.min(numQuestions, filteredQuestions.length)} Desafíos Seleccionados`
+                  : `Inizia Partita con ${Math.min(numQuestions, filteredQuestions.length)} Sfide Selezionate`)
+              : (language === 'en' ? 'No Challenges Found' : language === 'es' ? 'No se encontraron desafíos' : 'Nessuna Sfida Trovata')}
           </span>
         </button>
       </div>

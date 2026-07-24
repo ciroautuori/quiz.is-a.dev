@@ -9,7 +9,7 @@ interface DailyGoalBannerProps {
 }
 
 export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [goal, setGoal] = useState(3);
   const [todayCount, setTodayCount] = useState(0);
   const [streakCount, setStreakCount] = useState(0);

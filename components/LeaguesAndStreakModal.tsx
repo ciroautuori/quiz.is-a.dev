@@ -24,7 +24,7 @@ const MOCK_LEAGUE_LEADERBOARD = [
 ];
 
 export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStreakModalProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [stats, setStats] = useState<UserStats>(getUserStats());
   const [message, setMessage] = useState<string | null>(null);
   const [triggerBurst, setTriggerBurst] = useState(false);
@@ -131,7 +131,7 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-mono font-bold text-[var(--ctp-subtext0)] flex items-center gap-1.5">
                     <Trophy className="w-4 h-4 text-yellow-400" />
-                    {t.selectedTrack || 'Lega Corrente'}
+                    {language === 'en' ? 'Current League' : language === 'es' ? 'Liga Actual' : 'Lega Corrente'}
                   </span>
                   <span className="text-sm font-bold font-mono px-2.5 py-0.5 rounded-full border" style={{ color: currentLeagueConfig.color, borderColor: currentLeagueConfig.color + '40', backgroundColor: currentLeagueConfig.color + '15' }}>
                     {currentLeagueConfig.icon} {currentLeagueConfig.name}
@@ -155,8 +155,10 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
             {/* League Leaderboard Table */}
             <div>
               <h3 className="text-xs font-mono font-bold uppercase tracking-wider mb-3 flex items-center justify-between" style={{ color: 'var(--ctp-subtext0)' }}>
-                <span>{t.weeklyLeaderboard || 'Classifica Settimanale'} - {currentLeagueConfig.name}</span>
-                <span className="text-[10px] text-emerald-400">Promotion: 500 XP | Relegation: &lt; 100 XP</span>
+                <span>{t.weeklyLeaderboard || (language === 'en' ? 'Weekly Leaderboard' : language === 'es' ? 'Clasificación Semanal' : 'Classifica Settimanale')} - {currentLeagueConfig.name}</span>
+                <span className="text-[10px] text-emerald-400">
+                  {language === 'en' ? 'Promotion: 500 XP | Relegation: < 100 XP' : language === 'es' ? 'Ascenso: 500 XP | Descenso: < 100 XP' : 'Promozione: 500 XP | Retrocessione: < 100 XP'}
+                </span>
               </h3>
 
               <div className="border border-[var(--ctp-surface1)] rounded-xl overflow-hidden divide-y divide-[var(--ctp-surface1)]">
@@ -164,6 +166,9 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                   const isUser = item.isUser;
                   const itemXP = isUser ? stats.weeklyXP : item.weeklyXP;
                   const itemStreak = isUser ? stats.streakCount : item.streak;
+                  const displayName = isUser 
+                    ? (language === 'en' ? 'You (Player)' : language === 'es' ? 'Tú (Jugador)' : 'Tu (Player)') 
+                    : item.name;
 
                   return (
                     <div
@@ -178,7 +183,7 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                         </span>
                         <span className="text-base">{item.avatar}</span>
                         <span style={{ color: 'var(--ctp-text)' }}>
-                          {item.name} {isUser && <span className="text-[10px] text-[var(--ctp-mauve)] font-normal">(Tu)</span>}
+                          {displayName} {isUser && <span className="text-[10px] text-[var(--ctp-mauve)] font-normal">({language === 'en' ? 'You' : language === 'es' ? 'Tú' : 'Tu'})</span>}
                         </span>
                       </div>
 

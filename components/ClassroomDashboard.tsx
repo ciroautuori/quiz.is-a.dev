@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Users, BookOpen, BarChart3, Download } from 'lucide-react';
+import { useLanguage } from '../lib/LanguageContext';
 
 const MOCK_STUDENTS = [
   { id: 1, name: 'Alice Smith', progress: 85, assignments: 12, grade: 'A' },
@@ -10,6 +11,7 @@ const MOCK_STUDENTS = [
 ];
 
 export default function ClassroomDashboard() {
+  const { language } = useLanguage();
   const [students] = useState(MOCK_STUDENTS);
 
   const exportCSV = () => {
@@ -31,9 +33,9 @@ export default function ClassroomDashboard() {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Classroom Portal</h1>
+        <h1 className="text-3xl font-bold">{language === 'en' ? 'Classroom Portal' : language === 'es' ? 'Portal de Aula' : 'Portale Classe & Studenti'}</h1>
         <button onClick={exportCSV} className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-          <Download className="w-4 h-4" /> Export CSV
+          <Download className="w-4 h-4" /> {language === 'en' ? 'Export CSV' : language === 'es' ? 'Exportar CSV' : 'Esporta CSV'}
         </button>
       </div>
 
@@ -42,7 +44,7 @@ export default function ClassroomDashboard() {
           <div className="flex items-center gap-4">
             <Users className="w-8 h-8 text-blue-500" />
             <div>
-              <p className="text-sm text-gray-500">Total Students</p>
+              <p className="text-sm text-gray-500">{language === 'en' ? 'Total Students' : language === 'es' ? 'Estudiantes Totales' : 'Studenti Totali'}</p>
               <p className="text-2xl font-bold">{students.length}</p>
             </div>
           </div>
@@ -51,7 +53,7 @@ export default function ClassroomDashboard() {
           <div className="flex items-center gap-4">
             <BookOpen className="w-8 h-8 text-green-500" />
             <div>
-              <p className="text-sm text-gray-500">Avg Progress</p>
+              <p className="text-sm text-gray-500">{language === 'en' ? 'Avg Progress' : language === 'es' ? 'Progreso Medio' : 'Progresso Medio'}</p>
               <p className="text-2xl font-bold">
                 {Math.round(students.reduce((acc, s) => acc + s.progress, 0) / students.length)}%
               </p>
@@ -62,7 +64,7 @@ export default function ClassroomDashboard() {
           <div className="flex items-center gap-4">
             <BarChart3 className="w-8 h-8 text-purple-500" />
             <div>
-              <p className="text-sm text-gray-500">Assignments</p>
+              <p className="text-sm text-gray-500">{language === 'en' ? 'Assignments' : language === 'es' ? 'Tareas' : 'Compiti Completati'}</p>
               <p className="text-2xl font-bold">
                 {students.reduce((acc, s) => acc + s.assignments, 0)}
               </p>
@@ -75,10 +77,10 @@ export default function ClassroomDashboard() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-gray-50 border-b text-sm font-semibold text-gray-700">
-              <th className="p-4">Student</th>
-              <th className="p-4">Progress Heatmap</th>
-              <th className="p-4">Assignments</th>
-              <th className="p-4">Grade</th>
+              <th className="p-4">{language === 'en' ? 'Student' : language === 'es' ? 'Estudiante' : 'Studente'}</th>
+              <th className="p-4">{language === 'en' ? 'Progress Heatmap' : language === 'es' ? 'Mapa de Progreso' : 'Mappa di Progresso'}</th>
+              <th className="p-4">{language === 'en' ? 'Assignments' : language === 'es' ? 'Tareas' : 'Compiti'}</th>
+              <th className="p-4">{language === 'en' ? 'Grade' : language === 'es' ? 'Nota' : 'Voto'}</th>
             </tr>
           </thead>
           <tbody>
