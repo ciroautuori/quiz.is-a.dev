@@ -7,7 +7,7 @@ import { useTheme } from '../lib/ThemeContext';
 interface CodeBlockProps {
   code: string;
   title?: string;
-  language?: 'python' | 'typescript' | 'bash' | 'sql' | 'dockerfile';
+  language?: 'python' | 'typescript' | 'bash' | 'sql' | 'dockerfile' | 'json';
 }
 
 export default function CodeBlock({ code, title, language = 'python' }: CodeBlockProps) {

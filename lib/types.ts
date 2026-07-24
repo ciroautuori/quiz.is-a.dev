@@ -1,7 +1,7 @@
 export type DifficultyType = 'easy' | 'medium' | 'hard' | 'mixed' | 'facile' | 'media' | 'difficile' | 'miste';
 export type DifficoltaType = DifficultyType;
 export type SyntaxTheme = 'mocha' | 'latte';
-export type TrackId = 'python' | 'typescript' | 'git' | 'docker' | 'postgres';
+export type TrackId = 'python' | 'typescript' | 'git' | 'docker' | 'postgres' | 'prompt_engineering' | 'mcp' | 'claude_code';
 
 export interface LearningTrack {
   id: TrackId;
@@ -11,7 +11,7 @@ export interface LearningTrack {
   icon: string;
   badge: string;
   color: string; // Catppuccin color theme key (e.g. 'peach', 'blue', 'mauve')
-  codeLang: 'python' | 'typescript' | 'bash' | 'sql' | 'dockerfile';
+  codeLang: 'python' | 'typescript' | 'bash' | 'sql' | 'dockerfile' | 'json';
   bookRef: string;
   description: string;
   title_en?: string;
@@ -28,6 +28,10 @@ export interface Challenge {
   chapter?: number;
   topic?: string;
   difficulty?: 'easy' | 'medium' | 'hard' | 'facile' | 'media' | 'difficile';
+  source?: {
+    url: string;
+    verifiedOn: string;
+  };
   question?: string;
   code?: string;
   options?: string[];

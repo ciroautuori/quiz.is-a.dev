@@ -2,6 +2,7 @@ import { Sfida, TrackId, normalizeChallenge } from './types';
 import { INITIAL_TYPESCRIPT_CHALLENGES, INITIAL_GIT_CHALLENGES } from './content/initial_challenges';
 import { DOCKER_CHALLENGES } from './challenges_docker';
 import { POSTGRES_CHALLENGES } from './challenges_postgres';
+import { AI_NATIVE_CHALLENGES } from './challenges_ai';
 
 export const SFIDE_PYTHON: Sfida[] = [
   // --- BASI (Capitoli 1-2) ---
@@ -526,6 +527,15 @@ export function getQuestionsForTrack(trackId: TrackId): Sfida[] {
     case 'postgres':
       list = POSTGRES_CHALLENGES;
       break;
+    case 'prompt_engineering':
+      list = AI_NATIVE_CHALLENGES.filter(q => q.trackId === 'prompt_engineering');
+      break;
+    case 'mcp':
+      list = AI_NATIVE_CHALLENGES.filter(q => q.trackId === 'mcp');
+      break;
+    case 'claude_code':
+      list = AI_NATIVE_CHALLENGES.filter(q => q.trackId === 'claude_code');
+      break;
     case 'python':
     default:
       list = SFIDE_PYTHON;
@@ -540,7 +550,8 @@ export function getAllQuestions(): Sfida[] {
     ...INITIAL_TYPESCRIPT_CHALLENGES, 
     ...INITIAL_GIT_CHALLENGES,
     ...DOCKER_CHALLENGES,
-    ...POSTGRES_CHALLENGES
+    ...POSTGRES_CHALLENGES,
+    ...AI_NATIVE_CHALLENGES
   ].map((q) => normalizeChallenge(q));
 }
 
