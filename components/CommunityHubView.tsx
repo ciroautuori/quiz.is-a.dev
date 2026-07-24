@@ -73,7 +73,6 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
   const [correctIdx, setCorrectIdx] = useState(0);
 
   const handleUpvote = (id: string) => {
-    console.log("Mock Firestore: Updating upvotes...");
     setChallenges(prev => prev.map(c => {
       if (c.id === id) {
         const nextUpvoted = !c.hasUpvoted;
@@ -89,7 +88,6 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
   };
 
   const handleClone = (id: string) => {
-    console.log("Mock Firestore: Cloning quest...");
     const toClone = challenges.find(c => c.id === id);
     if (!toClone) return;
     const cloned = { ...toClone, id: `ugc_clone_${Date.now()}`, author: 'Tu (Clonato)', upvotes: 0, hasUpvoted: false, isCreator: false };
@@ -99,8 +97,6 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
 
   const handleCreateChallenge = () => {
     if (!newQuestion || !newAns0 || !newAns1) return;
-
-    console.log("Mock Firestore: Saving to 'quests' collection...");
     const newSfida: CommunityChallenge = normalizeChallenge({
       id: `ugc_custom_${Date.now()}`,
       capitolo: 99,
