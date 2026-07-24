@@ -21,7 +21,7 @@ interface GitHubSyncModalProps {
 }
 
 export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [authData, setAuthData] = useState<GitHubAuthData | null>(null);
   const [repoName, setRepoName] = useState<string>('python-quest-solutions');
   const [isConnecting, setIsConnecting] = useState(false);
@@ -356,7 +356,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
                       <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
                     )}
                     <span>
-                      {syncResult.success ? t.syncSuccess : 'Errore Sincronizzazione'}
+                      {syncResult.success ? t.syncSuccess : (language === 'en' ? 'Sync Error' : language === 'es' ? 'Error de Sincronización' : 'Errore Sincronizzazione')}
                     </span>
                   </div>
 
