@@ -12,7 +12,6 @@ services:
     restart: unless-stopped
     # Porta host non-standard: 4242 → 3000 nel container
     ports:
-      - "80:3000"
       - "4242:3000"
     environment:
       NODE_ENV: production
