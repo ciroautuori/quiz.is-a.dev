@@ -14,7 +14,7 @@ interface CustomQuestionsViewProps {
 }
 
 export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestionsViewProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [customList, setCustomList] = useState<Sfida[]>([]);
   const [showForm, setShowForm] = useState(false);
 
@@ -85,8 +85,8 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
             <PlusCircle className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>{language === 'en' ? 'Custom Questions Lab' : language === 'es' ? 'Laboratorio de Preguntas Personalizadas' : 'Laboratorio Domande Personalizzate'}</h2>
-            <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Create your Python challenges and integrate them into the game' : language === 'es' ? 'Crea tus desafíos de Python e intégralos al juego' : 'Crea le tue sfide Python e integrarle subito nel gioco'}</p>
+            <h2 className="text-xl font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>{t.customLabTitle}</h2>
+            <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>{t.customLabSubtitle}</p>
           </div>
         </div>
 
@@ -96,18 +96,18 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
           style={{ backgroundColor: 'var(--ctp-peach)', color: 'var(--ctp-crust)' }}
         >
           <PlusCircle className="w-4 h-4" />
-          <span>{showForm ? (language === 'en' ? 'Cancel' : language === 'es' ? 'Cancelar' : 'Annulla') : (language === 'en' ? 'New Question' : language === 'es' ? 'Nueva Pregunta' : 'Nuova Domanda')}</span>
+          <span>{showForm ? t.cancel : t.addQuestionBtn}</span>
         </button>
       </div>
 
       {/* Form */}
       {showForm && (
         <form onSubmit={handleSubmit} className="ctp-card border rounded-2xl p-6 shadow-xl mb-8 space-y-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider font-mono" style={{ color: 'var(--ctp-text)' }}>{language === 'en' ? 'Add a Challenge' : language === 'es' ? 'Añadir una Desafío' : 'Aggiungi una Sfida'}</h3>
+          <h3 className="text-sm font-bold uppercase tracking-wider font-mono" style={{ color: 'var(--ctp-text)' }}>{t.formTitleShort}</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-              <label className="block text-xs mb-1 font-semibold" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Language / Track' : language === 'es' ? 'Lenguaje / Trac' : 'Linguaggio / Tracciato'}</label>
+              <label className="block text-xs mb-1 font-semibold" style={{ color: 'var(--ctp-subtext0)' }}>{t.languageTrack}</label>
               <select
                 value={trackId}
                 onChange={(e) => setTrackId(e.target.value as TrackId)}
@@ -121,7 +121,7 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
               </select>
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Chapter' : language === 'es' ? 'Capítulo' : 'Capitolo'}</label>
+              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.chapterLabelShort}</label>
               <input
                 type="number"
                 min={1}
@@ -132,10 +132,10 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
               />
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Topic' : language === 'es' ? 'Tema' : 'Argomento'}</label>
+              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.topicLabelShort}</label>
               <input
                 type="text"
-                placeholder={language === 'en' ? 'e.g. Functions, Interface, Commit' : language === 'es' ? 'ej. Funciones, Interfaz, Commit' : 'es. Funzioni, Interface, Commit'}
+                placeholder={t.topicPlaceholder}
                 value={argomento}
                 onChange={(e) => setArgomento(e.target.value)}
                 className="w-full ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
@@ -143,24 +143,24 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
               />
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Difficulty' : language === 'es' ? 'Dificultad' : 'Difficoltà'}</label>
+              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.difficultyLabelShort}</label>
               <select
                 value={difficolta}
                 onChange={(e) => setDifficolta(e.target.value as any)}
                 className="w-full ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
               >
-                <option value="facile">{language === 'en' ? 'Easy' : language === 'es' ? 'Fácil' : 'Facile'}</option>
-                <option value="media">{language === 'en' ? 'Medium' : language === 'es' ? 'Media' : 'Media'}</option>
-                <option value="difficile">{language === 'en' ? 'Hard' : language === 'es' ? 'Difícil' : 'Difficile'}</option>
+                <option value="facile">{t.facile}</option>
+                <option value="media">{t.media}</option>
+                <option value="difficile">{t.difficile}</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Question Text' : language === 'es' ? 'Texto de la Pregunta' : 'Testo della Domanda'}</label>
+            <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.questionTextLabelShort}</label>
             <input
               type="text"
-              placeholder={language === 'en' ? 'e.g. What does this Python code print?' : language === 'es' ? 'ej. ¿Qué imprime este código Python?' : 'es. Cosa stampa questo codice Python?'}
+              placeholder={t.questionPlaceholder}
               value={domanda}
               onChange={(e) => setDomanda(e.target.value)}
               className="w-full ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
@@ -169,7 +169,7 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
           </div>
 
           <div>
-            <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Code Snippet (optional)' : language === 'es' ? 'Código (opcional)' : 'Codice Python (opzionale)'}</label>
+            <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.codeSnippetOptional}</label>
             <textarea
               rows={3}
               placeholder="def saluta():&#10;    print('Ciao')"
@@ -180,7 +180,7 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
           </div>
 
           <div>
-            <label className="block text-xs mb-2" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Response Options (select the correct one)' : language === 'es' ? 'Opciones de respuesta (selecciona la correcta)' : 'Opzioni di Risposta (seleziona quella corretta)'}</label>
+            <label className="block text-xs mb-2" style={{ color: 'var(--ctp-subtext0)' }}>{t.responseOptionsLabel}</label>
             <div className="space-y-2">
               {opzioni.map((opt, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -194,7 +194,7 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
                   />
                   <input
                     type="text"
-                    placeholder={`${language === 'en' ? 'Option' : language === 'es' ? 'Opción' : 'Opzione'} ${String.fromCharCode(65 + i)}`}
+                    placeholder={`${t.optionLetter} ${String.fromCharCode(65 + i)}`}
                     value={opt}
                     onChange={(e) => handleOpzioneChange(i, e.target.value)}
                     className="flex-1 ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
@@ -207,20 +207,20 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Hint' : language === 'es' ? 'Sugerencia' : 'Suggerimento'}</label>
+              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.hint}</label>
               <input
                 type="text"
-                placeholder={language === 'en' ? 'Useful hint' : language === 'es' ? 'Sugerencia útil' : 'Indizio utile'}
+                placeholder={t.usefulHint}
                 value={suggerimento}
                 onChange={(e) => setSuggerimento(e.target.value)}
                 className="w-full ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
               />
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Solution Explanation' : language === 'es' ? 'Explicación de la solución' : 'Spiegazione della soluzione'}</label>
+              <label className="block text-xs mb-1" style={{ color: 'var(--ctp-subtext0)' }}>{t.solutionExplanation}</label>
               <input
                 type="text"
-                placeholder={language === 'en' ? 'Detailed explanation' : language === 'es' ? 'Explicación detallada' : 'Spiegazione dettagliata'}
+                placeholder={t.detailedExplanation}
                 value={spiegazione}
                 onChange={(e) => setSpiegazione(e.target.value)}
                 className="w-full ctp-input rounded-lg p-2.5 text-xs border focus:outline-none"
@@ -233,7 +233,7 @@ export default function CustomQuestionsView({ onQuestionAdded }: CustomQuestions
             className="w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
             style={{ backgroundColor: 'var(--ctp-peach)', color: 'var(--ctp-crust)' }}
           >
-            Salva Domanda
+            {t.saveQuestion}
           </button>
         </form>
       )}

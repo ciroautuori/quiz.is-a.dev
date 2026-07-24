@@ -15,8 +15,10 @@ export const POSTGRES_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'Si usa prima del raggruppamento per filtrare i record di una tabella.',
     hint_en: 'Used before grouping to filter individual table records.',
+    hint_es: 'Se usa antes de la agrupación para filtrar los registros de una tabla.',
     explanation: '`WHERE` specifica le condizioni di filtro per le singole righe estratte da una tabella.',
-    explanation_en: '`WHERE` filters individual rows based on a specified boolean condition.'
+    explanation_en: '`WHERE` filters individual rows based on a specified boolean condition.',
+    explanation_es: '`WHERE` especifica las condiciones de filtro para las filas individuales extraídas de una tabla.'
   },
   {
     id: 'pg-1-2',
@@ -32,8 +34,10 @@ export const POSTGRES_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'Il tipo di JOIN di default quando si scrive semplicemente JOIN.',
     hint_en: 'The default JOIN behavior when writing standard JOIN.',
+    hint_es: 'El tipo de JOIN por defecto cuando se escribe simplemente JOIN.',
     explanation: '`INNER JOIN` seleziona tutti i record le cui chiavi coincidono sia nella tabella a sinistra sia in quella a destra.',
-    explanation_en: '`INNER JOIN` selects rows where the join predicate matches in both tables.'
+    explanation_en: '`INNER JOIN` selects rows where the join predicate matches in both tables.',
+    explanation_es: '`INNER JOIN` selecciona todos los registros cuyas claves coinciden tanto en la tabla de la izquierda como en la de la derecha.'
   },
   {
     id: 'pg-2-1',
@@ -49,8 +53,10 @@ export const POSTGRES_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'La parola chiave SQL standard per la struttura dati di indicizzazione.',
     hint_en: 'Standard SQL keyword for database index structure.',
+    hint_es: 'La palabra clave SQL estándar para la estructura de datos de indexación.',
     explanation: '`CREATE INDEX` aggiunge un indice su una o più colonne di una tabella PostgreSQL per accelerare le query.',
-    explanation_en: '`CREATE INDEX` builds an index data structure over table columns.'
+    explanation_en: '`CREATE INDEX` builds an index data structure over table columns.',
+    explanation_es: '`CREATE INDEX` añade un índice en una o más columnas de una tabla PostgreSQL para acelerar las consultas.'
   },
   {
     id: 'pg-3-1',
@@ -66,7 +72,9 @@ export const POSTGRES_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'La lettera iniziale fa parte dell\'acronimo ACID.',
     hint_en: 'Part of standard transaction control commands alongside ROLLBACK.',
+    hint_es: 'La letra inicial forma parte del acrónimo ACID.',
     explanation: '`COMMIT` salva permanentemente tutte le modifiche effettuate nella transazione corrente.',
-    explanation_en: '`COMMIT` persists all modifications executed within the active transaction.'
+    explanation_en: '`COMMIT` persists all modifications executed within the active transaction.',
+    explanation_es: '`COMMIT` guarda permanentemente todos los cambios realizados en la transacción actual.'
   }
 ];

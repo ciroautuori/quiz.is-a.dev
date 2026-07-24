@@ -24,8 +24,11 @@ export const AI_NATIVE_CHALLENGES: Challenge[] = [
     ],
     correctIndex: 0,
     hint: 'I tag XML impediscono che i dati di input vengano scambiati per istruzioni di sistema.',
+    hint_en: 'XML tags prevent input data from being mistaken for system instructions.',
+    hint_es: 'Las etiquetas XML impiden que los datos de entrada se confundan con instrucciones del sistema.',
     explanation: 'I tag XML strutturano il prompt consentendo al modello di distinguere senza ambiguità tra le istruzioni del prompt e i dati o codice su cui operare. Nomi di tag coerenti e descrittivi, e nesting quando il contenuto ha una gerarchia naturale, sono le best practice indicate.',
     explanation_en: 'XML tags explicitly separate system/user instructions from payload data, reducing misinterpretation especially when a prompt mixes instructions, context, examples, and variable inputs.',
+    explanation_es: 'Las etiquetas XML estructuran el prompt permitiendo al modelo distinguir sin ambigüedad entre las instrucciones del prompt y los datos o código sobre los cuales operar. Los nombres de etiquetas coherentes y descriptivos, así como el anidamiento cuando el contenido tiene una jerarquía natural, son las mejores prácticas indicadas.',
     source: {
       url: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#structure-prompts-with-xml-tags',
       verifiedOn: '2026-07-24'
@@ -74,6 +77,8 @@ export const AI_NATIVE_CHALLENGES: Challenge[] = [
     ],
     correctIndex: 0,
     hint: 'Utilizza messaggi JSON strutturati con campi jsonrpc, id, method e params.',
+    hint_en: 'Use structured JSON messages with jsonrpc, id, method, and params fields.',
+    hint_es: 'Utiliza mensajes JSON estructurados con campos jsonrpc, id, method y params.',
     explanation: 'La data layer di MCP implementa un protocollo di scambio basato su JSON-RPC 2.0, che definisce struttura e semantica dei messaggi tra MCP host/client e MCP server; la transport layer (stdio o Streamable HTTP) trasporta questo stesso formato.',
     explanation_en: 'MCP\'s data layer implements a JSON-RPC 2.0 based exchange protocol; the transport layer (stdio or Streamable HTTP) carries this same message format regardless of mechanism.',
     source: {
@@ -99,8 +104,11 @@ export const AI_NATIVE_CHALLENGES: Challenge[] = [
     ],
     correctIndex: 0,
     hint: 'Si usa un metodo JSON-RPC nativo di discovery dei tool, che supporta paginazione.',
+    hint_en: 'A native JSON-RPC tool discovery method is used, which supports pagination.',
+    hint_es: 'Se utiliza un método JSON-RPC nativo de descubrimiento de herramientas, que admite paginación.',
     explanation: 'Il metodo `tools/list` consente al client di interrogare il server MCP e ricevere l\'elenco dei tool disponibili con nome, descrizione e JSON Schema dei parametri (`inputSchema`); la richiesta supporta paginazione tramite `cursor`.',
     explanation_en: 'The `tools/list` RPC method dynamically discovers available tools along with their argument schemas, and supports pagination via a cursor parameter.',
+    explanation_es: 'El método `tools/list` permite al cliente consultar al servidor MCP y recibir la lista de herramientas disponibles con nombre, descripción y JSON Schema de los parámetros (`inputSchema`); la solicitud admite paginación mediante `cursor`.',
     source: {
       url: 'https://modelcontextprotocol.io/specification/2025-06-18/server/tools',
       verifiedOn: '2026-07-24'
@@ -126,6 +134,7 @@ export const AI_NATIVE_CHALLENGES: Challenge[] = [
     hint: 'Fornisce contesto persistente all\'agente per evitare che violi le convenzioni del progetto.',
     explanation: 'CLAUDE.md è un file markdown nella root del progetto che Claude Code legge a ogni sessione, usato per definire standard di codice, decisioni architetturali, librerie preferite e checklist di review. Claude Code costruisce anche "auto memory" nel tempo, salvando learning come comandi di build o insight di debug tra sessioni.',
     explanation_en: 'CLAUDE.md is read by Claude Code at the start of every session to set coding standards, architecture decisions, and review checklists; Claude Code also builds auto memory over time across sessions.',
+    explanation_es: 'CLAUDE.md es un archivo markdown en la raíz del proyecto que Claude Code lee en cada sesión, utilizado para definir estándares de código, decisiones arquitectónicas, librerías preferidas y listas de verificación de revisión. Claude Code también construye \"auto memory\" con el tiempo, guardando aprendizajes como comandos de compilación o conocimientos de depuración entre sesiones.',
     source: {
       url: 'https://code.claude.com/docs/en/overview#customize-with-instructions-skills-and-hooks',
       verifiedOn: '2026-07-24'

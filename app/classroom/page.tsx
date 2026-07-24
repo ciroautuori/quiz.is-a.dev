@@ -3,10 +3,12 @@
 import React from 'react';
 import ClassroomDashboard from '../../components/ClassroomDashboard';
 import { LanguageProvider } from '../../lib/LanguageContext';
+import LangSync from '../../lib/LangSync';
 
 export default function ClassroomPage() {
   return (
     <LanguageProvider>
+      <LangSync />
       <div className="min-h-screen bg-gray-50 text-gray-900 py-8">
         <ClassroomDashboard />
       </div>

@@ -92,17 +92,17 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
   // Execute Sandbox Code
   const handleRunSandbox = async () => {
     setIsRunningCode(true);
-    setSandboxOutput(language === 'en' ? 'Execution in progress...' : language === 'es' ? 'Ejecución en curso...' : 'Esecuzione in corso...');
+    setSandboxOutput(t.executionInProgress);
     try {
       if (track.codeLang === 'python') {
         const res = await runPythonCode(sandboxCode);
-        setSandboxOutput(res.error ? `${language === 'en' ? 'Error' : language === 'es' ? 'Error' : 'Errore'}:\n${res.error}` : res.output || (language === 'en' ? '(No output)' : language === 'es' ? '(Sin salida)' : '(Nessun output)'));
+        setSandboxOutput(res.error ? `${t.executionError}:\n${res.error}` : res.output || t.noOutput);
       } else {
         // JavaScript/TypeScript/Bash fallback
         setSandboxOutput(`Output:\n> ${sandboxCode}`);
       }
     } catch (err: any) {
-      setSandboxOutput(`${language === 'en' ? 'Execution error' : language === 'es' ? 'Error de ejecución' : 'Errore esecuzione'}: ${err.message || String(err)}`);
+      setSandboxOutput(`${t.executionError}: ${err.message || String(err)}`);
     } finally {
       setIsRunningCode(false);
     }
@@ -135,14 +135,14 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg sm:text-xl font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
-                {language === 'en' ? 'Lesson Path' : language === 'es' ? 'Ruta de Lecciones' : 'Percorso Lezioni'} • {getTrackTitle(track, language)}
+                {t.lessonPath} • {getTrackTitle(track, language)}
               </h2>
               <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border font-mono" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface1)' }}>
                 {track.badge}
               </span>
             </div>
             <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-              {language === 'en' ? 'Interactive learning module based on' : language === 'es' ? 'Módulo de aprendizaje interactivo basado en' : 'Modulo di apprendimento interattivo basato su'} {track.bookRef}
+              {t.interactiveModule} {track.bookRef}
             </p>
           </div>
         </div>
@@ -152,7 +152,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
           <Award className="w-4 h-4 text-[var(--ctp-mauve)]" />
           <div>
             <div className="font-bold text-[var(--ctp-text)]">
-              {language === 'en' ? 'Progress' : language === 'es' ? 'Progreso' : 'Progresso'}: {completedCount}/{lessons.length} {language === 'en' ? 'Lessons' : language === 'es' ? 'Lecciones' : 'Lezioni'}
+              {t.learnProgress}: {completedCount}/{lessons.length} {t.learnLessons}
             </div>
             <div className="w-28 h-1.5 rounded-full bg-[var(--ctp-surface1)] overflow-hidden mt-1">
               <div className="h-full bg-[var(--ctp-mauve)] transition-all duration-300" style={{ width: `${progressPct}%` }} />
@@ -167,7 +167,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
         <div className="lg:col-span-4 space-y-2">
           <h3 className="text-xs font-bold font-mono uppercase tracking-wider px-1 text-[var(--ctp-subtext0)] mb-3 flex items-center gap-1.5">
             <BookOpen className="w-3.5 h-3.5 text-[var(--ctp-mauve)]" />
-            <span>{language === 'en' ? 'Lesson Index' : language === 'es' ? 'Índice de Lecciones' : 'Indice delle Lezioni'} ({lessons.length})</span>
+            <span>{t.lessonIndex} ({lessons.length})</span>
           </h3>
 
           <div className="space-y-2">
@@ -198,7 +198,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
                         {language === 'en' ? (lesson.title_en || lesson.title) : language === 'es' ? (lesson.title_es || lesson.title) : lesson.title}
                       </div>
                       <div className="text-[10px] truncate" style={{ color: 'var(--ctp-subtext0)' }}>
-                        {language === 'en' ? 'Chapter' : language === 'es' ? 'Capítulo' : 'Capitolo'} {lesson.chapter}
+                        {t.chapter} {lesson.chapter}
                       </div>
                     </div>
                   </div>
@@ -217,11 +217,11 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
             <div className="p-6 rounded-2xl ctp-card border shadow-md space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold font-mono px-2.5 py-1 rounded-lg border bg-[var(--ctp-surface0)] text-[var(--ctp-mauve)] border-[var(--ctp-surface1)]">
-                  {language === 'en' ? 'Chapter' : language === 'es' ? 'Capítulo' : 'Capitolo'} {currentLesson.chapter} • {language === 'en' ? 'Interactive Lesson' : language === 'es' ? 'Lección Interactiva' : 'Lezione Interattiva'}
+                  {t.chapterLabelLearn} {currentLesson.chapter} • {t.interactiveLesson}
                 </span>
                 {completedLessonIds.includes(currentLesson.id) && (
                   <span className="flex items-center gap-1 text-xs font-bold text-[var(--ctp-green)] font-mono">
-                    <CheckCircle2 className="w-4 h-4" /> {language === 'en' ? 'Completed' : language === 'es' ? 'Completado' : 'Completata'}
+                    <CheckCircle2 className="w-4 h-4" /> {t.completedStatus}
                   </span>
                 )}
               </div>
@@ -248,7 +248,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
               {/* Code Example */}
               <div>
                 <div className="text-xs font-bold font-mono mb-2 text-[var(--ctp-subtext0)]">
-                  {language === 'en' ? 'Code Example:' : language === 'es' ? 'Ejemplo de Código:' : 'Esempio di Codice:'}
+                  {t.codeExample}
                 </div>
                 <CodeBlock 
                   code={currentLesson.codeExample}
@@ -286,7 +286,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
 
               {sandboxOutput && (
                 <div className="p-3 rounded-xl border bg-[var(--ctp-crust)] font-mono text-xs text-[var(--ctp-text)] border-[var(--ctp-border)] space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--ctp-subtext0)]">{language === 'en' ? 'Console Output:' : language === 'es' ? 'Salida de Consola:' : 'Output Console:'}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--ctp-subtext0)]">{t.consoleOutput}</div>
                   <pre className="whitespace-pre-wrap">{sandboxOutput}</pre>
                 </div>
               )}
@@ -296,7 +296,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
             <div className="p-6 rounded-2xl ctp-card border shadow-md space-y-4">
               <div className="flex items-center gap-2 text-xs font-bold font-mono text-[var(--ctp-peach)]">
                 <Sparkles className="w-4 h-4" />
-                <span>{language === 'en' ? 'Checkpoint Quiz' : language === 'es' ? 'Cuestionario de Control' : 'Quiz Checkpoint'}</span>
+                <span>{t.checkpointQuiz}</span>
               </div>
 
               <h3 className="text-sm font-semibold" style={{ color: 'var(--ctp-text)' }}>

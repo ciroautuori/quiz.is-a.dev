@@ -21,6 +21,7 @@ import CertificateModal from '../components/CertificateModal';
 import AnalyticsDashboardModal from '../components/AnalyticsDashboardModal';
 import CommandPaletteModal, { CommandPaletteAction } from '../components/CommandPaletteModal';
 import SettingsDrawerModal from '../components/SettingsDrawerModal';
+import LangSync from '../lib/LangSync';
 
 import { getAllQuestions } from '../lib/questions';
 import { 
@@ -185,6 +186,7 @@ export default function Home() {
 
   return (
     <LanguageProvider>
+      <LangSync />
       <ThemeProvider>
         <div className="min-h-screen flex ctp-bg-app">
           {/* Desktop Navigation Sidebar */}

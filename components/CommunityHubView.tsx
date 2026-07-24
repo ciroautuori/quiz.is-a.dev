@@ -60,7 +60,7 @@ interface CommunityHubViewProps {
 import { useLanguage } from '../lib/LanguageContext';
 
 export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [challenges, setChallenges] = useState<CommunityChallenge[]>(INITIAL_COMMUNITY_CHALLENGES);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -160,7 +160,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
           className="px-5 py-2.5 rounded-xl bg-[var(--ctp-mauve)] text-white font-bold text-xs flex items-center gap-2 shadow-lg hover:opacity-90 cursor-pointer transition-transform hover:scale-105 active:scale-95 shrink-0"
         >
           <Plus className="w-4 h-4" />
-          <span>{language === 'en' ? 'Create New Challenge' : language === 'es' ? 'Crear Nueva Desafío' : 'Crea Nuova Sfida'}</span>
+          <span>{t.createChallenge}</span>
         </button>
       </div>
 
@@ -171,7 +171,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder={language === 'en' ? 'Search community challenges...' : language === 'es' ? 'Buscar desafíos de la comunidad...' : 'Cerca sfide create dalla community...'}
+          placeholder={t.searchCommunity}
           className="w-full ctp-input pl-10 pr-4 py-3 rounded-xl text-xs border focus:outline-none"
         />
       </div>
@@ -189,8 +189,8 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                   {item.argomento}
                 </span>
                 <span className="text-xs text-[var(--ctp-subtext0)] flex items-center gap-1">
-                  {language === 'en' ? 'Author:' : language === 'es' ? 'Autor:' : 'Autore:'} <strong className="text-[var(--ctp-text)]">{item.author}</strong>
-                  {item.isCreator && <span className="bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] ml-1" title={language === 'en' ? 'Creator Badge' : language === 'es' ? 'Insignia de Creador' : 'Creator Badge'}>🏆</span>}
+                  {t.author} <strong className="text-[var(--ctp-text)]">{item.author}</strong>
+                  {item.isCreator && <span className="bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] ml-1" title={t.creatorBadge}>🏆</span>}
                 </span>
               </div>
 
@@ -223,14 +223,14 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                   onClick={() => handleClone(item.id)}
                   className="px-3 py-1.5 rounded-xl border border-[var(--ctp-surface1)] text-[var(--ctp-subtext0)] text-xs font-bold hover:text-white transition-colors cursor-pointer"
                 >
-                  {language === 'en' ? 'Clone' : language === 'es' ? 'Clonar' : 'Clona'}
+                  {t.clone}
                 </button>
                 <button
                   onClick={() => onPlayChallenge(item)}
                   className="px-4 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <Play className="w-3.5 h-3.5 fill-emerald-300" />
-                  <span>{language === 'en' ? 'Play Now' : language === 'es' ? 'Jugar Ahora' : 'Gioca Ora'}</span>
+                  <span>{t.playNow}</span>
                 </button>
               </div>
             </div>
@@ -241,8 +241,8 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
       {filtered.length === 0 && (
         <div className="p-8 text-center ctp-card border border-[var(--ctp-surface1)] rounded-2xl">
           <div className="text-4xl mb-4">📭</div>
-          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">{language === 'en' ? 'No challenges found' : language === 'es' ? 'No se encontraron desafíos' : 'Nessuna sfida trovata'}</h3>
-          <p className="text-sm text-[var(--ctp-subtext0)]">{language === 'en' ? 'No challenges match your criteria. Try creating a new one!' : language === 'es' ? 'No hay desafíos que coincidan con tus criterios. ¡Intenta crear uno nuevo!' : 'Non ci sono sfide che corrispondono ai tuoi criteri. Prova a creare una nuova sfida!'}</p>
+          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">{t.noChallengesFound}</h3>
+          <p className="text-sm text-[var(--ctp-subtext0)]">{t.noChallengesCriteria}</p>
         </div>
       )}
 
@@ -257,35 +257,35 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
               className="w-full max-w-lg ctp-card rounded-2xl shadow-2xl border border-[var(--ctp-surface1)] p-6 space-y-4 font-mono max-h-[90vh] overflow-y-auto"
             >
               <h3 className="text-sm font-bold text-[var(--ctp-text)] flex items-center justify-between">
-                <span>Pubblica Nuova Sfida Community</span>
+                <span>{t.publishNewChallenge}</span>
                 <button onClick={() => setShowCreateModal(false)}>✕</button>
               </h3>
 
               <div className="space-y-3">
                 <input
                   type="text"
-                  placeholder="Argomento (es. List Comprehension)"
+                  placeholder={t.topicPlaceholder}
                   value={newTopic}
                   onChange={(e) => setNewTopic(e.target.value)}
                   className="w-full ctp-input text-xs rounded-xl p-3 border focus:outline-none"
                 />
 
                 <textarea
-                  placeholder="Domanda della sfida..."
+                  placeholder={t.questionPlaceholder}
                   value={newQuestion}
                   onChange={(e) => setNewQuestion(e.target.value)}
                   className="w-full ctp-input text-xs rounded-xl p-3 border focus:outline-none h-20"
                 />
 
                 <textarea
-                  placeholder="Snippet di codice (opzionale)..."
+                  placeholder={t.codeOptional}
                   value={newCode}
                   onChange={(e) => setNewCode(e.target.value)}
                   className="w-full ctp-input font-mono text-xs rounded-xl p-3 border focus:outline-none h-20 bg-slate-950 text-emerald-300"
                 />
 
                 <div className="space-y-2">
-                  <span className="text-xs font-bold text-[var(--ctp-subtext0)]">Opzioni di Risposta:</span>
+                  <span className="text-xs font-bold text-[var(--ctp-subtext0)]">{t.answerOptions}</span>
                   {[newAns0, newAns1, newAns2, newAns3].map((ans, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <input
@@ -296,7 +296,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                       />
                       <input
                         type="text"
-                        placeholder={`Opzione ${i + 1}`}
+                        placeholder={`${t.optionN} ${i + 1}`}
                         value={[newAns0, newAns1, newAns2, newAns3][i]}
                         onChange={(e) => {
                           const val = e.target.value;

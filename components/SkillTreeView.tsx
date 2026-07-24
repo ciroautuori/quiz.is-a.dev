@@ -103,7 +103,7 @@ interface SkillTreeViewProps {
 }
 
 export default function SkillTreeView({ onSelectChapter, trackId = 'python', completedIds }: SkillTreeViewProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [selectedNode, setSelectedNode] = useState<SkillNode | null>(SKILL_NODES[0]);
 
   return (
@@ -131,8 +131,8 @@ export default function SkillTreeView({ onSelectChapter, trackId = 'python', com
       {SKILL_NODES.length === 0 && (
         <div className="p-8 text-center ctp-card border border-[var(--ctp-surface1)] rounded-2xl w-full max-w-lg mx-auto">
           <div className="text-4xl mb-4">⚠️</div>
-          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">{language === 'en' ? 'No Modules Available' : language === 'es' ? 'No hay módulos disponibles' : 'Nessun modulo disponibile'}</h3>
-          <p className="text-sm text-[var(--ctp-subtext0)]">{language === 'en' ? 'Unable to load skill tree.' : language === 'es' ? 'No se pudo cargar el árbol de competencias.' : "Impossibile caricare l'albero delle competenze."}</p>
+          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">{t.noModulesAvailable}</h3>
+          <p className="text-sm text-[var(--ctp-subtext0)]">{t.unableLoadSkillTree}</p>
         </div>
       )}
 

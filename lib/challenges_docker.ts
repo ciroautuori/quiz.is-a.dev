@@ -15,8 +15,10 @@ export const DOCKER_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'Si tratta del comando analogo al comando Unix per i processi.',
     hint_en: 'It is analogous to the Unix command for listing processes.',
+    hint_es: 'Se trata del comando análogo al comando Unix para los procesos.',
     explanation: '`docker ps` mostra la lista dei container attivi. Usando `docker ps -a` si vedono anche quelli arrestati.',
-    explanation_en: '`docker ps` lists active containers. Adding `-a` shows stopped ones too.'
+    explanation_en: '`docker ps` lists active containers. Adding `-a` shows stopped ones too.',
+    explanation_es: '`docker ps` muestra la lista de los contenedores activos. Usando `docker ps -a` se ven también los que están detenidos.'
   },
   {
     id: 'docker-1-2',
@@ -32,8 +34,10 @@ export const DOCKER_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'La lettera iniziale della parola "detached".',
     hint_en: 'The first letter of the word "detached".',
+    hint_es: 'La letra inicial de la palabra "detached".',
     explanation: 'Il flag `-d` (o `--detach`) esegue il container in background e stampa l\'ID del container.',
-    explanation_en: 'The `-d` flag (short for `--detach`) runs the container in background.'
+    explanation_en: 'The `-d` flag (short for `--detach`) runs the container in background.',
+    explanation_es: 'El flag `-d` (o `--detach`) ejecuta el contenedor en segundo plano y muestra el ID del contenedor.'
   },
   {
     id: 'docker-2-1',
@@ -49,8 +53,10 @@ export const DOCKER_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'Ogni Dockerfile valido inizia quasi sempre con questa istruzione.',
     hint_en: 'Almost every valid Dockerfile starts with this keyword.',
+    hint_es: 'Cada Dockerfile válido comienza casi siempre con esta instrucción.',
     explanation: '`FROM` imposta l\'immagine base su cui verranno applicate tutte le istruzioni successive.',
-    explanation_en: '`FROM` sets the base image for subsequent instructions.'
+    explanation_en: '`FROM` sets the base image for subsequent instructions.',
+    explanation_es: '`FROM` establece la imagen base sobre la cual se aplicarán todas las instrucciones siguientes.'
   },
   {
     id: 'docker-2-2',
@@ -66,8 +72,10 @@ export const DOCKER_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'La sintassi della porta è sempre host_port:container_port.',
     hint_en: 'Port syntax is always host_port:container_port.',
+    hint_es: 'La sintaxis del puerto es siempre host_port:container_port.',
     explanation: 'La sintassi `-p host_port:container_port` inoltra il traffico dalla macchina host dentro al container.',
-    explanation_en: 'The `-p host:container` flag maps incoming host traffic into the container.'
+    explanation_en: 'The `-p host:container` flag maps incoming host traffic into the container.',
+    explanation_es: 'La sintaxis `-p host_port:container_port` redirige el tráfico desde la máquina host hacia el interior del contenedor.'
   },
   {
     id: 'docker-3-1',
@@ -83,7 +91,9 @@ export const DOCKER_CHALLENGES: Challenge[] = [
     correctIndex: 0,
     hint: 'Il contrario di "down".',
     hint_en: 'The opposite of "down".',
+    hint_es: 'El contrario de "down".',
     explanation: '`docker compose up` crea e avvia i container, le reti e i volumi definiti nel file compose.',
-    explanation_en: '`docker compose up` builds, creates, and starts all multi-container services.'
+    explanation_en: '`docker compose up` builds, creates, and starts all multi-container services.',
+    explanation_es: '`docker compose up` crea e inicia los contenedores, las redes y los volúmenes definidos en el archivo compose.'
   }
 ];

@@ -28,10 +28,9 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState<{ success: boolean; repoUrl?: string; filesSynced?: number; error?: string } | null>(null);
 
-  // Restore saved GitHub OAuth token from localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('devquest_github_auth');
+      const saved = sessionStorage.getItem('devquest_github_auth') || localStorage.getItem('devquest_github_auth');
       if (saved) {
         try {
           setAuthData(JSON.parse(saved));
@@ -39,6 +38,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
           console.error('Failed to parse saved github auth', e);
         }
       }
+      localStorage.removeItem('devquest_github_auth');
     }
   }, []);
 
@@ -60,7 +60,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
         setAuthData(payload);
         setIsConnecting(false);
         if (typeof window !== 'undefined') {
-          localStorage.setItem('devquest_github_auth', JSON.stringify(payload));
+          sessionStorage.setItem('devquest_github_auth', JSON.stringify(payload));
         }
       } else if (event.data?.type === 'GITHUB_AUTH_ERROR') {
         setIsConnecting(false);
@@ -129,7 +129,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
     setAuthData(null);
     setSyncResult(null);
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('devquest_github_auth');
+      sessionStorage.removeItem('devquest_github_auth');
     }
   };
 
@@ -211,7 +211,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
                 {isConnecting ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>{language === 'en' ? 'Connecting...' : language === 'es' ? 'Conectando...' : 'Connessione in corso...'}</span>
+                    <span>{t.connecting}</span>
                   </>
                 ) : (
                   <>
@@ -356,7 +356,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
                       <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
                     )}
                     <span>
-                      {syncResult.success ? t.syncSuccess : (language === 'en' ? 'Sync Error' : language === 'es' ? 'Error de Sincronización' : 'Errore Sincronizzazione')}
+                      {syncResult.success ? t.syncSuccess : t.syncError}
                     </span>
                   </div>
 

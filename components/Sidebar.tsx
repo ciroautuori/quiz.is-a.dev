@@ -101,7 +101,7 @@ export default function Sidebar({
         {/* Tools & Leaderboard */}
         <div>
           <div className="px-2 mb-2 text-[10px] uppercase font-bold tracking-widest text-[var(--ctp-subtext0)]">
-            {language === 'en' ? 'Tools & Community' : language === 'es' ? 'Herramientas y Comunidad' : 'Strumenti & Community'}
+            {t.toolsCommunity}
           </div>
           <div className="space-y-1">
             <button
@@ -113,7 +113,7 @@ export default function Sidebar({
               }`}
             >
               <Trophy className="w-4 h-4 text-yellow-400" />
-              <span>{t.leaderboardTab || (language === 'en' ? 'Leaderboard' : language === 'es' ? 'Clasificación' : 'Classifica')}</span>
+              <span>{t.leaderboardTab}</span>
             </button>
 
             <button
@@ -146,7 +146,7 @@ export default function Sidebar({
         >
           <div className="flex items-center gap-2.5">
             <Settings className="w-4 h-4 text-[var(--ctp-subtext0)]" />
-            <span>{language === 'en' ? 'Settings' : language === 'es' ? 'Configuración' : 'Impostazioni'}</span>
+            <span>{t.settingsNav}</span>
           </div>
           <span className="flex items-center gap-1 text-[10px] text-amber-400 font-bold">
             🔥 {streakCount}d

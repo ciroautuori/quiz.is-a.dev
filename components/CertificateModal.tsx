@@ -22,7 +22,7 @@ export default function CertificateModal({
   trackName = 'Python Master Developer Track',
   // completedCount and totalCount are optional and kept for interface compliance
 }: CertificateModalProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [nameInput, setNameInput] = useState(studentName);
   const [isEditing, setIsEditing] = useState(false);
   const [hash, setHash] = useState('');
@@ -99,7 +99,7 @@ export default function CertificateModal({
   const handleGithubShare = () => {
     const md = `[![DevQuest Certificate](https://devquest.app/badge.png)](https://devquest.app/verify/${hash})\n\n**${nameInput}** has completed the **${trackName}** on DevQuest!`;
     navigator.clipboard.writeText(md);
-    alert(language === 'en' ? 'Markdown copied to clipboard! Paste it into your GitHub README.' : language === 'es' ? '¡Markdown copiado al portapapeles! Pégalo en tu README de GitHub.' : 'Markdown copiata negli appunti! Incollala nel tuo README di GitHub.');
+    alert(t.markdownCopied);
   };
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://devquest.app/verify/${hash}`;
@@ -121,10 +121,10 @@ export default function CertificateModal({
               </div>
               <div>
                 <h2 className="font-bold text-base text-[var(--ctp-text)]">
-                  {language === 'en' ? 'Official Certificate of Mastery' : language === 'es' ? 'Certificado Oficial de Maestría' : 'Certificato Ufficiale di Maestria'}
+                  {t.certificateTitle}
                 </h2>
                 <p className="text-xs text-[var(--ctp-subtext0)]">
-                  {language === 'en' ? 'Digital Badge Export & QR Verification' : language === 'es' ? 'Exportación de Insignia Digital y Verificación QR' : 'Export Digital Badge e Verificabilità QR'}
+                  {t.certificateSubtitle}
                 </p>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function CertificateModal({
 
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400 mb-2">
-                  {language === 'en' ? 'This is to certify that' : language === 'es' ? 'Por la presente se certifica que' : 'Si attesta con la presente che'}
+                  {t.certThisAttests}
                 </p>
                 {isEditing ? (
                   <input
@@ -169,7 +169,7 @@ export default function CertificateModal({
                   <h3
                     onClick={() => setIsEditing(true)}
                     className="text-2xl sm:text-3xl font-serif font-black text-amber-300 cursor-pointer hover:underline"
-                    title={language === 'en' ? 'Click to edit your name' : language === 'es' ? 'Haz clic para editar tu nombre' : 'Clicca per modificare il tuo nome'}
+                    title={t.certEditName}
                   >
                     {nameInput}
                   </h3>
@@ -177,17 +177,13 @@ export default function CertificateModal({
               </div>
 
               <div className="max-w-md mx-auto text-xs leading-relaxed text-slate-300">
-                {language === 'en'
-                  ? 'has successfully passed 100% of the practical challenges and syntax tests in the official track:'
-                  : language === 'es'
-                  ? 'ha superado con éxito el 100% de los desafíos prácticos y pruebas de sintaxis en la ruta oficial:'
-                  : 'ha superato con successo il 100% delle sfide pratiche e dei test di sintassi nel percorso ufficiale:'}
+                {t.certPassedText}
                 <div className="text-sm font-bold text-amber-400 mt-2">{trackName}</div>
               </div>
 
               <div className="pt-4 border-t border-amber-500/20 flex items-center justify-between text-[11px] text-slate-400">
                 <div>
-                  <span>{language === 'en' ? 'Issue Date' : language === 'es' ? 'Fecha de Emisión' : 'Data Rilascio'}: </span>
+                  <span>{t.certIssueDate}: </span>
                   <strong className="text-slate-200">{issueDate}</strong>
                 </div>
 
@@ -208,11 +204,7 @@ export default function CertificateModal({
           {/* Controls Footer */}
           <div className="p-4 px-6 ctp-card-mantle flex flex-wrap items-center justify-between gap-4">
             <span className="text-xs text-[var(--ctp-subtext0)] max-w-[200px]">
-              {language === 'en'
-                ? 'Supports PDF export, OpenBadge 2.0 and social sharing.'
-                : language === 'es'
-                ? 'Admite exportación a PDF, OpenBadge 2.0 y compartir en redes sociales.'
-                : "Supporta l'esportazione in PDF, OpenBadge 2.0 e la condivisione social."}
+              {t.certFooter}
             </span>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -233,11 +225,9 @@ export default function CertificateModal({
                 <button
                   onClick={() => {
                     const text = encodeURIComponent(
-                      language === 'en'
-                        ? `I just earned the Official Python Mastery Certificate on DevQuest! Verified ID: ${hash}`
-                        : language === 'es'
-                        ? `¡Acabo de obtener el Certificado Oficial de Maestría en Python en DevQuest! Verified ID: ${hash}`
-                        : `Ho appena conseguito il Certificato Ufficiale di Maestria Python su DevQuest! Verified ID: ${hash}`
+                      t.certificateShareLinkedin
+                        .replace('{trackName}', trackName)
+                        .replace('{hash}', hash)
                     );
                     const url = encodeURIComponent('https://devquest.app');
                     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&text=${text}`, '_blank');
@@ -253,7 +243,7 @@ export default function CertificateModal({
                   className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg hover:opacity-90 cursor-pointer transition-transform hover:scale-105 active:scale-95"
                 >
                   <Download className="w-4 h-4" />
-                  <span>{language === 'en' ? 'Print / PDF' : language === 'es' ? 'Imprimir / PDF' : 'Stampa'}</span>
+                  <span>{t.printPdf}</span>
                 </button>
               </div>
           </div>

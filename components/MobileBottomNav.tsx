@@ -33,7 +33,7 @@ export default function MobileBottomNav({
             <div className="flex items-center justify-between border-b border-[var(--ctp-surface1)] pb-3">
               <h3 className="font-mono font-bold text-sm text-[var(--ctp-text)] flex items-center gap-2">
                 <Code2 className="w-4 h-4 text-[var(--ctp-mauve)]" />
-                <span>{language === 'en' ? 'Select Tech Hub (5)' : language === 'es' ? 'Seleccionar Hub Técnico (5)' : 'Seleziona Tech Hub (5)'}</span>
+                <span>{t.selectTechHub}</span>
               </h3>
               <button
                 onClick={() => setIsTechDrawerOpen(false)}
@@ -67,7 +67,7 @@ export default function MobileBottomNav({
                       </div>
                     </div>
                     <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--ctp-surface1)] text-[var(--ctp-subtext0)]">
-                      {language === 'en' ? 'Enter →' : language === 'es' ? 'Entrar →' : 'Entra →'}
+                      {t.enterArrow}
                     </span>
                   </button>
                 );
@@ -110,10 +110,10 @@ export default function MobileBottomNav({
         <button
           onClick={onOpenAiTutor}
           className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/30 cursor-pointer min-h-[44px] min-w-[44px]"
-          aria-label="AI Tutor"
+          aria-label={t.aiTutorLabel}
         >
           <Sparkles className="w-5 h-5 text-amber-300" />
-          <span className="font-bold text-[9px]">AI Tutor</span>
+          <span className="font-bold text-[9px]">{t.aiTutorLabel}</span>
         </button>
 
         {/* Leaderboard */}

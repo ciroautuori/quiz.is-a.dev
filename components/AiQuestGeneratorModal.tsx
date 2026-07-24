@@ -99,20 +99,20 @@ export default function AiQuestGeneratorModal({
           <div className="p-6 space-y-4">
             <div>
               <label className="text-xs font-bold text-[var(--ctp-subtext0)] mb-1.5 block">
-                {language === 'en' ? 'Specific Topic or Weak Point:' : language === 'es' ? 'Tema Específico o Punto Débil:' : 'Argomento Specifico o Punto Debole:'}
+                {t.questTopicLabel}
               </label>
               <input
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                placeholder={language === 'en' ? 'e.g. List Comprehension, Asyncio, Decorators...' : language === 'es' ? 'ej. Comprensión de listas, Asyncio, Decoradores...' : 'es. List Comprehension, Asyncio, Decoratori...'}
+                placeholder={t.questTopicPlaceholder}
                 className="w-full ctp-input text-xs rounded-xl p-3 border focus:outline-none"
               />
             </div>
 
             <div>
               <label className="text-xs font-bold text-[var(--ctp-subtext0)] mb-1.5 block">
-                {t.difficultyLabel || (language === 'en' ? 'Difficulty Level:' : language === 'es' ? 'Nivel de Dificultad:' : 'Livello di Difficoltà:')}
+                {t.difficultyLabel}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {(['facile', 'media', 'difficile'] as const).map((lvl) => (
@@ -150,7 +150,7 @@ export default function AiQuestGeneratorModal({
               {loading ? (
                 <>
                   <Sparkles className="w-4 h-4 animate-spin text-amber-300" />
-                  <span>{t.aiThinking || 'Generazione in corso...'}</span>
+                  <span>{t.generating}</span>
                 </>
               ) : (
                 <>

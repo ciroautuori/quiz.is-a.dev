@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
   const error = req.nextUrl.searchParams.get('error');
+  const origin = req.nextUrl.origin || process.env.APP_URL || 'http://localhost:3000';
 
   if (error || !code) {
     return new Response(
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest) {
             <p>${error || 'Missing authorization code.'}</p>
             <script>
               if (window.opener) {
-                window.opener.postMessage({ type: 'GITHUB_AUTH_ERROR', error: '${error || 'Mancante'}' }, '*');
+                window.opener.postMessage({ type: 'GITHUB_AUTH_ERROR', error: '${error || 'Mancante'}' }, '${origin}');
                 setTimeout(() => window.close(), 2000);
               }
             </script>
@@ -26,8 +27,6 @@ export async function GET(req: NextRequest) {
 
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-
-  const origin = req.nextUrl.origin || process.env.APP_URL || 'http://localhost:3000';
   const redirectUri = `${origin}/api/auth/github/callback`;
 
   try {
@@ -121,7 +120,7 @@ export async function GET(req: NextRequest) {
                 window.opener.postMessage({
                   type: 'GITHUB_AUTH_SUCCESS',
                   payload: ${payload}
-                }, '*');
+                }, '${origin}');
                 setTimeout(function() {
                   window.close();
                 }, 1000);

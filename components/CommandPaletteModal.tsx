@@ -27,7 +27,7 @@ export default function CommandPaletteModal({
   onClose,
   actions
 }: CommandPaletteModalProps) {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -92,13 +92,7 @@ export default function CommandPaletteModal({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder={
-                  language === 'en'
-                    ? 'Search commands or select an action... (e.g. WASM, Skill Tree, Theme)'
-                    : language === 'es'
-                    ? 'Buscar comandos o seleccionar una acción... (ej. WASM, Skill Tree, Theme)'
-                    : "Cerca comandi o seleziona un'azione... (es. WASM, Skill Tree, Theme)"
-                }
+                placeholder={t.cmdSearchPlaceholder}
                 className="w-full bg-transparent text-sm font-mono focus:outline-none placeholder:text-[var(--ctp-overlay0)] text-[var(--ctp-text)]"
               />
               <button
@@ -113,11 +107,7 @@ export default function CommandPaletteModal({
             <div className="p-2 overflow-y-auto max-h-[380px] divide-y divide-[var(--ctp-surface1)]/30 font-mono">
               {filteredActions.length === 0 ? (
                 <div className="p-8 text-center text-xs text-[var(--ctp-subtext0)] font-sans">
-                  {language === 'en'
-                    ? `No commands found for "${query}"`
-                    : language === 'es'
-                    ? `No se encontraron comandos para "${query}"`
-                    : `Nessun comando trovato per "${query}"`}
+                  {t.cmdsNotFound}
                 </div>
               ) : (
                 filteredActions.map((action, idx) => {
@@ -161,9 +151,9 @@ export default function CommandPaletteModal({
             {/* Footer */}
             <div className="p-2.5 border-t border-[var(--ctp-surface1)] bg-[var(--ctp-surface0)] flex items-center justify-between text-[11px] text-[var(--ctp-overlay0)] font-mono">
               <div className="flex items-center gap-3">
-                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">↑↓</kbd> {language === 'en' ? 'Navigate' : language === 'es' ? 'Navegar' : 'Naviga'}</span>
-                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">↵</kbd> {language === 'en' ? 'Select' : language === 'es' ? 'Seleccionar' : 'Seleziona'}</span>
-                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">esc</kbd> {language === 'en' ? 'Close' : language === 'es' ? 'Cerrar' : 'Chiudi'}</span>
+                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">↑↓</kbd> {t.navigate}</span>
+                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">↵</kbd> {t.select}</span>
+                <span><kbd className="px-1 rounded bg-[var(--ctp-surface1)] text-[10px]">esc</kbd> {t.close}</span>
               </div>
               <div className="flex items-center gap-1 text-[var(--ctp-mauve)] font-bold">
                 <Command className="w-3 h-3" />

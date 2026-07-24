@@ -38,10 +38,10 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
               </div>
               <div>
                 <h2 className="text-lg font-bold font-mono flex items-center gap-2" style={{ color: 'var(--ctp-text)' }}>
-                  {t.achievementsTitle || (language === 'en' ? 'Achievements & Medals' : language === 'es' ? 'Logros y Medallas' : 'Obiettivi & Medaglie')}
+                  {t.achievementsTitle}
                 </h2>
                 <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-                  {language === 'en' ? 'Complete challenges and maintain your streak to unlock badges' : language === 'es' ? 'Completa desafíos y mantén tu racha para desbloquear insignias' : 'Completa le sfide e mantieni la streak per sbloccare i badge'}
+                  {t.achievementsSubtitle}
                 </p>
               </div>
             </div>
@@ -61,10 +61,10 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
               <Sparkles className="w-5 h-5 shrink-0" style={{ color: 'var(--ctp-peach)' }} />
               <div className="text-xs font-mono">
                 <span className="font-medium" style={{ color: 'var(--ctp-text)' }}>
-                  {language === 'en' ? 'Total Badge Progress: ' : language === 'es' ? 'Progreso Total de Insignias: ' : 'Progresso Totale Medaglie: '}
+                  {t.totalProgress}
                 </span>
                 <span className="font-bold" style={{ color: 'var(--ctp-peach)' }}>
-                  {unlockedCount} {language === 'en' ? 'of' : language === 'es' ? 'de' : 'di'} {totalCount} {language === 'en' ? 'unlocked' : language === 'es' ? 'desbloqueados' : 'sbloccati'} ({percentage}%)
+                  {unlockedCount} {t.ofBadge} {totalCount} {t.unlocked} ({percentage}%)
                 </span>
               </div>
             </div>
@@ -114,11 +114,11 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
 
                         {item.unlocked ? (
                           <span className="flex items-center gap-1 text-[11px] font-semibold border px-2 py-0.5 rounded-full shrink-0 font-mono" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-green)', borderColor: 'var(--ctp-green)' }}>
-                            <CheckCircle2 className="w-3 h-3" /> {language === 'en' ? 'Unlocked' : language === 'es' ? 'Desbloqueado' : 'Sbloccato'}
+                            <CheckCircle2 className="w-3 h-3" /> {t.unlockedStatus}
                           </span>
                         ) : (
                           <span className="flex items-center gap-1 text-[11px] font-medium border px-2 py-0.5 rounded-full shrink-0 font-mono" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-subtext0)', borderColor: 'var(--ctp-border)' }}>
-                            <Lock className="w-3 h-3" /> {t.locked || (language === 'en' ? 'Locked' : language === 'es' ? 'Bloqueado' : 'Bloccato')}
+                            <Lock className="w-3 h-3" /> {t.locked}
                           </span>
                         )}
                       </div>
@@ -131,7 +131,7 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
                     {/* Progress indicator */}
                     <div className="pt-2 border-t" style={{ borderColor: 'var(--ctp-border)' }}>
                       <div className="flex items-center justify-between text-[11px] font-mono mb-1" style={{ color: 'var(--ctp-subtext0)' }}>
-                        <span>{language === 'en' ? 'Progress:' : language === 'es' ? 'Progreso:' : 'Progresso:'}</span>
+                        <span>{t.progress}</span>
                         <span style={{ color: item.unlocked ? 'var(--ctp-green)' : 'var(--ctp-subtext0)', fontWeight: item.unlocked ? 'bold' : 'normal' }}>
                           {Math.min(item.currentValue, item.targetValue)} / {item.targetValue}
                         </span>
@@ -159,7 +159,7 @@ export default function AchievementsModal({ isOpen, onClose }: AchievementsModal
               className="px-5 py-2 rounded-xl font-bold text-xs transition-colors cursor-pointer"
               style={{ backgroundColor: 'var(--ctp-peach)', color: 'var(--ctp-crust)' }}
             >
-              {t.cancel || (language === 'en' ? 'Close' : language === 'es' ? 'Cerrar' : 'Chiudi')}
+              {t.close}
             </button>
           </div>
         </motion.div>

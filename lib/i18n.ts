@@ -78,6 +78,14 @@ export interface Translations {
   explanationLabel: string;
   saveQuestion: string;
   cancel: string;
+  formTitleShort: string;
+  topicPlaceholder: string;
+  questionPlaceholder: string;
+  solutionExplanation: string;
+  codeOptional: string;
+  publishNewChallenge: string;
+  answerOptions: string;
+  optionN: string;
 
   // Achievements
   achievementsTitle: string;
@@ -195,6 +203,267 @@ export interface Translations {
   generateAiQuestNow: string;
   newBadgeUnlocked: string;
   days: string;
+  // Achievements Modal
+  achievementsSubtitle: string;
+  totalProgress: string;
+  unlocked: string;
+  progress: string;
+  ofBadge: string;
+  close: string;
+  // AI Quest Generator
+  questTopicLabel: string;
+  questTopicPlaceholder: string;
+  generating: string;
+  // AI Tutor TTS
+  toggleTts: string;
+  clearChat: string;
+  zeroMsgs: string;
+  // Analytics Dashboard
+  analyticsTitle: string;
+  analyticsSubtitle: string;
+  noDataTitle: string;
+  noDataDesc: string;
+  avgSpeed: string;
+  totalXp: string;
+  solvedQuests: string;
+  skillRadarBreakdown: string;
+  masteryLevel: string;
+  personalAdvice: string;
+  adviceBody: string;
+  // Competency Radar Labels
+  compSyntax: string;
+  compControlFlow: string;
+  compFunctions: string;
+  compDataStructures: string;
+  compOop: string;
+  compAsync: string;
+  // Certificate
+  certificateTitle: string;
+  certificateSubtitle: string;
+  certThisAttests: string;
+  certEditName: string;
+  certPassedText: string;
+  certIssueDate: string;
+  certFooter: string;
+  printPdf: string;
+  markdownCopied: string;
+  certificateShareLinkedin: string;
+  // Challenge Filter descriptions
+  filterBeginnerDesc: string;
+  filterIntermediateDesc: string;
+  filterAdvancedDesc: string;
+  filterMixedDesc: string;
+  resetFilters: string;
+  filteredPreview: string;
+  noFilteredResults: string;
+  questionsShort: string;
+  allShort: string;
+  noChallengesFound: string;
+  // Classroom
+  classroomTitle: string;
+  exportCsv: string;
+  totalStudents: string;
+  avgProgress: string;
+  assignments: string;
+  student: string;
+  progressHeatmap: string;
+  grade: string;
+  // Code Sandbox
+  pyodideReady: string;
+  loadingWasm: string;
+  copied: string;
+  copy: string;
+  outputConsole: string;
+  resetCode: string;
+  clearOutput: string;
+  executionInProgress: string;
+  runCodeWasm: string;
+  noOutput: string;
+  executionError: string;
+  consoleOutput: string;
+  // Command Palette
+  cmdSearchPlaceholder: string;
+  cmdsNotFound: string;
+  navigate: string;
+  select: string;
+  // Community Hub
+  communityTitle: string;
+  communitySubtitle: string;
+  createChallenge: string;
+  searchCommunity: string;
+  author: string;
+  creatorBadge: string;
+  noChallengesCriteria: string;
+  clone: string;
+  playNow: string;
+  publishChallenge: string;
+  responseOptions: string;
+  // Custom Questions
+  customLabTitle: string;
+  customLabSubtitle: string;
+  languageTrack: string;
+  chapterLabelShort: string;
+  topicLabelShort: string;
+  difficultyLabelShort: string;
+  questionTextLabelShort: string;
+  codeSnippetOptional: string;
+  responseOptionsLabel: string;
+  optionLetter: string;
+  usefulHint: string;
+  detailedExplanation: string;
+  saveQuestionLabel: string;
+  noCustomQuestions: string;
+  // Daily Goal
+  streakActive: string;
+  goalLabel: string;
+  hideNotification: string;
+  chooseGoal: string;
+  challengesPerDay: string;
+  editDailyGoal: string;
+  // Game Mode
+  correctAnswers: string;
+  saveScoreLabel: string;
+  nicknamePlaceholder: string;
+  save: string;
+  scoreSaved: string;
+  changeFilters: string;
+  results: string;
+  timerOn: string;
+  timerOff: string;
+  exit: string;
+  record: string;
+  // General Home
+  devQuestHub: string;
+  devPlatform: string;
+  heroDescription: string;
+  startQuickQuest: string;
+  availableTracks: string;
+  selectTechHubHint: string;
+  questsShort: string;
+  enterHub: string;
+  fullstackRadar: string;
+  communityFeed: string;
+  globalLeaderboard: string;
+  // Leagues
+  currentLeague: string;
+  currentStreak: string;
+  youPlayer: string;
+  youShort: string;
+  promotionRelegation: string;
+  // Learn Mode
+  lessonPath: string;
+  interactiveModule: string;
+  lessonIndex: string;
+  codeExample: string;
+  checkpointQuiz: string;
+  chapterLabelLearn: string;
+  interactiveLesson: string;
+  completedStatus: string;
+  learnProgress: string;
+  learnLessons: string;
+  // Mobile Nav
+  selectTechHub: string;
+  enterArrow: string;
+  homeLabel: string;
+  hubsLabel: string;
+  aiTutorLabel: string;
+  leaderboardLabel: string;
+  settingsLabel: string;
+  // Navbar
+  badgesAchievements: string;
+  aiTutorNav: string;
+  streakTooltip: string;
+  // PvP Duel
+  pvpTitle: string;
+  pvpSubtitle: string;
+  arenaTitle: string;
+  arenaDesc: string;
+  roomCodePlaceholder: string;
+  searchingMatch: string;
+  findMatch: string;
+  tempsRimasto: string;
+  victory: string;
+  defeat: string;
+  victoryDesc: string;
+  defeatDesc: string;
+  backToLobby: string;
+  // Settings
+  settingsTools: string;
+  customizeExperience: string;
+  interfaceLanguage: string;
+  syntaxTheme: string;
+  themeMocha: string;
+  themeLatte: string;
+  change: string;
+  soundEffects: string;
+  muted: string;
+  active: string;
+  enable: string;
+  mute: string;
+  githubSyncShort: string;
+  openGitHubSync: string;
+  activeStreak: string;
+  unlockedBadgesLabel: string;
+  viewBadges: string;
+  githubSyncDesc: string;
+  // Sidebar
+  fullstackHub: string;
+  communityHome: string;
+  techHubs: string;
+  proBadge: string;
+  toolsCommunity: string;
+  aiTutorAgent: string;
+  githubSyncNav: string;
+  settingsNav: string;
+  // Skill Tree
+  skillTreeTitle: string;
+  skillTreeSubtitle: string;
+  noModulesAvailable: string;
+  unableLoadSkillTree: string;
+  moduleDetails: string;
+  startExercises: string;
+  // Tech Hub
+  quickChallenge: string;
+  askAiDevBot: string;
+  overview: string;
+  playChallengeTab: string;
+  progressStatus: string;
+  challengesShort: string;
+  educationalRef: string;
+  completeTheory: string;
+  lessonsSandbox: string;
+  exploreTheory: string;
+  filterableQuizzes: string;
+  configQuizzes: string;
+  trackInfo: string;
+  technology: string;
+  sandboxLanguage: string;
+  totalQuestions: string;
+  // Variable Inspector
+  varInspectorTitle: string;
+  interactiveLabel: string;
+  inspectMemory: string;
+  resetStep: string;
+  prevStep: string;
+  nextStep: string;
+  codeExecution: string;
+  memoryVariables: string;
+  noVariables: string;
+  scopeLocal: string;
+  frameStatus: string;
+  // GitHub Sync
+  connecting: string;
+  syncError: string;
+  errorAuth: string;
+  errorPopup: string;
+  errorServer: string;
+  errorUnexpected: string;
+  // PWA / WASM
+  wasmSandboxReady: string;
+  loadingWasmCore: string;
+  // Achievements carry-over
+  unlockedStatus: string;
+  progressLabel: string;
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = {
@@ -269,6 +538,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     explanationLabel: "Spiegazione della Soluzione",
     saveQuestion: "Salva Sfida",
     cancel: "Annulla",
+    formTitleShort: "Aggiungi una Sfida",
+    topicPlaceholder: "es. Funzioni, Interface, Commit",
+    questionPlaceholder: "es. Cosa stampa questo codice Python?",
+    solutionExplanation: "Spiegazione della soluzione",
+    codeOptional: "Snippet di codice (opzionale)...",
+    publishNewChallenge: "Pubblica Nuova Sfida Community",
+    answerOptions: "Opzioni di Risposta:",
+    optionN: "Opzione",
 
     achievementsTitle: "Badge e Traguardi Sbloccati",
     unlockedBadges: "Badge Sbloccati",
@@ -377,7 +654,240 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     weeklyLeaderboard: "Classifica Settimanale",
     generateAiQuestNow: "Genera Sfida AI Ora",
     newBadgeUnlocked: "Nuovo Badge Sbloccato!",
-    days: "giorni"
+    days: "giorni",
+    achievementsSubtitle: "Completa le sfide e mantieni la streak per sbloccare i badge",
+    totalProgress: "Progresso Totale Medaglie: ",
+    unlocked: "sbloccati",
+    progress: "Progresso:",
+    ofBadge: "di",
+    close: "Chiudi",
+    questTopicLabel: "Argomento Specifico o Punto Debole:",
+    questTopicPlaceholder: "es. List Comprehension, Asyncio, Decoratori...",
+    generating: "Generazione in corso...",
+    toggleTts: "Attiva/Disattiva Lettura Vocale",
+    clearChat: "Pulisci chat",
+    zeroMsgs: "Nessun messaggio. Inizia a chattare con DevBot!",
+    analyticsTitle: "Dashboard Analitica & Competence Radar",
+    analyticsSubtitle: "Analisi delle prestazioni di codifica, accuratezza e punti di forza",
+    noDataTitle: "Dati non disponibili",
+    noDataDesc: "Gioca qualche partita per generare le tue statistiche.",
+    avgSpeed: "Velocità Media",
+    totalXp: "XP Totali",
+    solvedQuests: "Sfide Risolte",
+    skillRadarBreakdown: "Grafico Radar Competenze Per Dominio",
+    masteryLevel: "Livello di Padroneggiamento",
+    personalAdvice: "Consiglio Personalizzato dell'AI Tutor:",
+    adviceBody: "Hai un'eccellente precisione nella sintassi base (92%), ma ti consigliamo di allenare maggiormente Async, Decoratori e OOP.",
+    compSyntax: 'Sintassi & Tipi',
+    compControlFlow: 'Controllo Flusso',
+    compFunctions: 'Funzioni & Scope',
+    compDataStructures: 'Strutture Dati',
+    compOop: 'Programmazione OOP',
+    compAsync: 'Async & Decoratori',
+    certificateTitle: "Certificato Ufficiale di Maestria",
+    certificateSubtitle: "Export Digital Badge e Verificabilità QR",
+    certThisAttests: "Si attesta con la presente che",
+    certEditName: "Clicca per modificare il tuo nome",
+    certPassedText: "ha superato con successo il 100% delle sfide pratiche e dei test di sintassi nel percorso ufficiale:",
+    certIssueDate: "Data Rilascio",
+    certFooter: "Supporta l'esportazione in PDF, OpenBadge 2.0 e la condivisione social.",
+    printPdf: "Stampa",
+    markdownCopied: "Markdown copiata negli appunti! Incollala nel tuo README di GitHub.",
+    certificateShareLinkedin: "Ho appena conseguito il Certificato Ufficiale {trackName} su DevQuest! ID verificato: {hash}",
+    filterBeginnerDesc: "Sintassi base, tipi & print",
+    filterIntermediateDesc: "Liste, cicli & funzioni",
+    filterAdvancedDesc: "Dizionari, classi & errori",
+    filterMixedDesc: "Mix casuale equilibrato",
+    resetFilters: "Azzera Filtri",
+    filteredPreview: "Anteprima sfide filtrate",
+    noFilteredResults: "Nessuna sfida trovata con i filtri attuali. Prova a modificare le opzioni o azzerare la ricerca.",
+    questionsShort: "Domande",
+    allShort: "Tutte",
+    noChallengesFound: "Nessuna Sfida Trovata",
+    classroomTitle: "Portale Classe & Studenti",
+    exportCsv: "Esporta CSV",
+    totalStudents: "Studenti Totali",
+    avgProgress: "Progresso Medio",
+    assignments: "Compiti Completati",
+    student: "Studente",
+    progressHeatmap: "Mappa di Progresso",
+    grade: "Voto",
+    pyodideReady: "Pyodide WASM Ready",
+    loadingWasm: "Loading WASM Core...",
+    copied: "Copiato",
+    copy: "Copia",
+    outputConsole: "Output Console",
+    resetCode: "Reset Codice",
+    clearOutput: "Pulisci",
+    executionInProgress: "Esecuzione in corso...",
+    runCodeWasm: "Esegui Codice (WASM)",
+    noOutput: "(Nessun output)",
+    executionError: "Errore esecuzione",
+    consoleOutput: "Output Console:",
+    cmdSearchPlaceholder: "Cerca comandi o seleziona un'azione... (es. WASM, Skill Tree, Theme)",
+    cmdsNotFound: "Nessun comando trovato per",
+    navigate: "Naviga",
+    select: "Seleziona",
+    communityTitle: "Community Challenge Hub (UGC)",
+    communitySubtitle: "Crea sfide, condividi test case con gli sviluppatori della community e vota i quiz più astuti!",
+    createChallenge: "Crea Nuova Sfida",
+    searchCommunity: "Cerca sfide create dalla community...",
+    author: "Autore:",
+    creatorBadge: "Creator Badge",
+    noChallengesCriteria: "Non ci sono sfide che corrispondono ai tuoi criteri. Prova a creare una nuova sfida!",
+    clone: "Clona",
+    playNow: "Gioca Ora",
+    publishChallenge: "Pubblica Nuova Sfida Community",
+    responseOptions: "Opzioni di Risposta:",
+    customLabTitle: "Laboratorio Domande Personalizzate",
+    customLabSubtitle: "Crea le tue sfide Python e integrarle subito nel gioco",
+    languageTrack: "Linguaggio / Tracciato",
+    chapterLabelShort: "Capitolo",
+    topicLabelShort: "Argomento",
+    difficultyLabelShort: "Difficoltà",
+    questionTextLabelShort: "Testo della Domanda",
+    codeSnippetOptional: "Codice Python (opzionale)",
+    responseOptionsLabel: "Opzioni di Risposta (seleziona quella corretta)",
+    optionLetter: "Opzione",
+    usefulHint: "Indizio utile",
+    detailedExplanation: "Spiegazione dettagliata",
+    saveQuestionLabel: "Salva Domanda",
+    noCustomQuestions: "Nessuna domanda personalizzata creata. Clicca \"Nuova Domanda\" per aggiungere i tuoi quesiti Python!",
+    streakActive: "Streak Attiva:",
+    goalLabel: "Obiettivo:",
+    hideNotification: "Nascondi Notifica",
+    chooseGoal: "Scegli il tuo obiettivo giornaliero:",
+    challengesPerDay: "sfide/giorno",
+    editDailyGoal: "Modifica Obiettivo Giornaliero",
+    correctAnswers: "Risposte Esatte",
+    saveScoreLabel: "Salva il tuo punteggio in Classifica",
+    nicknamePlaceholder: "Inserisci il tuo nome (es. Dev)",
+    save: "Salva",
+    scoreSaved: "Punteggio salvato con successo per",
+    changeFilters: "Cambia Filtri",
+    results: "Risultati",
+    timerOn: "Timer ON",
+    timerOff: "Timer OFF",
+    exit: "Esci",
+    record: "Rec:",
+    devQuestHub: "DevQuest Full-Stack Hub 2026",
+    devPlatform: "DevQuest • Developer Platform",
+    heroDescription: "Padroneggia il Full-Stack moderno: Python, TypeScript, Git/GitHub, Docker e PostgreSQL. Impara con lezioni interattive, sandbox in-browser e sfide competitive!",
+    startQuickQuest: "Inizia Sfida Rapida",
+    availableTracks: "Tracciati Tecnici Disponibili (5)",
+    selectTechHubHint: "Seleziona una tecnologia per entrare nell'Hub dedicato",
+    questsShort: "Sfide",
+    enterHub: "Entra Hub",
+    fullstackRadar: "Full-Stack Competency Radar",
+    communityFeed: "Community Feed & Discussioni",
+    globalLeaderboard: "Classifica Globale →",
+    currentLeague: "Lega Corrente",
+    currentStreak: "Serie Attuale",
+    youPlayer: "Tu (Player)",
+    youShort: "Tu",
+    promotionRelegation: "Promozione: 500 XP | Retrocessione: < 100 XP",
+    lessonPath: "Percorso Lezioni",
+    interactiveModule: "Modulo di apprendimento interattivo basato su",
+    lessonIndex: "Indice delle Lezioni",
+    codeExample: "Esempio di Codice:",
+    checkpointQuiz: "Quiz Checkpoint",
+    chapterLabelLearn: "Capitolo",
+    interactiveLesson: "Lezione Interattiva",
+    completedStatus: "Completata",
+    learnProgress: "Progresso",
+    learnLessons: "Lezioni",
+    selectTechHub: "Seleziona Tech Hub (5)",
+    enterArrow: "Entra →",
+    homeLabel: "Home",
+    hubsLabel: "Hubs (5)",
+    aiTutorLabel: "AI Tutor",
+    leaderboardLabel: "Leaderboard",
+    settingsLabel: "Settings",
+    badgesAchievements: "Badge e Traguardi",
+    aiTutorNav: "AI Tutor",
+    streakTooltip: "Serie di giorni consecutivi",
+    pvpTitle: "PvP Code Duels (1v1 Arena)",
+    pvpSubtitle: "Sfida il Cyber-Bot a chi risolve prima il bug di codice!",
+    arenaTitle: "Arena CyberDuel 1v1",
+    arenaDesc: "Metti alla prova i tuoi riflessi di debugging. Rispondi più velocemente dell'avversario prima che scada il tempo!",
+    roomCodePlaceholder: "Codice (vuoto per creare)",
+    searchingMatch: "Ricerca in corso...",
+    findMatch: "Trova Partita PvP ⚔️",
+    tempsRimasto: "Tempo Rimasto:",
+    victory: "VITTORIA SCHIACCIANTE!",
+    defeat: "SCONFITTA IN ARENA!",
+    victoryDesc: "Hai sconfitto il CyberBot guadagnando +100 XP e +25 Trofei per la tua Lega!",
+    defeatDesc: "Il CyberBot ha avuto la meglio in questa tornata. Riprova e perfeziona la tua velocità!",
+    backToLobby: "Torna in Lobby ⚔️",
+    settingsTools: "Impostazioni & Strumenti",
+    customizeExperience: "Personalizza la tua esperienza su DevQuest",
+    interfaceLanguage: "Lingua Interfaccia / Language",
+    syntaxTheme: "Tema Sintassi:",
+    themeMocha: "Catppuccin Mocha (Scuro)",
+    themeLatte: "Catppuccin Latte (Chiaro)",
+    change: "Cambia",
+    soundEffects: "Effetti Sonori:",
+    muted: "Disattivati",
+    active: "Attivi",
+    enable: "Attiva",
+    mute: "Disattiva",
+    githubSyncShort: "Sincronizzazione GitHub",
+    openGitHubSync: "Apri Sincronizzazione GitHub",
+    activeStreak: "Streak Attiva:",
+    unlockedBadgesLabel: "Badge Sbloccati:",
+    viewBadges: "Vedi Badge",
+    githubSyncDesc: "Pubblica le sfide completate direttamente sul tuo account GitHub tramite OAuth ufficiale.",
+    fullstackHub: "Full-Stack Developer Hub",
+    communityHome: "Community Home",
+    techHubs: "Tech Hubs (5)",
+    proBadge: "PRO",
+    toolsCommunity: "Strumenti & Community",
+    aiTutorAgent: "AI Tutor Agent",
+    githubSyncNav: "GitHub Sync",
+    settingsNav: "Impostazioni",
+    skillTreeTitle: "Skill Tree ad Albero Nodale (Percorso RPG)",
+    skillTreeSubtitle: "Visualizza i nodi di competenza, sblocca nuovi moduli e padroneggia la sintassi passo dopo passo.",
+    noModulesAvailable: "Nessun modulo disponibile",
+    unableLoadSkillTree: "Impossibile caricare l'albero delle competenze.",
+    moduleDetails: "Dettagli Modulo: Capitolo",
+    startExercises: "Avvia Esercizi Capitolo",
+    quickChallenge: "Sfida Rapida",
+    askAiDevBot: "Chiedi a DevBot IA",
+    overview: "Panoramica",
+    playChallengeTab: "Gioca & Sfida",
+    progressStatus: "Stato di Avanzamento",
+    challengesShort: "Sfide",
+    educationalRef: "Riferimento didattico principale:",
+    completeTheory: "Completa lezioni teoriche nella scheda Impara ed esegui checkpoint quiz per avanzare di livello.",
+    lessonsSandbox: "Lezioni & Code Sandbox",
+    exploreTheory: "Esplora la teoria passo-passo ed esegui codice reale in-browser.",
+    filterableQuizzes: "Sfide Quiz Filtrabili",
+    configQuizzes: "Configura sessioni di test per argomento e difficoltà per guadagnare XP.",
+    trackInfo: "Info Tracciato",
+    technology: "Tecnologia:",
+    sandboxLanguage: "Linguaggio Sandbox:",
+    totalQuestions: "Totale Domande:",
+    varInspectorTitle: "Variable Inspector & Debugger Step-by-Step",
+    interactiveLabel: "Interactive",
+    inspectMemory: "Ispeziona lo stato della memoria e delle variabili ad ogni riga di codice",
+    resetStep: "Reset al primo step",
+    prevStep: "Passo Prev",
+    nextStep: "Passo Succ",
+    codeExecution: "Esecuzione Codice",
+    memoryVariables: "Ispettore Memoria & Variabili",
+    noVariables: "Nessuna variabile allocata a questo punto dell'esecuzione.",
+    scopeLocal: "Scope: Local / Function",
+    frameStatus: "Frame Status: Active",
+    connecting: "Connessione in corso...",
+    syncError: "Errore Sincronizzazione",
+    errorAuth: "Abilita i popup per il sito per consentire l'autenticazione con GitHub.",
+    errorPopup: "Impossibile contattare il server per l'autenticazione GitHub.",
+    errorServer: "Configurazione GitHub OAuth mancante sul server.",
+    errorUnexpected: "Errore imprevisto durante la sincronizzazione.",
+    wasmSandboxReady: "Python 3.11 WASM",
+    loadingWasmCore: "Loading WASM Core...",
+    unlockedStatus: "Sbloccato",
+    progressLabel: "Progresso:"
   },
 
   en: {
@@ -451,6 +961,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     explanationLabel: "Solution Explanation",
     saveQuestion: "Save Challenge",
     cancel: "Cancel",
+    formTitleShort: "Add a Challenge",
+    topicPlaceholder: "e.g. Functions, Interface, Commit",
+    questionPlaceholder: "e.g. What does this Python code print?",
+    solutionExplanation: "Solution Explanation",
+    codeOptional: "Code snippet (optional)...",
+    publishNewChallenge: "Publish New Community Challenge",
+    answerOptions: "Answer Options:",
+    optionN: "Option",
 
     achievementsTitle: "Badges & Achievements",
     unlockedBadges: "Unlocked Badges",
@@ -559,7 +1077,240 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     weeklyLeaderboard: "Weekly Leaderboard",
     generateAiQuestNow: "Generate AI Quest Now",
     newBadgeUnlocked: "New Badge Unlocked!",
-    days: "days"
+    days: "days",
+    achievementsSubtitle: "Complete challenges and maintain your streak to unlock badges",
+    totalProgress: "Total Badge Progress: ",
+    unlocked: "unlocked",
+    progress: "Progress:",
+    ofBadge: "of",
+    close: "Close",
+    questTopicLabel: "Specific Topic or Weak Point:",
+    questTopicPlaceholder: "e.g. List Comprehension, Asyncio, Decorators...",
+    generating: "Generating...",
+    toggleTts: "Toggle TTS",
+    clearChat: "Clear chat",
+    zeroMsgs: "No messages yet. Start chatting with DevBot!",
+    analyticsTitle: "Analytics Dashboard & Competence Radar",
+    analyticsSubtitle: "Analysis of coding performance, accuracy, and strengths",
+    noDataTitle: "Data Not Available",
+    noDataDesc: "Play a few challenges to generate your stats.",
+    avgSpeed: "Avg Speed",
+    totalXp: "Total XP",
+    solvedQuests: "Solved Quests",
+    skillRadarBreakdown: "Skill Radar Breakdown",
+    masteryLevel: "Mastery Level",
+    personalAdvice: "AI Tutor Personal Advice:",
+    adviceBody: "You have excellent precision in basic syntax (92%), but we recommend practicing Async & Decorators and OOP topics.",
+    compSyntax: 'Syntax & Types',
+    compControlFlow: 'Control Flow',
+    compFunctions: 'Functions & Scope',
+    compDataStructures: 'Data Structures',
+    compOop: 'OOP Programming',
+    compAsync: 'Async & Decorators',
+    certificateTitle: "Official Certificate of Mastery",
+    certificateSubtitle: "Digital Badge Export & QR Verification",
+    certThisAttests: "This is to certify that",
+    certEditName: "Click to edit your name",
+    certPassedText: "has successfully passed 100% of the practical challenges and syntax tests in the official track:",
+    certIssueDate: "Issue Date",
+    certFooter: "Supports PDF export, OpenBadge 2.0 and social sharing.",
+    printPdf: "Print / PDF",
+    markdownCopied: "Markdown copied to clipboard! Paste it into your GitHub README.",
+    certificateShareLinkedin: "I just earned the Official {trackName} Certificate on DevQuest! Verified ID: {hash}",
+    filterBeginnerDesc: "Basic syntax, types & print",
+    filterIntermediateDesc: "Lists, loops & functions",
+    filterAdvancedDesc: "Dictionaries, classes & errors",
+    filterMixedDesc: "Balanced random mix",
+    resetFilters: "Reset Filters",
+    filteredPreview: "Filtered challenges preview",
+    noFilteredResults: "No challenges found with current filters. Try changing options or resetting search.",
+    questionsShort: "Questions",
+    allShort: "All",
+    noChallengesFound: "No Challenges Found",
+    classroomTitle: "Classroom Portal",
+    exportCsv: "Export CSV",
+    totalStudents: "Total Students",
+    avgProgress: "Avg Progress",
+    assignments: "Assignments",
+    student: "Student",
+    progressHeatmap: "Progress Heatmap",
+    grade: "Grade",
+    pyodideReady: "Pyodide WASM Ready",
+    loadingWasm: "Loading WASM Core...",
+    copied: "Copied",
+    copy: "Copy",
+    outputConsole: "Output Console",
+    resetCode: "Reset Code",
+    clearOutput: "Clear",
+    executionInProgress: "Running...",
+    runCodeWasm: "Run Code (WASM)",
+    noOutput: "(No output)",
+    executionError: "Execution error",
+    consoleOutput: "Console Output:",
+    cmdSearchPlaceholder: "Search commands or select an action... (e.g. WASM, Skill Tree, Theme)",
+    cmdsNotFound: "No commands found for",
+    navigate: "Navigate",
+    select: "Select",
+    communityTitle: "Community Challenge Hub (UGC)",
+    communitySubtitle: "Create challenges, share test cases with community developers and vote for the cleverest quizzes!",
+    createChallenge: "Create New Challenge",
+    searchCommunity: "Search community challenges...",
+    author: "Author:",
+    creatorBadge: "Creator Badge",
+    noChallengesCriteria: "No challenges match your criteria. Try creating a new one!",
+    clone: "Clone",
+    playNow: "Play Now",
+    publishChallenge: "Publish New Community Challenge",
+    responseOptions: "Response Options:",
+    customLabTitle: "Custom Questions Lab",
+    customLabSubtitle: "Create your Python challenges and integrate them into the game",
+    languageTrack: "Language / Track",
+    chapterLabelShort: "Chapter",
+    topicLabelShort: "Topic",
+    difficultyLabelShort: "Difficulty",
+    questionTextLabelShort: "Question Text",
+    codeSnippetOptional: "Code Snippet (optional)",
+    responseOptionsLabel: "Response Options (select the correct one)",
+    optionLetter: "Option",
+    usefulHint: "Useful hint",
+    detailedExplanation: "Detailed explanation",
+    saveQuestionLabel: "Save Question",
+    noCustomQuestions: "No custom questions created. Click \"New Question\" to add your Python questions!",
+    streakActive: "Active Streak:",
+    goalLabel: "Goal:",
+    hideNotification: "Hide Notification",
+    chooseGoal: "Choose your daily goal:",
+    challengesPerDay: "challenges/day",
+    editDailyGoal: "Edit Daily Goal",
+    correctAnswers: "Correct Answers",
+    saveScoreLabel: "Save your score in Leaderboard",
+    nicknamePlaceholder: "Enter your nickname (e.g. Dev)",
+    save: "Save",
+    scoreSaved: "Score saved successfully for",
+    changeFilters: "Change Filters",
+    results: "Results",
+    timerOn: "Timer ON",
+    timerOff: "Timer OFF",
+    exit: "Exit",
+    record: "Rec:",
+    devQuestHub: "DevQuest Full-Stack Hub 2026",
+    devPlatform: "DevQuest • Developer Platform",
+    heroDescription: "Master modern full-stack development: Python, TypeScript, Git/GitHub, Docker, and PostgreSQL. Learn with interactive lessons, in-browser sandbox, and competitive challenges!",
+    startQuickQuest: "Start Quick Quest",
+    availableTracks: "Available Tech Tracks (5)",
+    selectTechHubHint: "Select a technology to enter its dedicated Hub",
+    questsShort: "Quests",
+    enterHub: "Enter Hub",
+    fullstackRadar: "Full-Stack Competency Radar",
+    communityFeed: "Community Feed & Discussions",
+    globalLeaderboard: "Global Leaderboard →",
+    currentLeague: "Current League",
+    currentStreak: "Current Streak",
+    youPlayer: "You (Player)",
+    youShort: "You",
+    promotionRelegation: "Promotion: 500 XP | Relegation: < 100 XP",
+    lessonPath: "Lesson Path",
+    interactiveModule: "Interactive learning module based on",
+    lessonIndex: "Lesson Index",
+    codeExample: "Code Example:",
+    checkpointQuiz: "Checkpoint Quiz",
+    chapterLabelLearn: "Chapter",
+    interactiveLesson: "Interactive Lesson",
+    completedStatus: "Completed",
+    learnProgress: "Progress",
+    learnLessons: "Lessons",
+    selectTechHub: "Select Tech Hub (5)",
+    enterArrow: "Enter →",
+    homeLabel: "Home",
+    hubsLabel: "Hubs (5)",
+    aiTutorLabel: "AI Tutor",
+    leaderboardLabel: "Leaderboard",
+    settingsLabel: "Settings",
+    badgesAchievements: "Badges & Achievements",
+    aiTutorNav: "AI Tutor",
+    streakTooltip: "Consecutive days streak",
+    pvpTitle: "PvP Code Duels (1v1 Arena)",
+    pvpSubtitle: "Challenge the Cyber-Bot to see who debugs the fastest!",
+    arenaTitle: "Arena CyberDuel 1v1",
+    arenaDesc: "Test your debugging reflexes. Answer faster than your opponent before time runs out!",
+    roomCodePlaceholder: "Room Code (leave empty to create)",
+    searchingMatch: "Searching...",
+    findMatch: "Find PvP Match ⚔️",
+    tempsRimasto: "Time Remaining:",
+    victory: "CRUSHING VICTORY!",
+    defeat: "ARENA DEFEAT!",
+    victoryDesc: "You defeated the CyberBot earning +100 XP and +25 Trophies for your League!",
+    defeatDesc: "The CyberBot got the better of you this round. Try again and improve your speed!",
+    backToLobby: "Back to Lobby ⚔️",
+    settingsTools: "Settings & Tools",
+    customizeExperience: "Customize your DevQuest experience",
+    interfaceLanguage: "Interface Language",
+    syntaxTheme: "Syntax Theme:",
+    themeMocha: "Catppuccin Mocha (Dark)",
+    themeLatte: "Catppuccin Latte (Light)",
+    change: "Change",
+    soundEffects: "Sound Effects:",
+    muted: "Muted",
+    active: "Active",
+    enable: "Enable",
+    mute: "Mute",
+    githubSyncShort: "GitHub Sync",
+    openGitHubSync: "Open GitHub Sync",
+    activeStreak: "Active Streak:",
+    unlockedBadgesLabel: "Unlocked Badges:",
+    viewBadges: "View Badges",
+    githubSyncDesc: "Publish completed challenges directly to your GitHub account via official OAuth.",
+    fullstackHub: "Full-Stack Developer Hub",
+    communityHome: "Community Home",
+    techHubs: "Tech Hubs (5)",
+    proBadge: "PRO",
+    toolsCommunity: "Tools & Community",
+    aiTutorAgent: "AI Tutor Agent",
+    githubSyncNav: "GitHub Sync",
+    settingsNav: "Settings",
+    skillTreeTitle: "Nodal Skill Tree (RPG Path)",
+    skillTreeSubtitle: "View competency nodes, unlock new modules and master syntax step by step.",
+    noModulesAvailable: "No Modules Available",
+    unableLoadSkillTree: "Unable to load skill tree.",
+    moduleDetails: "Module Details: Chapter",
+    startExercises: "Start Chapter Exercises",
+    quickChallenge: "Quick Challenge",
+    askAiDevBot: "Ask AI DevBot",
+    overview: "Overview",
+    playChallengeTab: "Play & Challenge",
+    progressStatus: "Progress Status",
+    challengesShort: "Challenges",
+    educationalRef: "Main educational reference:",
+    completeTheory: "Complete theory lessons in the Learn tab and run checkpoint quizzes to level up.",
+    lessonsSandbox: "Lessons & Code Sandbox",
+    exploreTheory: "Explore theory step-by-step and run real code in-browser.",
+    filterableQuizzes: "Filterable Quiz Challenges",
+    configQuizzes: "Configure quiz sessions by topic and difficulty to earn XP.",
+    trackInfo: "Track Info",
+    technology: "Technology:",
+    sandboxLanguage: "Sandbox Language:",
+    totalQuestions: "Total Questions:",
+    varInspectorTitle: "Variable Inspector & Debugger Step-by-Step",
+    interactiveLabel: "Interactive",
+    inspectMemory: "Inspect memory and variable state at each line of code",
+    resetStep: "Reset to first step",
+    prevStep: "Prev Step",
+    nextStep: "Next Step",
+    codeExecution: "Code Execution",
+    memoryVariables: "Memory & Variables Inspector",
+    noVariables: "No variables allocated at this point in execution.",
+    scopeLocal: "Scope: Local / Function",
+    frameStatus: "Frame Status: Active",
+    connecting: "Connecting...",
+    syncError: "Sync Error",
+    errorAuth: "Enable popups for this site to authenticate with GitHub.",
+    errorPopup: "Unable to contact the server for GitHub authentication.",
+    errorServer: "GitHub OAuth configuration missing on the server.",
+    errorUnexpected: "Unexpected error during synchronization.",
+    wasmSandboxReady: "Python 3.11 WASM",
+    loadingWasmCore: "Loading WASM Core...",
+    unlockedStatus: "Unlocked",
+    progressLabel: "Progress:"
   },
 
   es: {
@@ -633,6 +1384,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     explanationLabel: "Explicación de la Solución",
     saveQuestion: "Guardar Desafío",
     cancel: "Cancelar",
+    formTitleShort: "Añadir un Desafío",
+    topicPlaceholder: "ej. Funciones, Interfaz, Commit",
+    questionPlaceholder: "ej. ¿Qué imprime este código Python?",
+    solutionExplanation: "Explicación de la solución",
+    codeOptional: "Fragmento de código (opcional)...",
+    publishNewChallenge: "Publicar Nuevo Desafío Comunitario",
+    answerOptions: "Opciones de Respuesta:",
+    optionN: "Opción",
 
     achievementsTitle: "Insignias y Logros",
     unlockedBadges: "Insignias Desbloqueadas",
@@ -741,6 +1500,239 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     weeklyLeaderboard: "Clasificación Semanal",
     generateAiQuestNow: "Generar Desafío IA Ahora",
     newBadgeUnlocked: "¡Nueva Insignia Desbloqueada!",
-    days: "días"
+    days: "días",
+    achievementsSubtitle: "Completa desafíos y mantén tu racha para desbloquear insignias",
+    totalProgress: "Progreso Total de Insignias: ",
+    unlocked: "desbloqueado",
+    progress: "Progreso:",
+    ofBadge: "de",
+    close: "Cerrar",
+    questTopicLabel: "Tema Específico o Punto Débil:",
+    questTopicPlaceholder: "ej. List Comprehension, Asyncio, Decoradores...",
+    generating: "Generando...",
+    toggleTts: "Activar/Desactivar TTS",
+    clearChat: "Limpiar chat",
+    zeroMsgs: "No hay mensajes todavía. ¡Empieza a chatear con DevBot!",
+    analyticsTitle: "Panel de Análisis y Radar de Competencias",
+    analyticsSubtitle: "Análisis de rendimiento de codificación, precisión y fortalezas",
+    noDataTitle: "Datos No Disponibles",
+    noDataDesc: "Juega algunos desafíos para generar tus estadísticas.",
+    avgSpeed: "Velocidad Promedio",
+    totalXp: "XP Total",
+    solvedQuests: "Desafíos Resueltos",
+    skillRadarBreakdown: "Desglose del Radar de Habilidades",
+    masteryLevel: "Nivel de Maestría",
+    personalAdvice: "Consejo Personal del Tutor IA:",
+    adviceBody: "Tienes excelente precisión en sintaxis básica (92%), pero recomendamos practicar Async & Decorators y POO.",
+    compSyntax: 'Sintaxis y Tipos',
+    compControlFlow: 'Control de Flujo',
+    compFunctions: 'Funciones y Alcance',
+    compDataStructures: 'Estructuras de Datos',
+    compOop: 'Programación POO',
+    compAsync: 'Async y Decoradores',
+    certificateTitle: "Certificado Oficial de Maestría",
+    certificateSubtitle: "Exportación de Insignia Digital y Verificación QR",
+    certThisAttests: "Por la presente se certifica que",
+    certEditName: "Haz clic para editar tu nombre",
+    certPassedText: "ha superado exitosamente el 100% de los desafíos prácticos y pruebas de sintaxis en el recorrido oficial:",
+    certIssueDate: "Fecha de Emisión",
+    certFooter: "Compatible con exportación PDF, OpenBadge 2.0 y redes sociales.",
+    printPdf: "Imprimir / PDF",
+    markdownCopied: "¡Markdown copiado al portapapeles! Pégalo en tu README de GitHub.",
+    certificateShareLinkedin: "¡Acabo de obtener el Certificado Oficial {trackName} en DevQuest! ID verificado: {hash}",
+    filterBeginnerDesc: "Sintaxis básica, tipos y print",
+    filterIntermediateDesc: "Listas, bucles y funciones",
+    filterAdvancedDesc: "Diccionarios, clases y errores",
+    filterMixedDesc: "Mezcla aleatoria equilibrada",
+    resetFilters: "Restablecer Filtros",
+    filteredPreview: "Vista previa de desafíos filtrados",
+    noFilteredResults: "No se encontraron desafíos con los filtros actuales. Intenta cambiar opciones o restablecer la búsqueda.",
+    questionsShort: "Preguntas",
+    allShort: "Todo",
+    noChallengesFound: "No se Encontraron Desafíos",
+    classroomTitle: "Portal de Aula",
+    exportCsv: "Exportar CSV",
+    totalStudents: "Total Estudiantes",
+    avgProgress: "Progreso Promedio",
+    assignments: "Tareas",
+    student: "Estudiante",
+    progressHeatmap: "Mapa de Calor de Progreso",
+    grade: "Calificación",
+    pyodideReady: "Pyodide WASM Listo",
+    loadingWasm: "Cargando Núcleo WASM...",
+    copied: "Copiado",
+    copy: "Copiar",
+    outputConsole: "Consola de Salida",
+    resetCode: "Restablecer Código",
+    clearOutput: "Limpiar",
+    executionInProgress: "Ejecutando...",
+    runCodeWasm: "Ejecutar Código (WASM)",
+    noOutput: "(Sin salida)",
+    executionError: "Error de ejecución",
+    consoleOutput: "Salida de Consola:",
+    cmdSearchPlaceholder: "Buscar comandos o seleccionar una acción... (ej. WASM, Árbol de Habilidades, Tema)",
+    cmdsNotFound: "No se encontraron comandos para",
+    navigate: "Navegar",
+    select: "Seleccionar",
+    communityTitle: "Centro de Desafíos Comunitarios (UGC)",
+    communitySubtitle: "¡Crea desafíos, comparte casos de prueba con desarrolladores de la comunidad y vota los quizzes más ingeniosos!",
+    createChallenge: "Crear Nuevo Desafío",
+    searchCommunity: "Buscar desafíos comunitarios...",
+    author: "Autor:",
+    creatorBadge: "Insignia de Creador",
+    noChallengesCriteria: "Ningún desafío coincide con tus criterios. ¡Intenta crear uno nuevo!",
+    clone: "Clonar",
+    playNow: "Jugar Ahora",
+    publishChallenge: "Publicar Nuevo Desafío Comunitario",
+    responseOptions: "Opciones de Respuesta:",
+    customLabTitle: "Laboratorio de Preguntas Personalizadas",
+    customLabSubtitle: "Crea tus desafíos de Python e intégralos en el juego",
+    languageTrack: "Idioma / Ruta",
+    chapterLabelShort: "Capítulo",
+    topicLabelShort: "Tema",
+    difficultyLabelShort: "Dificultad",
+    questionTextLabelShort: "Texto de la Pregunta",
+    codeSnippetOptional: "Fragmento de Código (opcional)",
+    responseOptionsLabel: "Opciones de Respuesta (selecciona la correcta)",
+    optionLetter: "Opción",
+    usefulHint: "Pista útil",
+    detailedExplanation: "Explicación detallada",
+    saveQuestionLabel: "Guardar Pregunta",
+    noCustomQuestions: "No hay preguntas personalizadas creadas. ¡Haz clic en \"Nueva Pregunta\" para añadir tus preguntas de Python!",
+    streakActive: "Racha Activa:",
+    goalLabel: "Meta:",
+    hideNotification: "Ocultar Notificación",
+    chooseGoal: "Elige tu meta diaria:",
+    challengesPerDay: "desafíos/día",
+    editDailyGoal: "Editar Meta Diaria",
+    correctAnswers: "Respuestas Correctas",
+    saveScoreLabel: "Guardar tu puntuación en la Clasificación",
+    nicknamePlaceholder: "Introduce tu apodo (ej. Dev)",
+    save: "Guardar",
+    scoreSaved: "Puntuación guardada correctamente para",
+    changeFilters: "Cambiar Filtros",
+    results: "Resultados",
+    timerOn: "Temporizador ON",
+    timerOff: "Temporizador OFF",
+    exit: "Salir",
+    record: "Rec:",
+    devQuestHub: "DevQuest Centro Full-Stack 2026",
+    devPlatform: "DevQuest • Plataforma para Desarrolladores",
+    heroDescription: "Domina el desarrollo full-stack moderno: Python, TypeScript, Git/GitHub, Docker y PostgreSQL. ¡Aprende con lecciones interactivas, sandbox en el navegador y desafíos competitivos!",
+    startQuickQuest: "Iniciar Desafío Rápido",
+    availableTracks: "Rutas Técnicas Disponibles (5)",
+    selectTechHubHint: "Selecciona una tecnología para entrar en su Centro dedicado",
+    questsShort: "Desafíos",
+    enterHub: "Entrar al Centro",
+    fullstackRadar: "Radar de Competencias Full-Stack",
+    communityFeed: "Feed de la Comunidad y Discusiones",
+    globalLeaderboard: "Clasificación Global →",
+    currentLeague: "Liga Actual",
+    currentStreak: "Racha Actual",
+    youPlayer: "Tú (Jugador)",
+    youShort: "Tú",
+    promotionRelegation: "Ascenso: 500 XP | Descenso: < 100 XP",
+    lessonPath: "Ruta de Lecciones",
+    interactiveModule: "Módulo de aprendizaje interactivo basado en",
+    lessonIndex: "Índice de Lecciones",
+    codeExample: "Ejemplo de Código:",
+    checkpointQuiz: "Examen de Control",
+    chapterLabelLearn: "Capítulo",
+    interactiveLesson: "Lección Interactiva",
+    completedStatus: "Completado",
+    learnProgress: "Progreso",
+    learnLessons: "Lecciones",
+    selectTechHub: "Seleccionar Centro Técnico (5)",
+    enterArrow: "Entrar →",
+    homeLabel: "Inicio",
+    hubsLabel: "Centros (5)",
+    aiTutorLabel: "Tutor IA",
+    leaderboardLabel: "Clasificación",
+    settingsLabel: "Configuración",
+    badgesAchievements: "Insignias y Logros",
+    aiTutorNav: "Tutor IA",
+    streakTooltip: "Racha de días consecutivos",
+    pvpTitle: "Duelos de Código PvP (Arena 1v1)",
+    pvpSubtitle: "¡Desafía al Cyber-Bot para ver quién depura más rápido!",
+    arenaTitle: "Arena CyberDuelo 1v1",
+    arenaDesc: "Pon a prueba tus reflejos de depuración. ¡Responde más rápido que tu oponente antes de que se acabe el tiempo!",
+    roomCodePlaceholder: "Código de Sala (dejar vacío para crear)",
+    searchingMatch: "Buscando...",
+    findMatch: "Buscar Partida PvP ⚔️",
+    tempsRimasto: "Tiempo Restante:",
+    victory: "¡VICTORIA ARROLLADORA!",
+    defeat: "¡DERROTA EN LA ARENA!",
+    victoryDesc: "¡Derrotaste al CyberBot ganando +100 XP y +25 Trofeos para tu Liga!",
+    defeatDesc: "El CyberBot te ha superado esta ronda. ¡Inténtalo de nuevo y mejora tu velocidad!",
+    backToLobby: "Volver al Lobby ⚔️",
+    settingsTools: "Configuración y Herramientas",
+    customizeExperience: "Personaliza tu experiencia DevQuest",
+    interfaceLanguage: "Idioma de Interfaz",
+    syntaxTheme: "Tema de Sintaxis:",
+    themeMocha: "Catppuccin Mocha (Oscuro)",
+    themeLatte: "Catppuccin Latte (Claro)",
+    change: "Cambiar",
+    soundEffects: "Efectos de Sonido:",
+    muted: "Silenciado",
+    active: "Activo",
+    enable: "Activar",
+    mute: "Silenciar",
+    githubSyncShort: "Sincronización GitHub",
+    openGitHubSync: "Abrir Sincronización GitHub",
+    activeStreak: "Racha Activa:",
+    unlockedBadgesLabel: "Insignias Desbloqueadas:",
+    viewBadges: "Ver Insignias",
+    githubSyncDesc: "Publica los desafíos completados directamente en tu cuenta de GitHub mediante OAuth oficial.",
+    fullstackHub: "Centro de Desarrollador Full-Stack",
+    communityHome: "Inicio de la Comunidad",
+    techHubs: "Centros Técnicos (5)",
+    proBadge: "PRO",
+    toolsCommunity: "Herramientas y Comunidad",
+    aiTutorAgent: "Agente Tutor IA",
+    githubSyncNav: "Sincronización GitHub",
+    settingsNav: "Configuración",
+    skillTreeTitle: "Árbol de Habilidades Nodal (Ruta RPG)",
+    skillTreeSubtitle: "Visualiza nodos de competencia, desbloquea nuevos módulos y domina la sintaxis paso a paso.",
+    noModulesAvailable: "No hay Módulos Disponibles",
+    unableLoadSkillTree: "No se puede cargar el árbol de habilidades.",
+    moduleDetails: "Detalles del Módulo: Capítulo",
+    startExercises: "Iniciar Ejercicios del Capítulo",
+    quickChallenge: "Desafío Rápido",
+    askAiDevBot: "Preguntar a AI DevBot",
+    overview: "Resumen",
+    playChallengeTab: "Jugar y Desafiar",
+    progressStatus: "Estado de Progreso",
+    challengesShort: "Desafíos",
+    educationalRef: "Referencia educativa principal:",
+    completeTheory: "Completa las lecciones de teoría en la pestaña Aprender y realiza exámenes de control para subir de nivel.",
+    lessonsSandbox: "Lecciones y Sandbox de Código",
+    exploreTheory: "Explora la teoría paso a paso y ejecuta código real en el navegador.",
+    filterableQuizzes: "Desafíos de Quiz Filtrables",
+    configQuizzes: "Configura sesiones de quiz por tema y dificultad para ganar XP.",
+    trackInfo: "Información de Ruta",
+    technology: "Tecnología:",
+    sandboxLanguage: "Idioma del Sandbox:",
+    totalQuestions: "Total de Preguntas:",
+    varInspectorTitle: "Inspector de Variables y Depurador Paso a Paso",
+    interactiveLabel: "Interactivo",
+    inspectMemory: "Inspecciona la memoria y el estado de las variables en cada línea de código",
+    resetStep: "Restablecer al primer paso",
+    prevStep: "Paso Anterior",
+    nextStep: "Siguiente Paso",
+    codeExecution: "Ejecución de Código",
+    memoryVariables: "Inspector de Memoria y Variables",
+    noVariables: "No hay variables asignadas en este punto de la ejecución.",
+    scopeLocal: "Ámbito: Local / Función",
+    frameStatus: "Estado del Marco: Activo",
+    connecting: "Conectando...",
+    syncError: "Error de Sincronización",
+    errorAuth: "Habilita las ventanas emergentes para este sitio para autenticarte con GitHub.",
+    errorPopup: "No se puede contactar al servidor para la autenticación de GitHub.",
+    errorServer: "Falta la configuración de OAuth de GitHub en el servidor.",
+    errorUnexpected: "Error inesperado durante la sincronización.",
+    wasmSandboxReady: "Python 3.11 WASM",
+    loadingWasmCore: "Cargando Núcleo WASM...",
+    unlockedStatus: "Desbloqueado",
+    progressLabel: "Progreso:"
   }
 };

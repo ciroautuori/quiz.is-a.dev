@@ -58,12 +58,12 @@ Pedagogical Rules:
       },
     });
 
-    const reply = response.text || "Non sono riuscito a generare una risposta. Riprova tra poco.";
+    const reply = response.text || "I couldn't generate a response. Please try again later.";
 
     return NextResponse.json({ text: reply });
   } catch (error: unknown) {
     console.error("Error calling Gemini API:", error);
-    const errorMessage = error instanceof Error ? error.message : "Errore sconosciuto";
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
       { error: "SERVER_ERROR", message: errorMessage },
       { status: 500 }

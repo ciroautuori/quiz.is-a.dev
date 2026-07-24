@@ -47,17 +47,13 @@ export default function GeneralHomeView({
         <div className="space-y-3 z-10 text-center md:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-[var(--ctp-mauve)] border border-[var(--ctp-mauve)]/30">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>DevQuest Full-Stack Hub 2026</span>
+            {t.devQuestHub}
           </div>
           <h1 className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-[var(--ctp-text)]">
-            {t.appName || 'DevQuest'} • Developer Platform
+            {t.devPlatform}
           </h1>
           <p className="text-xs sm:text-sm text-[var(--ctp-subtext0)] max-w-2xl leading-relaxed font-sans">
-            {language === 'en' 
-              ? 'Master modern full-stack development: Python, TypeScript, Git/GitHub, Docker, and PostgreSQL. Learn with interactive lessons, in-browser sandbox, and competitive challenges!'
-              : language === 'es'
-              ? 'Domina el desarrollo full-stack moderno: Python, TypeScript, Git/GitHub, Docker y PostgreSQL. ¡Aprende con lecciones interactivas, sandbox en el navegador y desafíos competitivos!'
-              : 'Padroneggia il Full-Stack moderno: Python, TypeScript, Git/GitHub, Docker e PostgreSQL. Impara con lezioni interattive, sandbox in-browser e sfide competitive!'}
+            {t.heroDescription}
           </p>
         </div>
 
@@ -67,7 +63,7 @@ export default function GeneralHomeView({
             className="px-6 py-3.5 rounded-2xl bg-[var(--ctp-mauve)] text-[var(--ctp-crust)] font-mono font-bold text-xs flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <Play className="w-4 h-4 fill-current" />
-            <span>{language === 'en' ? 'Start Quick Quest' : language === 'es' ? 'Iniciar Desafío Rápido' : 'Inizia Sfida Rapida'}</span>
+            <span>{t.startQuickQuest}</span>
           </button>
         </div>
       </div>
@@ -82,9 +78,9 @@ export default function GeneralHomeView({
         <div className="flex items-center justify-between font-mono">
           <h2 className="text-lg font-bold text-[var(--ctp-text)] flex items-center gap-2">
             <Code2 className="w-5 h-5 text-[var(--ctp-mauve)]" />
-            <span>{language === 'en' ? 'Available Tech Tracks (5)' : language === 'es' ? 'Rutas Técnicas Disponibles (5)' : 'Tracciati Tecnici Disponibili (5)'}</span>
+            <span>{t.availableTracks}</span>
           </h2>
-          <span className="text-xs text-[var(--ctp-subtext0)]">{language === 'en' ? 'Select a technology to enter its dedicated Hub' : language === 'es' ? 'Selecciona una tecnología para entrar en su Hub dedicado' : "Seleziona una tecnologia per entrare nell'Hub dedicato"}</span>
+          <span className="text-xs text-[var(--ctp-subtext0)]">{t.selectTechHubHint}</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
@@ -121,9 +117,9 @@ export default function GeneralHomeView({
                 </div>
 
                 <div className="pt-3 border-t border-[var(--ctp-surface1)] flex items-center justify-between font-mono text-xs text-[var(--ctp-subtext0)]">
-                  <span>{trackCompleted} / {trackQuestions.length} {language === 'en' ? 'Quests' : language === 'es' ? 'Desafíos' : 'Sfide'}</span>
+                  <span>{trackCompleted} / {trackQuestions.length} {t.questsShort}</span>
                   <span className="flex items-center gap-1 font-bold text-[var(--ctp-mauve)] group-hover:translate-x-1 transition-transform">
-                    <span>{language === 'en' ? 'Enter Hub' : language === 'es' ? 'Entrar Hub' : 'Entra Hub'}</span>
+                    <span>{t.enterHub}</span>
                     <ChevronRight className="w-4 h-4" />
                   </span>
                 </div>
@@ -139,7 +135,7 @@ export default function GeneralHomeView({
           <div className="flex items-center justify-between font-mono">
             <h3 className="font-bold text-sm text-[var(--ctp-text)] flex items-center gap-2">
               <BarChart3 className="w-4 h-4 text-[var(--ctp-sky)]" />
-              <span>Full-Stack Competency Radar</span>
+              {t.fullstackRadar}
             </h3>
             <span className="text-xs text-[var(--ctp-subtext0)]">Python • TS • Git</span>
           </div>
@@ -154,13 +150,13 @@ export default function GeneralHomeView({
           <div className="flex items-center justify-between font-mono">
             <h3 className="font-bold text-sm text-[var(--ctp-text)] flex items-center gap-2">
               <Users className="w-4 h-4 text-[var(--ctp-mauve)]" />
-              <span>Community Feed & Discussioni</span>
+              {t.communityFeed}
             </h3>
             <button 
               onClick={onGoToLeaderboard}
               className="text-xs text-[var(--ctp-mauve)] font-bold hover:underline"
             >
-              Classifica Globale →
+              {t.globalLeaderboard}
             </button>
           </div>
 

@@ -42,7 +42,7 @@ export default function CodeSandboxModal({
   initialCode,
   title = "In-Browser Python WASM Sandbox"
 }: CodeSandboxModalProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [code, setCode] = useState(() => {
     if (initialCode) return initialCode;
     if (typeof window !== 'undefined') {
@@ -264,7 +264,7 @@ sys.stderr = io.StringIO()
                 </button>
               </div>
               <pre className="flex-1 p-4 font-mono text-xs overflow-y-auto whitespace-pre-wrap leading-relaxed text-[var(--ctp-green)]">
-                {output || (language === 'en' ? '> Click "Run Code" to compile and execute Python code live in your browser.' : language === 'es' ? '> Haz clic en "Ejecutar Código" para compilar y ejecutar código Python en tiempo real.' : '> Fai clic su "Esegui Codice" per compilare ed eseguire il tuo codice Python in tempo reale.')}
+                {t.noOutput}
               </pre>
             </div>
           </div>
@@ -277,7 +277,7 @@ sys.stderr = io.StringIO()
               style={{ color: 'var(--ctp-subtext0)', borderColor: 'var(--ctp-surface1)' }}
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>{language === 'en' ? 'Reset Code' : language === 'es' ? 'Restablecer' : 'Reset Codice'}</span>
+              <span>{t.resetCode}</span>
             </button>
 
             <button
@@ -288,12 +288,12 @@ sys.stderr = io.StringIO()
               {isRunning ? (
                 <>
                   <Sparkles className="w-4 h-4 animate-spin text-[var(--ctp-yellow)]" />
-                  <span>{language === 'en' ? 'Running...' : language === 'es' ? 'Ejecutando...' : 'Esecuzione in corso...'}</span>
+                  <span>{t.executionInProgress}</span>
                 </>
               ) : (
                 <>
                   <Play className="w-4 h-4 fill-white" />
-                  <span>{language === 'en' ? 'Run Code (WASM)' : language === 'es' ? 'Ejecutar Código (WASM)' : 'Esegui Codice (WASM)'}</span>
+                  <span>{t.runCodeWasm}</span>
                 </>
               )}
             </button>
