@@ -12,7 +12,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { messages, questionContext, language = 'it', mode = 'general' } = await req.json();
+    const { messages: rawMessages, questionContext, language: rawLang = 'it' } = await req.json();
+
+    const language = typeof rawLang === 'string' ? rawLang.slice(0, 5) : 'it';
+    const messages = Array.isArray(rawMessages)
+      ? rawMessages.slice(-10).map((m: { role?: string; content?: string }) => ({
+          role: m.role === 'user' ? 'user' : 'model',
+          content: typeof m.content === 'string' ? m.content.slice(0, 2000) : ''
+        }))
+      : [];
 
     const ai = new GoogleGenAI({
       apiKey: apiKey,

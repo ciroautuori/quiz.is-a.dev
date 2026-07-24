@@ -1,20 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
-  const error = req.nextUrl.searchParams.get('error');
+  const rawError = req.nextUrl.searchParams.get('error');
+  const safeError = rawError ? escapeHtml(rawError) : null;
   const origin = req.nextUrl.origin || process.env.APP_URL || 'http://localhost:3000';
 
-  if (error || !code) {
+  if (rawError || !code) {
     return new Response(
       `<html>
         <body style="font-family: sans-serif; background: #1e1e2e; color: #f38ba8; display: flex; align-items: center; justify-content: center; height: 100vh;">
           <div style="text-align: center;">
             <h2>GitHub Authentication Cancelled or Failed</h2>
-            <p>${error || 'Missing authorization code.'}</p>
+            <p>${safeError || 'Missing authorization code.'}</p>
             <script>
               if (window.opener) {
-                window.opener.postMessage({ type: 'GITHUB_AUTH_ERROR', error: '${error || 'Mancante'}' }, '${origin}');
+                window.opener.postMessage({ type: 'GITHUB_AUTH_ERROR', error: ${JSON.stringify(rawError || 'Mancante')} }, '${origin}');
                 setTimeout(() => window.close(), 2000);
               }
             </script>
@@ -63,6 +73,9 @@ export async function GET(req: NextRequest) {
 
     const userData = await userRes.json();
 
+    const safeUsername = escapeHtml(userData.login || '');
+    const safeAvatarUrl = escapeHtml(userData.avatar_url || '');
+
     const payload = JSON.stringify({
       token: accessToken,
       username: userData.login,
@@ -109,9 +122,9 @@ export async function GET(req: NextRequest) {
         </head>
         <body>
           <div class="card">
-            <img src="${userData.avatar_url}" class="avatar" alt="Avatar" />
+            <img src="${safeAvatarUrl}" class="avatar" alt="Avatar" />
             <h3>GitHub Authentication Successful!</h3>
-            <p>Connected as @${userData.login}</p>
+            <p>Connected as @${safeUsername}</p>
             <p style="margin-top: 12px; font-size: 12px; color: #cba6f7;">Closing window...</p>
           </div>
           <script>
@@ -136,11 +149,12 @@ export async function GET(req: NextRequest) {
       { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
     );
   } catch (err: any) {
+    const safeErrMsg = escapeHtml(err.message || String(err));
     return new Response(
       `<html>
         <body style="font-family: sans-serif; background: #1e1e2e; color: #f38ba8; padding: 30px;">
           <h2>GitHub Authentication Error</h2>
-          <p>${err.message || String(err)}</p>
+          <p>${safeErrMsg}</p>
           <p>Please ensure GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET are configured.</p>
         </body>
       </html>`,

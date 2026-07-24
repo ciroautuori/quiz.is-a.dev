@@ -20,6 +20,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'OAuth Access Token mancante' }, { status: 401 });
     }
 
+    if (typeof repoName !== 'string' || !/^[a-zA-Z0-9_\-]+$/.test(repoName) || repoName.length > 100) {
+      return NextResponse.json({ error: 'Nome repository non valido' }, { status: 400 });
+    }
+
+    if (!Array.isArray(challenges) || challenges.length > 50) {
+      return NextResponse.json({ error: 'Numero massimo di sfide per sincronizzazione superato (max 50)' }, { status: 400 });
+    }
+
     const headers = {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/vnd.github+json',

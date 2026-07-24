@@ -212,6 +212,17 @@ export interface Translations {
   progress: string;
   ofBadge: string;
   close: string;
+  publishBtn: string;
+  communityTitle: string;
+  communitySubtitle: string;
+  createChallenge: string;
+  searchCommunity: string;
+  author: string;
+  creatorBadge: string;
+  clone: string;
+  playNow: string;
+  noChallengesCriteria: string;
+
   // AI Quest Generator
   questTopicLabel: string;
   questTopicPlaceholder: string;
@@ -288,18 +299,6 @@ export interface Translations {
   cmdsNotFound: string;
   navigate: string;
   select: string;
-  // Community Hub
-  communityTitle: string;
-  communitySubtitle: string;
-  createChallenge: string;
-  searchCommunity: string;
-  author: string;
-  creatorBadge: string;
-  noChallengesCriteria: string;
-  clone: string;
-  playNow: string;
-  publishChallenge: string;
-  responseOptions: string;
   // Custom Questions
   customLabTitle: string;
   customLabSubtitle: string;
@@ -648,6 +647,17 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     analyticsRadar: "Radar Analisi",
     certificateModalBtn: "Certificato ID",
 
+    communityTitle: "Community Challenge Hub (UGC)",
+    communitySubtitle: "Crea sfide, condividi test case con gli sviluppatori della community e vota i quiz più astuti!",
+    createChallenge: "Crea Nuova Sfida",
+    searchCommunity: "Cerca sfide create dalla community...",
+    author: "Autore:",
+    creatorBadge: "Creatore Originale",
+    clone: "Clona",
+    playNow: "Gioca Ora",
+    noChallengesCriteria: "Nessuna sfida della community corrisponde ai criteri di ricerca.",
+    publishBtn: "Pubblica Sfida 🚀",
+
     theoryExplanation: "Spiegazione Teorica",
     liveSandboxTitle: "Sandbox di Codice Live (Esegui e Sperimenta)",
     executing: "Esecuzione...",
@@ -733,17 +743,6 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     cmdsNotFound: "Nessun comando trovato per",
     navigate: "Naviga",
     select: "Seleziona",
-    communityTitle: "Community Challenge Hub (UGC)",
-    communitySubtitle: "Crea sfide, condividi test case con gli sviluppatori della community e vota i quiz più astuti!",
-    createChallenge: "Crea Nuova Sfida",
-    searchCommunity: "Cerca sfide create dalla community...",
-    author: "Autore:",
-    creatorBadge: "Creator Badge",
-    noChallengesCriteria: "Non ci sono sfide che corrispondono ai tuoi criteri. Prova a creare una nuova sfida!",
-    clone: "Clona",
-    playNow: "Gioca Ora",
-    publishChallenge: "Pubblica Nuova Sfida Community",
-    responseOptions: "Opzioni di Risposta:",
     customLabTitle: "Laboratorio Domande Personalizzate",
     customLabSubtitle: "Crea le tue sfide Python e integrarle subito nel gioco",
     languageTrack: "Linguaggio / Tracciato",
@@ -1165,11 +1164,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     searchCommunity: "Search community challenges...",
     author: "Author:",
     creatorBadge: "Creator Badge",
-    noChallengesCriteria: "No challenges match your criteria. Try creating a new one!",
     clone: "Clone",
     playNow: "Play Now",
-    publishChallenge: "Publish New Community Challenge",
-    responseOptions: "Response Options:",
+    noChallengesCriteria: "No community challenges match your search criteria.",
+    publishBtn: "Publish Challenge 🚀",
     customLabTitle: "Custom Questions Lab",
     customLabSubtitle: "Create your Python challenges and integrate them into the game",
     languageTrack: "Language / Track",
@@ -1401,6 +1399,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     publishNewChallenge: "Publicar Nuevo Desafío Comunitario",
     answerOptions: "Opciones de Respuesta:",
     optionN: "Opción",
+    publishBtn: "Publicar Desafío 🚀",
 
     achievementsTitle: "Insignias y Logros",
     unlockedBadges: "Insignias Desbloqueadas",
@@ -1594,8 +1593,6 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     noChallengesCriteria: "Ningún desafío coincide con tus criterios. ¡Intenta crear uno nuevo!",
     clone: "Clonar",
     playNow: "Jugar Ahora",
-    publishChallenge: "Publicar Nuevo Desafío Comunitario",
-    responseOptions: "Opciones de Respuesta:",
     customLabTitle: "Laboratorio de Preguntas Personalizadas",
     customLabSubtitle: "Crea tus desafíos de Python e intégralos en el juego",
     languageTrack: "Idioma / Ruta",

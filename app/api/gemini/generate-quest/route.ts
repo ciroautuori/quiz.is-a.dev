@@ -12,7 +12,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { topic, difficulty = 'media', trackId = 'python', language = 'it' } = await req.json();
+    const { topic: rawTopic, difficulty = 'media', trackId: rawTrackId = 'python', language: rawLang = 'it' } = await req.json();
+
+    const topic = typeof rawTopic === 'string' ? rawTopic.slice(0, 100) : 'General';
+    const trackId = typeof rawTrackId === 'string' ? rawTrackId.slice(0, 30) : 'python';
+    const language = typeof rawLang === 'string' ? rawLang.slice(0, 5) : 'it';
 
     const ai = new GoogleGenAI({
       apiKey: apiKey,

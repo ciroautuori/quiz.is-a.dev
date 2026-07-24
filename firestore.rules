@@ -26,9 +26,29 @@ service cloud.firestore {
       allow create: if isValidId(recordId) 
         && request.resource.data.keys().hasAll(['id', 'nomeUtente', 'punteggio', 'data'])
         && request.resource.data.nomeUtente is string
+        && request.resource.data.nomeUtente.size() > 0
         && request.resource.data.nomeUtente.size() <= 50
-        && request.resource.data.punteggio is number;
+        && request.resource.data.punteggio is number
+        && request.resource.data.punteggio >= 0
+        && request.resource.data.punteggio <= 100000;
       allow update, delete: if false;
+    }
+
+    // PvP Duels Matchmaking
+    match /duels/{duelId} {
+      allow read: if true;
+      allow create: if isValidId(duelId)
+        && request.resource.data.p1Hp == 100
+        && request.resource.data.p2Hp == 100
+        && request.resource.data.status == 'waiting';
+      allow update: if isValidId(duelId)
+        && request.resource.data.p1Hp is number
+        && request.resource.data.p1Hp >= 0
+        && request.resource.data.p1Hp <= 100
+        && request.resource.data.p2Hp is number
+        && request.resource.data.p2Hp >= 0
+        && request.resource.data.p2Hp <= 100;
+      allow delete: if false;
     }
 
     // Custom Questions

@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, ThumbsUp, Plus, Code, Play, CheckCircle2, Search, Sparkles, Send } from 'lucide-react';
-import { Sfida, normalizeChallenge } from '../lib/types';
+import { Sfida, normalizeChallenge, getChallengeQuestion, getChallengeTopic, getChallengeCode, getChallengeOptions, getChallengeExplanation } from '../lib/types';
 import { soundEngine } from '../lib/soundEngine';
+import { useLanguage } from '../lib/LanguageContext';
 
 interface CommunityChallenge extends Sfida {
   author: string;
@@ -18,7 +19,11 @@ const INITIAL_COMMUNITY_CHALLENGES: CommunityChallenge[] = [
     id: 'ugc_1',
     capitolo: 99,
     argomento: 'Trappola delle Liste Mutabili',
+    topic_en: 'Mutable List Trap',
+    topic_es: 'Trampa de Listas Mutables',
     domanda: 'Cosa stampa il seguente codice quando usiamo una lista come valore predefinito di un parametro?',
+    question_en: 'What does the following code print when using a list as a default parameter value?',
+    question_es: '¿Qué imprime el siguiente código cuando usamos una lista como valor predeterminado?',
     codice: `def add_item(val, target=[]):
     target.append(val)
     return target
@@ -26,8 +31,12 @@ const INITIAL_COMMUNITY_CHALLENGES: CommunityChallenge[] = [
 print(add_item(1))
 print(add_item(2))`,
     risposte: ['[1] poi [2]', '[1] poi [1, 2]', 'Error: SyntaxError', '[[1], [2]]'],
+    options_en: ['[1] then [2]', '[1] then [1, 2]', 'Error: SyntaxError', '[[1], [2]]'],
+    options_es: ['[1] luego [2]', '[1] luego [1, 2]', 'Error: SyntaxError', '[[1], [2]]'],
     indice_corretto: 1,
     spiegazione: 'I valori predefiniti delle funzioni in Python sono valutati una sola volta al momento della definizione!',
+    explanation_en: 'Default argument values in Python are evaluated once at function definition time!',
+    explanation_es: '¡Los valores predeterminados de funciones en Python se evalúan una sola vez al definir la función!',
     suggerimento: 'Ricorda che gli oggetti mutabili mantengono il riferimento tra una chiamata e l\'altra.',
     difficolta: 'media',
     trackId: 'python',
@@ -39,12 +48,18 @@ print(add_item(2))`,
     id: 'ugc_2',
     capitolo: 99,
     argomento: 'Inversione di una Stringa con Slicing',
+    topic_en: 'String Reversal via Slicing',
+    topic_es: 'Inversión de Cadena con Slicing',
     domanda: 'Qual è il modo idiomatico per invertire una stringa s in Python?',
+    question_en: 'What is the idiomatic way to reverse a string s in Python?',
+    question_es: '¿Cuál es la forma idiomática de invertir una cadena s en Python?',
     codice: `s = "DevQuest"
 # Come si inverte la stringa s?`,
     risposte: ['s.reverse()', 's[::-1]', 'reverse(s)', 's.invert()'],
     indice_corretto: 1,
     spiegazione: 'Lo slicing con passo negativo [::-1] crea una copia invertita della stringa.',
+    explanation_en: 'Negative step slicing [::-1] creates a reversed copy of the string.',
+    explanation_es: 'El troceado con paso negativo [::-1] crea una copia invertida de la cadena.',
     suggerimento: 'Lo slice prende [start:stop:step].',
     difficolta: 'facile',
     trackId: 'python',
@@ -54,10 +69,8 @@ print(add_item(2))`,
 ];
 
 interface CommunityHubViewProps {
-  onPlayChallenge: (sfida: Sfida) => void;
+  onPlayChallenge?: (sfida: Sfida) => void;
 }
-
-import { useLanguage } from '../lib/LanguageContext';
 
 export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewProps) {
   const { language, t } = useLanguage();
@@ -186,7 +199,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[var(--ctp-mauve)]/10 text-[var(--ctp-mauve)] border border-[var(--ctp-mauve)]/20">
-                  {item.argomento}
+                  {getChallengeTopic(item)}
                 </span>
                 <span className="text-xs text-[var(--ctp-subtext0)] flex items-center gap-1">
                   {t.author} <strong className="text-[var(--ctp-text)]">{item.author}</strong>
@@ -195,12 +208,12 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
               </div>
 
               <h3 className="text-xs font-bold text-[var(--ctp-text)] leading-relaxed">
-                {item.domanda}
+                {getChallengeQuestion(item, language)}
               </h3>
 
-              {item.codice && (
+              {getChallengeCode(item) && (
                 <pre className="p-2.5 rounded-lg bg-slate-950 text-emerald-300 font-mono text-[11px] overflow-x-auto border border-slate-800">
-                  {item.codice}
+                  {getChallengeCode(item)}
                 </pre>
               )}
             </div>
@@ -226,7 +239,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                   {t.clone}
                 </button>
                 <button
-                  onClick={() => onPlayChallenge(item)}
+                  onClick={() => onPlayChallenge && onPlayChallenge(item)}
                   className="px-4 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <Play className="w-3.5 h-3.5 fill-emerald-300" />
@@ -313,8 +326,9 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
 
                 <button
                   onClick={handleCreateChallenge}
-                 >
-                  Pubblica Sfida 🚀
+                  className="w-full py-3 rounded-xl bg-[var(--ctp-mauve)] text-white font-bold text-xs shadow-lg hover:opacity-90 cursor-pointer transition-transform hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2"
+                >
+                  {t.publishBtn}
                 </button>
               </div>
             </motion.div>
