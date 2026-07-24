@@ -22,11 +22,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       if (saved && (saved === 'it' || saved === 'en' || saved === 'es')) {
         setLanguageState(saved);
       } else {
-        // Detect browser language
-        const navLang = navigator.language.slice(0, 2);
-        if (navLang === 'en') setLanguageState('en');
-        else if (navLang === 'es') setLanguageState('es');
-        else setLanguageState('it');
+        setLanguageState('it');
       }
     }
   }, []);
