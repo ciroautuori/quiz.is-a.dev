@@ -121,10 +121,10 @@ export default function CertificateModal({
               </div>
               <div>
                 <h2 className="font-bold text-base text-[var(--ctp-text)]">
-                  Certificato Ufficiale di Maestria
+                  {language === 'en' ? 'Official Certificate of Mastery' : language === 'es' ? 'Certificado Oficial de Maestría' : 'Certificato Ufficiale di Maestria'}
                 </h2>
                 <p className="text-xs text-[var(--ctp-subtext0)]">
-                  Export Digital Badge e Verificabilità QR
+                  {language === 'en' ? 'Digital Badge Export & QR Verification' : language === 'es' ? 'Exportación de Insignia Digital y Verificación QR' : 'Export Digital Badge e Verificabilità QR'}
                 </p>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function CertificateModal({
 
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400 mb-2">
-                  Si attesta con la presente che
+                  {language === 'en' ? 'This is to certify that' : language === 'es' ? 'Por la presente se certifica que' : 'Si attesta con la presente che'}
                 </p>
                 {isEditing ? (
                   <input
@@ -169,7 +169,7 @@ export default function CertificateModal({
                   <h3
                     onClick={() => setIsEditing(true)}
                     className="text-2xl sm:text-3xl font-serif font-black text-amber-300 cursor-pointer hover:underline"
-                    title="Clicca per modificare il tuo nome"
+                    title={language === 'en' ? 'Click to edit your name' : language === 'es' ? 'Haz clic para editar tu nombre' : 'Clicca per modificare il tuo nome'}
                   >
                     {nameInput}
                   </h3>
@@ -177,13 +177,17 @@ export default function CertificateModal({
               </div>
 
               <div className="max-w-md mx-auto text-xs leading-relaxed text-slate-300">
-                ha superato con successo il 100% delle sfide pratiche e dei test di sintassi nel percorso ufficiale:
+                {language === 'en'
+                  ? 'has successfully passed 100% of the practical challenges and syntax tests in the official track:'
+                  : language === 'es'
+                  ? 'ha superado con éxito el 100% de los desafíos prácticos y pruebas de sintaxis en la ruta oficial:'
+                  : 'ha superato con successo il 100% delle sfide pratiche e dei test di sintassi nel percorso ufficiale:'}
                 <div className="text-sm font-bold text-amber-400 mt-2">{trackName}</div>
               </div>
 
               <div className="pt-4 border-t border-amber-500/20 flex items-center justify-between text-[11px] text-slate-400">
                 <div>
-                  <span>Data Rilascio: </span>
+                  <span>{language === 'en' ? 'Issue Date' : language === 'es' ? 'Fecha de Emisión' : 'Data Rilascio'}: </span>
                   <strong className="text-slate-200">{issueDate}</strong>
                 </div>
 
@@ -204,7 +208,11 @@ export default function CertificateModal({
           {/* Controls Footer */}
           <div className="p-4 px-6 ctp-card-mantle flex flex-wrap items-center justify-between gap-4">
             <span className="text-xs text-[var(--ctp-subtext0)] max-w-[200px]">
-              Supporta l'esportazione in PDF, OpenBadge 2.0 e la condivisione social.
+              {language === 'en'
+                ? 'Supports PDF export, OpenBadge 2.0 and social sharing.'
+                : language === 'es'
+                ? 'Admite exportación a PDF, OpenBadge 2.0 y compartir en redes sociales.'
+                : "Supporta l'esportazione in PDF, OpenBadge 2.0 e la condivisione social."}
             </span>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -224,7 +232,13 @@ export default function CertificateModal({
                 </button>
                 <button
                   onClick={() => {
-                    const text = encodeURIComponent(`Ho appena conseguito il Certificato Ufficiale di Maestria Python su DevQuest! Verified ID: ${hash}`);
+                    const text = encodeURIComponent(
+                      language === 'en'
+                        ? `I just earned the Official Python Mastery Certificate on DevQuest! Verified ID: ${hash}`
+                        : language === 'es'
+                        ? `¡Acabo de obtener el Certificado Oficial de Maestría en Python en DevQuest! Verified ID: ${hash}`
+                        : `Ho appena conseguito il Certificato Ufficiale di Maestria Python su DevQuest! Verified ID: ${hash}`
+                    );
                     const url = encodeURIComponent('https://devquest.app');
                     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&text=${text}`, '_blank');
                   }}
@@ -239,7 +253,7 @@ export default function CertificateModal({
                   className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg hover:opacity-90 cursor-pointer transition-transform hover:scale-105 active:scale-95"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Stampa</span>
+                  <span>{language === 'en' ? 'Print / PDF' : language === 'es' ? 'Imprimir / PDF' : 'Stampa'}</span>
                 </button>
               </div>
           </div>
