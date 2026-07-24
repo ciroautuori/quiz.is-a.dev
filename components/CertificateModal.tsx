@@ -45,11 +45,12 @@ export default function CertificateModal({
   const issueDate = new Date().toLocaleDateString(language === 'en' ? 'en-US' : language === 'es' ? 'es-ES' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 
   const generateOpenBadgeJSON = async () => {
-    const salt = "devquest_salt_2026";
-    const encoder = new TextEncoder();
-    const recipientData = encoder.encode(`${nameInput.toLowerCase()}$${salt}`);
-    const recipientBuffer = await crypto.subtle.digest('SHA-256', recipientData);
-    const recipientHex = Array.from(new Uint8Array(recipientBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    try {
+      const salt = "devquest_salt_2026";
+      const encoder = new TextEncoder();
+      const recipientData = encoder.encode(`${nameInput.toLowerCase()}$${salt}`);
+      const recipientBuffer = await crypto.subtle.digest('SHA-256', recipientData);
+      const recipientHex = Array.from(new Uint8Array(recipientBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
 
     const badge = {
       "@context": "https://w3id.org/openbadges/v2",
@@ -90,6 +91,9 @@ export default function CertificateModal({
     a.download = `openbadge-${hash}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Failed to generate badge:', err);
+    }
   };
 
   const handleDownload = () => {
@@ -225,11 +229,10 @@ export default function CertificateModal({
                 </button>
                 <button
                   onClick={() => {
-                    const text = encodeURIComponent(
-                      t.certificateShareLinkedin
-                        .replace('{trackName}', trackName)
-                        .replace('{hash}', hash)
-                    );
+                    const shareText = (t.certificateShareLinkedin || '')
+                      .replace('{trackName}', trackName)
+                      .replace('{hash}', hash);
+                    const text = encodeURIComponent(shareText);
                     const url = encodeURIComponent('https://devquest.app');
                     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&text=${text}`, '_blank');
                   }}

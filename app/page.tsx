@@ -26,6 +26,7 @@ import LangSync from '../lib/LangSync';
 import { getAllQuestions } from '../lib/questions';
 import { 
   getCustomQuestions, 
+  saveCustomQuestion,
   getCompletedQuestionIds, 
   markQuestionCompleted, 
   getDailyStreak, 
@@ -324,6 +325,7 @@ export default function Home() {
             isOpen={isQuestGenOpen}
             onClose={() => setIsQuestGenOpen(false)}
             onQuestGenerated={(newQuest) => {
+              saveCustomQuestion(newQuest);
               setAllQuestions(prev => [newQuest, ...prev]);
               if (newQuest.trackId) handleSelectView(newQuest.trackId);
             }}

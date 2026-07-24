@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Swords, Bot, User, CheckCircle2, XCircle, Timer, Award, Zap, X, ShieldAlert } from 'lucide-react';
 import { soundEngine } from '../lib/soundEngine';
@@ -151,8 +151,17 @@ export default function PvPDuelModal({ isOpen, onClose }: PvPDuelModalProps) {
     }
   };
 
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
   const checkEndDuel = (pMax: number, bMax: number) => {
-    setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       if (bMax <= 0) {
         setWinner('player');
         setStage('result');

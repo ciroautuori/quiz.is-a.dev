@@ -13,7 +13,8 @@ export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
   const rawError = req.nextUrl.searchParams.get('error');
   const safeError = rawError ? escapeHtml(rawError) : null;
-  const origin = req.nextUrl.origin || process.env.APP_URL || 'http://localhost:3000';
+  const configuredAppUrl = process.env.APP_URL;
+  const origin = configuredAppUrl || req.nextUrl.origin || 'http://localhost:3000';
 
   if (rawError || !code) {
     return new Response(

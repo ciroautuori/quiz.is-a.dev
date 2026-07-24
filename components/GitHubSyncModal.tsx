@@ -42,6 +42,22 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
     }
   }, []);
 
+  // Gather completed challenges to sync
+  const completedIds = getCompletedQuestionIds();
+  const customQuestions = getCustomQuestions();
+  const allAvailableChallenges = [...getAllQuestions(), ...customQuestions];
+
+  const completedChallenges = allAvailableChallenges.filter((ch) => completedIds.includes(ch.id)).map((ch) => ({
+    id: ch.id,
+    trackId: ch.trackId || 'python',
+    titolo: ch.argomento || `Sfida #${ch.id}`,
+    difficolta: ch.difficolta || 'facile',
+    domanda: ch.domanda,
+    codiceIniziale: ch.codice || '',
+    soluzioneFormattata: ch.spiegazione,
+    spiegazione: ch.spiegazione,
+  }));
+
   // Listen for OAuth postMessage callback from popup window
   useEffect(() => {
     // Background auto-sync if we have an auth token and challenges
@@ -70,25 +86,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
-  if (!isOpen) return null;
-
-  // Gather completed challenges to sync
-  const completedIds = getCompletedQuestionIds();
-  const customQuestions = getCustomQuestions();
-  const allAvailableChallenges = [...getAllQuestions(), ...customQuestions];
-
-  const completedChallenges = allAvailableChallenges.filter((ch) => completedIds.includes(ch.id)).map((ch) => ({
-    id: ch.id,
-    trackId: ch.trackId || 'python',
-    titolo: ch.argomento || `Sfida #${ch.id}`,
-    difficolta: ch.difficolta || 'facile',
-    domanda: ch.domanda,
-    codiceIniziale: ch.codice || '',
-    soluzioneFormattata: ch.spiegazione,
-    spiegazione: ch.spiegazione,
-  }));
+  }, [authData?.token, repoName]);
 
   const handleConnectGithub = async () => {
     setIsConnecting(true);

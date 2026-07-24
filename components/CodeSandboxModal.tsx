@@ -75,6 +75,7 @@ export default function CodeSandboxModal({
   // Load Pyodide script
   useEffect(() => {
     if (!isOpen) return;
+    let isMounted = true;
 
     if (window.pyodide) {
       pyodideRef.current = window.pyodide;
@@ -93,7 +94,9 @@ export default function CodeSandboxModal({
           });
           window.pyodide = pyodide;
           pyodideRef.current = pyodide;
-          setPyodideReady(true);
+          if (isMounted) {
+            setPyodideReady(true);
+          }
         }
       } catch (err) {
         console.error('Failed to initialize Pyodide:', err);
@@ -102,6 +105,7 @@ export default function CodeSandboxModal({
     document.body.appendChild(script);
 
     return () => {
+      isMounted = false;
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }

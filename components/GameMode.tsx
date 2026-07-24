@@ -189,7 +189,7 @@ export default function GameMode({
   const currentSfida = activeQuestions[currentIndex];
 
   const handleSelectAnswer = (index: number) => {
-    if (answered || gameOver) return;
+    if (answered || gameOver || !currentSfida) return;
 
     setSelectedOption(index);
     setAnswered(true);
@@ -218,21 +218,19 @@ export default function GameMode({
         setTimeResult({ spentSeconds: timeSpent, isNewRecord, bestTime });
       }
 
-      if (onQuestionCompleted && currentSfida.id) {
+      if (onQuestionCompleted && currentSfida?.id) {
         onQuestionCompleted(currentSfida.id);
       }
     } else {
       soundEngine.playWrong();
-      setVite((prev) => {
-        const nextVite = prev - 1;
-        if (nextVite <= 0) {
-          setTimeout(() => {
-            soundEngine.playWrong();
-            setGameOver(true);
-          }, 1200);
-        }
-        return nextVite;
-      });
+      const nextVite = vite - 1;
+      setVite(nextVite);
+      if (nextVite <= 0) {
+        setTimeout(() => {
+          soundEngine.playWrong();
+          setGameOver(true);
+        }, 1200);
+      }
     }
   };
 
@@ -602,7 +600,7 @@ export default function GameMode({
 
                 return (
                   <button
-                    key={idx}
+                    key={`${currentSfida?.id || currentIndex}_opt_${idx}`}
                     onClick={() => handleSelectAnswer(idx)}
                     disabled={answered}
                     style={customStyle}

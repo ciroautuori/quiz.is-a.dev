@@ -7,6 +7,8 @@ import { Sfida, normalizeChallenge, getChallengeQuestion, getChallengeTopic, get
 import { soundEngine } from '../lib/soundEngine';
 import { useLanguage } from '../lib/LanguageContext';
 
+import { saveCustomQuestion } from '../lib/storage';
+
 interface CommunityChallenge extends Sfida {
   author: string;
   upvotes: number;
@@ -129,6 +131,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
       upvotes: 1
     }) as CommunityChallenge;
 
+    saveCustomQuestion(newSfida);
     setChallenges([newSfida, ...challenges]);
     setShowCreateModal(false);
     soundEngine.playLevelUp();

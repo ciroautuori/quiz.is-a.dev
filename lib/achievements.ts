@@ -29,7 +29,9 @@ function getStoredUnlocks(): Record<string, string> {
     const map: Record<string, string> = {};
     if (Array.isArray(parsed)) {
       parsed.forEach((u) => {
-        map[u.id] = u.unlockedAt;
+        if (u && typeof u === 'object' && u.id) {
+          map[u.id] = u.unlockedAt;
+        }
       });
     }
     return map;
