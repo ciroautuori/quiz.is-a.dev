@@ -75,6 +75,115 @@ import CommunityHubView from '../components/CommunityHubView';
 import AnalyticsDashboardModal from '../components/AnalyticsDashboardModal';
 import CommandPaletteModal, { CommandPaletteAction } from '../components/CommandPaletteModal';
 import SettingsDrawerModal from '../components/SettingsDrawerModal';
+function EcosystemFeatureBar({
+  activeTab,
+  setActiveTab,
+  onOpenSandbox,
+  onOpenLeagues,
+  onOpenPvP,
+  onOpenQuestGen,
+  onOpenAnalytics,
+  onOpenCert
+}: {
+  activeTab: string;
+  setActiveTab: (tab: any) => void;
+  onOpenSandbox: () => void;
+  onOpenLeagues: () => void;
+  onOpenPvP: () => void;
+  onOpenQuestGen: () => void;
+  onOpenAnalytics: () => void;
+  onOpenCert: () => void;
+}) {
+  const { t } = useLanguage();
+
+  return (
+    <div className="mb-4 p-2 sm:p-2.5 rounded-2xl ctp-card border border-[var(--ctp-surface1)] shadow-md flex items-center justify-between gap-2 overflow-x-auto no-scrollbar font-mono text-xs sm:text-[11px] touch-pan-x">
+      <button
+        onClick={onOpenSandbox}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-green)]/10 text-[var(--ctp-green)] border-[var(--ctp-green)]/30 hover:bg-[var(--ctp-green)]/20"
+        title={t.wasmSandbox || "WASM Sandbox"}
+        aria-label={t.wasmSandbox || "WASM Sandbox"}
+      >
+        <Zap className="w-4 h-4 text-[var(--ctp-green)] shrink-0" />
+        <span className="whitespace-nowrap">{t.wasmSandbox || "WASM Sandbox"}</span>
+      </button>
+
+      <button
+        onClick={onOpenLeagues}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-yellow)]/10 text-[var(--ctp-yellow)] border-[var(--ctp-yellow)]/30 hover:bg-[var(--ctp-yellow)]/20"
+        title={t.leaguesStreaks || "Leghe & Streaks"}
+        aria-label={t.leaguesStreaks || "Leghe & Streaks"}
+      >
+        <Flame className="w-4 h-4 text-[var(--ctp-yellow)] shrink-0" />
+        <span className="whitespace-nowrap">{t.leaguesStreaks || "Leghe & Streaks"}</span>
+      </button>
+
+      <button
+        onClick={onOpenPvP}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-red)]/10 text-[var(--ctp-red)] border-[var(--ctp-red)]/30 hover:bg-[var(--ctp-red)]/20"
+        title={t.pvpDuels || "PvP Duels"}
+        aria-label={t.pvpDuels || "PvP Duels"}
+      >
+        <Swords className="w-4 h-4 text-[var(--ctp-red)] shrink-0" />
+        <span className="whitespace-nowrap">{t.pvpDuels || "PvP Duels"}</span>
+      </button>
+
+      <button
+        onClick={() => setActiveTab('skill_tree')}
+        className={`flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 ${
+          activeTab === 'skill_tree' ? 'bg-[var(--ctp-mauve)] text-white border-[var(--ctp-mauve)]' : 'bg-purple-500/10 text-purple-400 border-purple-500/30 hover:bg-purple-500/20'
+        }`}
+        title={t.skillTreeMap || "Skill Tree"}
+        aria-label={t.skillTreeMap || "Skill Tree"}
+      >
+        <GitBranch className={`w-4 h-4 shrink-0 ${activeTab === 'skill_tree' ? 'text-white' : 'text-purple-400'}`} />
+        <span className="whitespace-nowrap">{t.skillTreeMap || "Skill Tree"}</span>
+      </button>
+
+      <button
+        onClick={onOpenQuestGen}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-blue)]/10 text-[var(--ctp-blue)] border-[var(--ctp-blue)]/30 hover:bg-[var(--ctp-blue)]/20"
+        title={t.aiQuestGen || "AI Quest Gen"}
+        aria-label={t.aiQuestGen || "AI Quest Gen"}
+      >
+        <Brain className="w-4 h-4 text-[var(--ctp-blue)] shrink-0" />
+        <span className="whitespace-nowrap">{t.aiQuestGen || "AI Quest Gen"}</span>
+      </button>
+
+      <button
+        onClick={() => setActiveTab('community')}
+        className={`flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 ${
+          activeTab === 'community' ? 'bg-[var(--ctp-mauve)] text-white border-[var(--ctp-mauve)]' : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-500/20'
+        }`}
+        title={t.communityHub || "Community Hub"}
+        aria-label={t.communityHub || "Community Hub"}
+      >
+        <Users className={`w-4 h-4 shrink-0 ${activeTab === 'community' ? 'text-white' : 'text-cyan-400'}`} />
+        <span className="whitespace-nowrap">{t.communityHub || "Community Hub"}</span>
+      </button>
+
+      <button
+        onClick={onOpenAnalytics}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-sky)]/10 text-[var(--ctp-sky)] border-[var(--ctp-sky)]/30 hover:bg-[var(--ctp-sky)]/20"
+        title={t.analyticsRadar || "Analytics Radar"}
+        aria-label={t.analyticsRadar || "Analytics Radar"}
+      >
+        <BarChart3 className="w-4 h-4 text-[var(--ctp-sky)] shrink-0" />
+        <span className="whitespace-nowrap">{t.analyticsRadar || "Analytics Radar"}</span>
+      </button>
+
+      <button
+        onClick={onOpenCert}
+        className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 font-bold hover:bg-yellow-500/20 active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0"
+        title={t.certificateModalBtn || "Certificato ID"}
+        aria-label={t.certificateModalBtn || "Certificato ID"}
+      >
+        <GraduationCap className="w-4 h-4 text-yellow-400 shrink-0" />
+        <span className="whitespace-nowrap">{t.certificateModalBtn || "Certificato ID"}</span>
+      </button>
+    </div>
+  );
+}
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'gioca' | 'impara' | 'classifica' | 'personalizza' | 'skill_tree' | 'community'>('gioca');
@@ -293,91 +402,16 @@ export default function Home() {
             <main className={isZenMode ? "py-6 sm:py-10 max-w-4xl mx-auto px-3 sm:px-6" : "pb-28 sm:pb-12 max-w-7xl mx-auto px-3 sm:px-6 pt-3 sm:pt-4"}>
               {/* SOTA 2026 Ecosystem Feature Bar */}
               {!isZenMode && (
-                <div className="mb-4 p-2 sm:p-2.5 rounded-2xl ctp-card border border-[var(--ctp-surface1)] shadow-md flex items-center justify-between gap-2 overflow-x-auto no-scrollbar font-mono text-xs sm:text-[11px] touch-pan-x">
-                  <button
-                    onClick={() => setIsSandboxOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-green)]/10 text-[var(--ctp-green)] border-[var(--ctp-green)]/30 hover:bg-[var(--ctp-green)]/20"
-                    title="WASM Sandbox"
-                    aria-label="WASM Sandbox"
-                  >
-                    <Zap className="w-4 h-4 text-[var(--ctp-green)] shrink-0" />
-                    <span className="whitespace-nowrap">WASM Sandbox</span>
-                  </button>
-
-                  <button
-                    onClick={() => setIsLeaguesOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-yellow)]/10 text-[var(--ctp-yellow)] border-[var(--ctp-yellow)]/30 hover:bg-[var(--ctp-yellow)]/20"
-                    title="Leghe & Streaks"
-                    aria-label="Leghe & Streaks"
-                  >
-                    <Flame className="w-4 h-4 text-[var(--ctp-yellow)] shrink-0" />
-                    <span className="whitespace-nowrap">Leghe & Streaks</span>
-                  </button>
-
-                  <button
-                    onClick={() => setIsPvPOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-red)]/10 text-[var(--ctp-red)] border-[var(--ctp-red)]/30 hover:bg-[var(--ctp-red)]/20"
-                    title="PvP Duels"
-                    aria-label="PvP Duels"
-                  >
-                    <Swords className="w-4 h-4 text-[var(--ctp-red)] shrink-0" />
-                    <span className="whitespace-nowrap">PvP Duels</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('skill_tree')}
-                    className={`flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 ${
-                      activeTab === 'skill_tree' ? 'bg-[var(--ctp-mauve)] text-white border-[var(--ctp-mauve)]' : 'bg-purple-500/10 text-purple-400 border-purple-500/30 hover:bg-purple-500/20'
-                    }`}
-                    title="Skill Tree"
-                    aria-label="Skill Tree"
-                  >
-                    <GitBranch className={`w-4 h-4 shrink-0 ${activeTab === 'skill_tree' ? 'text-white' : 'text-purple-400'}`} />
-                    <span className="whitespace-nowrap">Skill Tree</span>
-                  </button>
-
-                  <button
-                    onClick={() => setIsQuestGenOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-blue)]/10 text-[var(--ctp-blue)] border-[var(--ctp-blue)]/30 hover:bg-[var(--ctp-blue)]/20"
-                    title="AI Quest Gen"
-                    aria-label="AI Quest Gen"
-                  >
-                    <Brain className="w-4 h-4 text-[var(--ctp-blue)] shrink-0" />
-                    <span className="whitespace-nowrap">AI Quest Gen</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('community')}
-                    className={`flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 ${
-                      activeTab === 'community' ? 'bg-[var(--ctp-mauve)] text-white border-[var(--ctp-mauve)]' : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-500/20'
-                    }`}
-                    title="Community Hub"
-                    aria-label="Community Hub"
-                  >
-                    <Users className={`w-4 h-4 shrink-0 ${activeTab === 'community' ? 'text-white' : 'text-cyan-400'}`} />
-                    <span className="whitespace-nowrap">Community Hub</span>
-                  </button>
-
-                  <button
-                    onClick={() => setIsAnalyticsOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl border font-bold active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0 bg-[var(--ctp-sky)]/10 text-[var(--ctp-sky)] border-[var(--ctp-sky)]/30 hover:bg-[var(--ctp-sky)]/20"
-                    title="Analytics Radar"
-                    aria-label="Analytics Radar"
-                  >
-                    <BarChart3 className="w-4 h-4 text-[var(--ctp-sky)] shrink-0" />
-                    <span className="whitespace-nowrap">Analytics Radar</span>
-                  </button>
-
-                  <button
-                    onClick={() => setIsCertOpen(true)}
-                    className="flex items-center gap-2 px-3 py-2 sm:py-1.5 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 font-bold hover:bg-yellow-500/20 active:scale-95 transition-all cursor-pointer shrink-0 min-h-[40px] sm:min-h-0"
-                    title="Certificato ID"
-                    aria-label="Certificato ID"
-                  >
-                    <GraduationCap className="w-4 h-4 text-yellow-400 shrink-0" />
-                    <span className="whitespace-nowrap">Certificato ID</span>
-                  </button>
-                </div>
+                <EcosystemFeatureBar
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  onOpenSandbox={() => setIsSandboxOpen(true)}
+                  onOpenLeagues={() => setIsLeaguesOpen(true)}
+                  onOpenPvP={() => setIsPvPOpen(true)}
+                  onOpenQuestGen={() => setIsQuestGenOpen(true)}
+                  onOpenAnalytics={() => setIsAnalyticsOpen(true)}
+                  onOpenCert={() => setIsCertOpen(true)}
+                />
               )}
 
               {/* Global Multi-Track Selector Banner on main view */}

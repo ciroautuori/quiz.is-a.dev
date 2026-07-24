@@ -141,6 +141,46 @@ export interface Translations {
   noCompletedChallengesToSync: string;
   openRepository: string;
   githubOauthHint: string;
+
+  // Daily Goal & Challenge Filter
+  dailyGoalTitle: string;
+  dailyGoalReached: string;
+  streakDays: string;
+  goalCompletedMsg: string;
+  goalZeroMsg: string;
+  goalProgressMsg: string;
+  goalRemainingMsg: string;
+  quickChallengeBtn: string;
+  selectDailyGoal: string;
+  filterSectionTitle: string;
+  filterSubtitle: string;
+  difficultyLevel: string;
+  beginner: string;
+  intermediate: string;
+  advanced: string;
+  mixed: string;
+  allLevels: string;
+  chapterFilterLabel: string;
+  allChaptersOption: string;
+  searchKeyword: string;
+  searchPlaceholderFilter: string;
+  sortChallenges: string;
+  sortCapAsc: string;
+  sortCapDesc: string;
+  sortDiffAsc: string;
+  sortDiffDesc: string;
+  questionsCountLabel: string;
+  challengesFound: string;
+  startMatchBtn: string;
+  skillTreeTab: string;
+  wasmSandbox: string;
+  leaguesStreaks: string;
+  pvpDuels: string;
+  skillTreeMap: string;
+  aiQuestGen: string;
+  communityHub: string;
+  analyticsRadar: string;
+  certificateModalBtn: string;
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = {
@@ -271,7 +311,46 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     challengesToPush: "Sfide da sincronizzare",
     noCompletedChallengesToSync: "Completa almeno una sfida per poterla sincronizzare su GitHub!",
     openRepository: "Apri Repository GitHub",
-    githubOauthHint: "Autenticazione sicura tramite OAuth ufficiale di GitHub. Nessuna password salvata."
+    githubOauthHint: "Autenticazione sicura tramite OAuth ufficiale di GitHub. Nessuna password salvata.",
+
+    dailyGoalTitle: "Obiettivo Giornaliero",
+    dailyGoalReached: "Obiettivo Raggiunto! 🎉",
+    streakDays: "giorni streak",
+    goalCompletedMsg: "Complimenti! Hai completato le tue {goal} sfide giornaliere.",
+    goalZeroMsg: "Non hai ancora completato nessuna sfida oggi!",
+    goalProgressMsg: "Hai completato {count} su {goal} sfide oggi!",
+    goalRemainingMsg: "Ti mancano ancora {count} domande per completare il tuo obiettivo.",
+    quickChallengeBtn: "Sfida Veloce ({count} domande)",
+    selectDailyGoal: "Scegli il tuo obiettivo giornaliero:",
+    filterSectionTitle: "Filtra & Configura le Sfide",
+    filterSubtitle: "Seleziona la difficoltà, gli argomenti e ordina i quesiti prima di giocare",
+    difficultyLevel: "Livello di Difficoltà",
+    beginner: "Principiante",
+    intermediate: "Intermedio",
+    advanced: "Avanzato",
+    mixed: "Miste",
+    allLevels: "Tutti i Livelli",
+    chapterFilterLabel: "Capitolo",
+    allChaptersOption: "Tutti i Capitoli",
+    searchKeyword: "Cerca per Parola Chiave",
+    searchPlaceholderFilter: "es. print, list, dict, class...",
+    sortChallenges: "Ordina Sfide",
+    sortCapAsc: "Ordina per Capitolo (Crescente 1 → 15)",
+    sortCapDesc: "Ordina per Capitolo (Decrescente 15 → 1)",
+    sortDiffAsc: "Ordina per Difficoltà (Facile → Difficile)",
+    sortDiffDesc: "Ordina per Difficoltà (Difficile → Facile)",
+    questionsCountLabel: "Quante domande vuoi in questa sessione?",
+    challengesFound: "Sfide Trovate:",
+    startMatchBtn: "Inizia Partita con {count} Sfide Selezionate",
+    skillTreeTab: "Competenze",
+    wasmSandbox: "WASM Sandbox",
+    leaguesStreaks: "Leghe & Streaks",
+    pvpDuels: "Duelli PvP",
+    skillTreeMap: "Mappa Competenze",
+    aiQuestGen: "Generatore Quest AI",
+    communityHub: "Community Hub",
+    analyticsRadar: "Radar Analisi",
+    certificateModalBtn: "Certificato ID"
   },
 
   en: {
@@ -401,7 +480,46 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     challengesToPush: "Challenges ready to sync",
     noCompletedChallengesToSync: "Complete at least one challenge to sync it to GitHub!",
     openRepository: "Open GitHub Repository",
-    githubOauthHint: "Secure authentication via official GitHub OAuth. No passwords stored."
+    githubOauthHint: "Secure authentication via official GitHub OAuth. No passwords stored.",
+
+    dailyGoalTitle: "Daily Goal",
+    dailyGoalReached: "Goal Reached! 🎉",
+    streakDays: "day streak",
+    goalCompletedMsg: "Congrats! You completed your {goal} daily challenges.",
+    goalZeroMsg: "You haven't completed any challenges today!",
+    goalProgressMsg: "You completed {count} of {goal} challenges today!",
+    goalRemainingMsg: "You still need {count} more questions to complete your goal.",
+    quickChallengeBtn: "Quick Challenge ({count} questions)",
+    selectDailyGoal: "Choose your daily goal:",
+    filterSectionTitle: "Filter & Configure Challenges",
+    filterSubtitle: "Select difficulty, topics, and sort questions before playing",
+    difficultyLevel: "Difficulty Level",
+    beginner: "Beginner",
+    intermediate: "Intermediate",
+    advanced: "Advanced",
+    mixed: "Mixed",
+    allLevels: "All Levels",
+    chapterFilterLabel: "Chapter",
+    allChaptersOption: "All Chapters",
+    searchKeyword: "Search by Keyword",
+    searchPlaceholderFilter: "e.g., print, list, dict, class...",
+    sortChallenges: "Sort Challenges",
+    sortCapAsc: "Sort by Chapter (Ascending 1 → 15)",
+    sortCapDesc: "Sort by Chapter (Descending 15 → 1)",
+    sortDiffAsc: "Sort by Difficulty (Easy → Hard)",
+    sortDiffDesc: "Sort by Difficulty (Hard → Easy)",
+    questionsCountLabel: "How many questions do you want in this session?",
+    challengesFound: "Challenges Found:",
+    startMatchBtn: "Start Match with {count} Selected Challenges",
+    skillTreeTab: "Skills",
+    wasmSandbox: "WASM Sandbox",
+    leaguesStreaks: "Leagues & Streaks",
+    pvpDuels: "PvP Duels",
+    skillTreeMap: "Skill Tree",
+    aiQuestGen: "AI Quest Gen",
+    communityHub: "Community Hub",
+    analyticsRadar: "Analytics Radar",
+    certificateModalBtn: "Certificate ID"
   },
 
   es: {
@@ -531,6 +649,45 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     challengesToPush: "Desafíos listos para sincronizar",
     noCompletedChallengesToSync: "¡Completa al menos un desafío para poder sincronizarlo en GitHub!",
     openRepository: "Abrir Repositorio en GitHub",
-    githubOauthHint: "Autenticación segura a través de OAuth oficial de GitHub. Sin contraseñas guardadas."
+    githubOauthHint: "Autenticación segura a través de OAuth oficial de GitHub. Sin contraseñas guardadas.",
+
+    dailyGoalTitle: "Objetivo Diario",
+    dailyGoalReached: "¡Objetivo Alcanzado! 🎉",
+    streakDays: "días de racha",
+    goalCompletedMsg: "¡Felicidades! Completaste tus {goal} desafíos diarios.",
+    goalZeroMsg: "¡Aún no has completado ningún desafío hoy!",
+    goalProgressMsg: "¡Has completato {count} de {goal} desafíos hoy!",
+    goalRemainingMsg: "Te faltan {count} preguntas para completar tu objetivo diario.",
+    quickChallengeBtn: "Desafío Rápido ({count} preguntas)",
+    selectDailyGoal: "Elige tu objetivo diario:",
+    filterSectionTitle: "Filtrar y Configurar Desafíos",
+    filterSubtitle: "Selecciona dificultad, temas y ordena preguntas antes de jugar",
+    difficultyLevel: "Nivel de Dificultad",
+    beginner: "Principiante",
+    intermediate: "Intermedio",
+    advanced: "Avanzado",
+    mixed: "Mezclados",
+    allLevels: "Todos los Niveles",
+    chapterFilterLabel: "Capítulo",
+    allChaptersOption: "Todos los Capítulos",
+    searchKeyword: "Buscar por Palabra Clave",
+    searchPlaceholderFilter: "ej. print, list, dict, class...",
+    sortChallenges: "Ordenar Desafíos",
+    sortCapAsc: "Ordenar por Capítulo (Ascendente 1 → 15)",
+    sortCapDesc: "Ordenar por Capítulo (Descendente 15 → 1)",
+    sortDiffAsc: "Ordenar por Dificultad (Fácil → Difícil)",
+    sortDiffDesc: "Ordenar por Dificultad (Difícil → Fácil)",
+    questionsCountLabel: "¿Cuántas preguntas quieres en esta sesión?",
+    challengesFound: "Desafíos Encontrados:",
+    startMatchBtn: "Iniciar Partida con {count} Desafíos Seleccionados",
+    skillTreeTab: "Competencias",
+    wasmSandbox: "WASM Sandbox",
+    leaguesStreaks: "Ligas y Rachas",
+    pvpDuels: "Duelos PvP",
+    skillTreeMap: "Mapa de Competencias",
+    aiQuestGen: "Generador Quest IA",
+    communityHub: "Centro de Comunidad",
+    analyticsRadar: "Radar de Análisis",
+    certificateModalBtn: "ID de Certificado"
   }
 };

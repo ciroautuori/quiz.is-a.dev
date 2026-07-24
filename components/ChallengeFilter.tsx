@@ -1,8 +1,7 @@
-'use client';
-
 import React, { useState, useMemo } from 'react';
 import { Sfida, DifficoltaType } from '../lib/types';
 import { getQuestionBestTimes } from '../lib/storage';
+import { useLanguage } from '../lib/LanguageContext';
 import CodeBlock from './CodeBlock';
 import { 
   Filter, 
@@ -29,6 +28,7 @@ interface ChallengeFilterProps {
 }
 
 export default function ChallengeFilter({ allQuestions, onStartGame }: ChallengeFilterProps) {
+  const { t } = useLanguage();
   // Filter states
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficoltaType>('miste');
   const [selectedChapter, setSelectedChapter] = useState<number | 'tutti'>('tutti');
@@ -161,10 +161,10 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
           </div>
           <div>
             <h2 className="text-xl font-bold font-mono flex items-center gap-2" style={{ color: 'var(--ctp-text)' }}>
-              Filtra & Configura le Sfide
+              {t.filterSectionTitle || 'Filtra & Configura le Sfide'}
             </h2>
             <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-              Seleziona la difficoltà, gli argomenti e ordina i quesiti prima di giocare
+              {t.filterSubtitle || 'Seleziona la difficoltà, gli argomenti e ordina i quesiti prima di giocare'}
             </p>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div className="flex items-center gap-2 self-start sm:self-auto ctp-card-mantle border px-3.5 py-1.5 rounded-xl">
           <Layers className="w-4 h-4" style={{ color: 'var(--ctp-mauve)' }} />
           <div className="text-xs font-mono">
-            <span style={{ color: 'var(--ctp-subtext0)' }}>Sfide Trovate: </span>
+            <span style={{ color: 'var(--ctp-subtext0)' }}>{t.challengesFound || 'Sfide Trovate:'} </span>
             <span className="font-bold" style={{ color: 'var(--ctp-mauve)' }}>{filteredQuestions.length}</span>
             <span style={{ color: 'var(--ctp-overlay0)' }}> / {allQuestions.length}</span>
           </div>
@@ -185,7 +185,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div className="flex items-center justify-between mb-2.5">
           <label className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <SlidersHorizontal className="w-3.5 h-3.5" style={{ color: 'var(--ctp-peach)' }} />
-            <span>Livello di Difficoltà</span>
+            <span>{t.difficultyLevel || 'Livello di Difficoltà'}</span>
           </label>
           {(selectedDifficulty !== 'miste' || selectedChapter !== 'tutti' || searchQuery) && (
             <button
@@ -215,12 +215,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-emerald-500 uppercase tracking-wider">🌱 Principiante</span>
+              <span className="text-xs font-bold font-mono text-emerald-500 uppercase tracking-wider">🌱 {t.beginner || 'Principiante'}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-green)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.facile}
               </span>
             </div>
-            <div className="text-sm font-bold">Facile</div>
+            <div className="text-sm font-bold">{t.facile || 'Facile'}</div>
             <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Sintassi base, tipi & print</div>
           </button>
 
@@ -240,12 +240,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-amber-500 uppercase tracking-wider">⚡ Intermedio</span>
+              <span className="text-xs font-bold font-mono text-amber-500 uppercase tracking-wider">⚡ {t.intermediate || 'Intermedio'}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-yellow)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.media}
               </span>
             </div>
-            <div className="text-sm font-bold">Media</div>
+            <div className="text-sm font-bold">{t.media || 'Media'}</div>
             <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Liste, cicli & funzioni</div>
           </button>
 
@@ -265,12 +265,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono text-rose-500 uppercase tracking-wider">🔥 Avanzato</span>
+              <span className="text-xs font-bold font-mono text-rose-500 uppercase tracking-wider">🔥 {t.advanced || 'Avanzato'}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-red)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.difficile}
               </span>
             </div>
-            <div className="text-sm font-bold">Difficile</div>
+            <div className="text-sm font-bold">{t.difficile || 'Difficile'}</div>
             <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Dizionari, classi & errori</div>
           </button>
 
@@ -290,12 +290,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
             }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold font-mono uppercase tracking-wider" style={{ color: 'var(--ctp-mauve)' }}>🌈 Miste</span>
+              <span className="text-xs font-bold font-mono uppercase tracking-wider" style={{ color: 'var(--ctp-mauve)' }}>🌈 {t.mixed || 'Miste'}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold border" style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface2)' }}>
                 {counts.tutti}
               </span>
             </div>
-            <div className="text-sm font-bold">Tutti i Livelli</div>
+            <div className="text-sm font-bold">{t.allLevels || 'Tutti i Livelli'}</div>
             <div className="text-[11px] mt-0.5" style={{ color: 'var(--ctp-subtext0)' }}>Mix casuale equilibrato</div>
           </button>
         </div>
@@ -307,17 +307,17 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <BookOpen className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>Capitolo Think Python</span>
+            <span>{t.chapterFilterLabel || 'Capitolo'}</span>
           </label>
           <select
             value={selectedChapter}
             onChange={(e) => setSelectedChapter(e.target.value === 'tutti' ? 'tutti' : Number(e.target.value))}
             className="w-full ctp-input rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none transition-colors"
           >
-            <option value="tutti">Tutti i Capitoli ({availableChapters.length} Capitoli)</option>
+            <option value="tutti">{t.allChaptersOption || 'Tutti i Capitoli'} ({availableChapters.length} {t.chapter || 'Capitoli'})</option>
             {availableChapters.map((cap) => (
               <option key={cap} value={cap}>
-                Capitolo {cap}
+                {t.chapter || 'Capitolo'} {cap}
               </option>
             ))}
           </select>
@@ -327,12 +327,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <Search className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>Cerca per Parola Chiave</span>
+            <span>{t.searchKeyword || 'Cerca per Parola Chiave'}</span>
           </label>
           <div className="relative">
             <input
               type="text"
-              placeholder="es. print, list, dict, class..."
+              placeholder={t.searchPlaceholderFilter || "es. print, list, dict, class..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full ctp-input rounded-xl pl-3.5 pr-8 py-2.5 text-sm border focus:outline-none transition-colors"
@@ -353,18 +353,17 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <ArrowUpDown className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>Ordina Sfide</span>
+            <span>{t.sortChallenges || 'Ordina Sfide'}</span>
           </label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
             className="w-full ctp-input rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none transition-colors"
           >
-            <option value="capitolo_asc">Ordina per Capitolo (Crescente 1 → 15)</option>
-            <option value="capitolo_desc">Ordina per Capitolo (Decrescente 15 → 1)</option>
-            <option value="difficolta_asc">Ordina per Difficoltà (Facile → Difficile)</option>
-            <option value="difficolta_desc">Ordina per Difficoltà (Difficile → Facile)</option>
-            <option value="argomento">Ordina Alfabetico per Argomento (A → Z)</option>
+            <option value="capitolo_asc">{t.sortCapAsc || 'Ordina per Capitolo (Crescente 1 → 15)'}</option>
+            <option value="capitolo_desc">{t.sortCapDesc || 'Ordina per Capitolo (Decrescente 15 → 1)'}</option>
+            <option value="difficolta_asc">{t.sortDiffAsc || 'Ordina per Difficoltà (Facile → Difficile)'}</option>
+            <option value="difficolta_desc">{t.sortDiffDesc || 'Ordina per Difficoltà (Difficile → Facile)'}</option>
           </select>
         </div>
       </div>
@@ -372,7 +371,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
       {/* 3. Number of questions for session */}
       <div className="border-t pt-4" style={{ borderColor: 'var(--ctp-border)' }}>
         <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--ctp-subtext0)' }}>
-          Quante domande vuoi in questa sessione?
+          {t.questionsCountLabel || 'Quante domande vuoi in questa sessione?'}
         </label>
         <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
           {[5, 10, 15, 20].map((n) => (

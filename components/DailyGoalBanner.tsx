@@ -1,15 +1,15 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Target, Flame, CheckCircle2, Sliders, Zap, X } from 'lucide-react';
 import { getDailyGoal, setDailyGoal, getTodayCompletedCount, getDailyStreak } from '../lib/storage';
+import { useLanguage } from '../lib/LanguageContext';
 
 interface DailyGoalBannerProps {
   onStartQuickGame: (count: number) => void;
 }
 
 export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerProps) {
+  const { t } = useLanguage();
   const [goal, setGoal] = useState(3);
   const [todayCount, setTodayCount] = useState(0);
   const [streakCount, setStreakCount] = useState(0);
@@ -80,7 +80,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                       borderColor: 'var(--ctp-surface1)'
                     }}
                   >
-                    {isGoalCompleted ? 'Obiettivo Raggiunto! 🎉' : 'Obiettivo Giornaliero'}
+                    {isGoalCompleted ? (t.dailyGoalReached || 'Obiettivo Raggiunto! 🎉') : (t.dailyGoalTitle || 'Obiettivo Giornaliero')}
                   </span>
 
                   {streakCount > 0 && (
@@ -93,18 +93,18 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                       }}
                     >
                       <Flame className="w-3.5 h-3.5 fill-current" />
-                      {streakCount} {streakCount === 1 ? 'giorno' : 'giorni'} streak
+                      {streakCount} {t.streakDays || 'giorni streak'}
                     </span>
                   )}
                 </div>
 
                 <h3 className="text-sm font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
                   {isGoalCompleted ? (
-                    `Complimenti! Hai completato le tue ${goal} sfide giornaliere.`
+                    (t.goalCompletedMsg || 'Complimenti! Hai completato le tue {goal} sfide giornaliere.').replace('{goal}', String(goal))
                   ) : todayCount === 0 ? (
-                    `Non hai ancora completato nessuna sfida oggi!`
+                    (t.goalZeroMsg || 'Non hai ancora completato nessuna sfida oggi!')
                   ) : (
-                    `Hai completato ${todayCount} su ${goal} sfide oggi!`
+                    (t.goalProgressMsg || 'Hai completato {count} su {goal} sfide oggi!').replace('{count}', String(todayCount)).replace('{goal}', String(goal))
                   )}
                 </h3>
 
@@ -112,7 +112,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                   {isGoalCompleted ? (
                     `Hai già mantenuto attiva la tua streak. Vuoi continuare a fare pratica?`
                   ) : (
-                    `Ti mancano ancora ${remaining} ${remaining === 1 ? 'domanda' : 'domande'} per completare il tuo obiettivo giornaliero.`
+                    (t.goalRemainingMsg || 'Ti mancano ancora {count} domande per completare il tuo obiettivo.').replace('{count}', String(remaining))
                   )}
                 </p>
 
@@ -145,7 +145,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                   style={{ backgroundColor: 'var(--ctp-peach)', color: 'var(--ctp-crust)' }}
                 >
                   <Zap className="w-4 h-4 fill-current" />
-                  <span>Sfida Veloce ({remaining} {remaining === 1 ? 'domanda' : 'domande'})</span>
+                  <span>{(t.quickChallengeBtn || 'Sfida Veloce ({count} domande)').replace('{count}', String(remaining))}</span>
                 </button>
               )}
 

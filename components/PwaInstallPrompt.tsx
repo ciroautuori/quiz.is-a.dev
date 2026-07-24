@@ -130,7 +130,7 @@ export default function PwaInstallPrompt() {
             <div className="pr-6">
               <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider font-mono text-[var(--ctp-mauve)]">
                 <Sparkles className="w-3 h-3 text-amber-300" />
-                <span>Web App Installabile</span>
+                <span>{t.installApp}</span>
               </div>
               <h4 className="text-xs font-bold font-mono mt-0.5" style={{ color: 'var(--ctp-text)' }}>
                 {t.pwaBannerTitle}
@@ -170,7 +170,7 @@ export default function PwaInstallPrompt() {
               onClick={handleDismiss}
               className="py-2.5 px-3 rounded-xl text-xs font-mono font-medium ctp-card-surface border text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)] transition-colors cursor-pointer"
             >
-              Più tardi
+              {t.cancel || 'Annulla'}
             </button>
           </div>
         </div>
