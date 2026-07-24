@@ -80,7 +80,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                       borderColor: 'var(--ctp-surface1)'
                     }}
                   >
-                    {isGoalCompleted ? (t.dailyGoalReached || 'Obiettivo Raggiunto! 🎉') : (t.dailyGoalTitle || 'Obiettivo Giornaliero')}
+                    {isGoalCompleted ? t.dailyGoalReached : t.dailyGoalTitle}
                   </span>
 
                   {streakCount > 0 && (
@@ -93,26 +93,26 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                       }}
                     >
                       <Flame className="w-3.5 h-3.5 fill-current" />
-                      {streakCount} {t.streakDays || 'giorni streak'}
+                      {streakCount} {t.streakDays}
                     </span>
                   )}
                 </div>
 
                 <h3 className="text-sm font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
                   {isGoalCompleted ? (
-                    (t.goalCompletedMsg || 'Complimenti! Hai completato le tue {goal} sfide giornaliere.').replace('{goal}', String(goal))
+                    t.goalCompletedMsg.replace('{goal}', String(goal))
                   ) : todayCount === 0 ? (
-                    (t.goalZeroMsg || 'Non hai ancora completato nessuna sfida oggi!')
+                    t.goalZeroMsg
                   ) : (
-                    (t.goalProgressMsg || 'Hai completato {count} su {goal} sfide oggi!').replace('{count}', String(todayCount)).replace('{goal}', String(goal))
+                    t.goalProgressMsg.replace('{count}', String(todayCount)).replace('{goal}', String(goal))
                   )}
                 </h3>
 
                 <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
                   {isGoalCompleted ? (
-                    `Hai già mantenuto attiva la tua streak. Vuoi continuare a fare pratica?`
+                    t.goalExtraPractice
                   ) : (
-                    (t.goalRemainingMsg || 'Ti mancano ancora {count} domande per completare il tuo obiettivo.').replace('{count}', String(remaining))
+                    t.goalRemainingMsg.replace('{count}', String(remaining))
                   )}
                 </p>
 
@@ -145,7 +145,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                   style={{ backgroundColor: 'var(--ctp-peach)', color: 'var(--ctp-crust)' }}
                 >
                   <Zap className="w-4 h-4 fill-current" />
-                  <span>{(t.quickChallengeBtn || 'Sfida Veloce ({count} domande)').replace('{count}', String(remaining))}</span>
+                  <span>{t.quickChallengeBtn.replace('{count}', String(remaining))}</span>
                 </button>
               )}
 
@@ -184,7 +184,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
               style={{ borderColor: 'var(--ctp-border)' }}
             >
               <span className="font-semibold" style={{ color: 'var(--ctp-subtext0)' }}>
-                Scegli il tuo obiettivo giornaliero:
+                {t.selectDailyGoal}
               </span>
 
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -200,7 +200,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                       color: goal === num ? 'var(--ctp-peach)' : 'var(--ctp-text)'
                     }}
                   >
-                    {num} {num === 1 ? 'sfida' : 'sfide'}/giorno
+                    {t.questsPerDay.replace('{count}', String(num))}
                   </button>
                 ))}
               </div>

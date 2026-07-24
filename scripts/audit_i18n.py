@@ -16,7 +16,10 @@ SKIP_DIRS = {"node_modules", ".next", ".git", "__pycache__", ".claude"}
 SKIP_FILES = {"i18n.ts", "tracks.ts", "types.ts", "firebase.ts", "pyodideRunner.ts",
               "soundEngine.ts", "pwa.ts", "storage.ts", "githubSync.ts",
               "spacedRepetition.ts", "lessonsData.ts", "achievements.ts",
-              "gamification.ts", "initial_challenges.ts", "langsync.ts"}
+              "gamification.ts", "initial_challenges.ts", "langsync.ts",
+              "questions.ts", "concepts.ts", "challenges_ai.ts", "challenges_docker.ts",
+              "challenges_postgres.ts", "concepts_git.ts", "concepts_typescript.ts",
+              "challenges_git.ts", "challenges_typescript.ts"}
 
 ITALIAN_WORDS = {
     "il", "lo", "la", "le", "gli", "un", "uno", "una", "del", "dello", "della",
@@ -97,8 +100,10 @@ def extract_string_literals(filepath: Path) -> list[dict]:
         if "t." in line or "useLanguage" in line:
             continue
 
-        for m in re.finditer(r'"([^"\\]*(?:\\.[^"\\]*)*)"', line):
-            text = m.group(1)
+        for m in re.finditer(r'"([^"\\]*(?:\\.[^"\\]*)*)"|\'([^\'\\]*(?:\\.[^\'\\]*)*)\'|`([^`\\]*(?:\\.[^`\\]*)*)`', line):
+            text = m.group(1) or m.group(2) or m.group(3)
+            if text is None:
+                continue
             if is_non_user_text(text) or not is_italian_text(text):
                 continue
             col = m.start() + 1

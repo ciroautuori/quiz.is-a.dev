@@ -495,17 +495,17 @@ export default function GameMode({
                   {currentSfida.difficolta === 'facile' ? (
                     <>
                       <Target className="w-3.5 h-3.5 text-[var(--ctp-green)] shrink-0" />
-                      <span>{t.facile || 'Beginner'}</span>
+                      <span>{t.facile}</span>
                     </>
                   ) : currentSfida.difficolta === 'media' ? (
                     <>
                       <Zap className="w-3.5 h-3.5 text-[var(--ctp-peach)] shrink-0" />
-                      <span>{t.media || 'Intermediate'}</span>
+                      <span>{t.media}</span>
                     </>
                   ) : (
                     <>
                       <Shield className="w-3.5 h-3.5 text-[var(--ctp-red)] shrink-0" />
-                      <span>{t.difficile || 'Advanced'}</span>
+                      <span>{t.difficile}</span>
                     </>
                   )}
                 </span>

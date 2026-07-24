@@ -161,10 +161,10 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
           </div>
           <div>
             <h2 className="text-xl font-bold font-mono flex items-center gap-2" style={{ color: 'var(--ctp-text)' }}>
-              {t.filterSectionTitle || 'Filtra & Configura le Sfide'}
+              {t.filterSectionTitle}
             </h2>
             <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-              {t.filterSubtitle || 'Seleziona la difficoltà, gli argomenti e ordina i quesiti prima di giocare'}
+              {t.filterSubtitle}
             </p>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div className="flex items-center gap-2 self-start sm:self-auto ctp-card-mantle border px-3.5 py-1.5 rounded-xl">
           <Layers className="w-4 h-4" style={{ color: 'var(--ctp-mauve)' }} />
           <div className="text-xs font-mono">
-            <span style={{ color: 'var(--ctp-subtext0)' }}>{t.challengesFound || 'Sfide Trovate:'} </span>
+            <span style={{ color: 'var(--ctp-subtext0)' }}>{t.challengesFound} </span>
             <span className="font-bold" style={{ color: 'var(--ctp-mauve)' }}>{filteredQuestions.length}</span>
             <span style={{ color: 'var(--ctp-overlay0)' }}> / {allQuestions.length}</span>
           </div>
@@ -185,7 +185,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div className="flex items-center justify-between mb-2.5">
           <label className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <SlidersHorizontal className="w-3.5 h-3.5" style={{ color: 'var(--ctp-peach)' }} />
-            <span>{t.difficultyLevel || 'Livello di Difficoltà'}</span>
+            <span>{t.difficultyLevel}</span>
           </label>
           {(selectedDifficulty !== 'miste' || selectedChapter !== 'tutti' || searchQuery) && (
             <button
@@ -315,17 +315,17 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <BookOpen className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>{t.chapterFilterLabel || 'Capitolo'}</span>
+            <span>{t.chapterFilterLabel}</span>
           </label>
           <select
             value={selectedChapter}
             onChange={(e) => setSelectedChapter(e.target.value === 'tutti' ? 'tutti' : Number(e.target.value))}
             className="w-full ctp-input rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none transition-colors"
           >
-            <option value="tutti">{t.allChaptersOption || 'Tutti i Capitoli'} ({availableChapters.length} {t.chapter || 'Capitoli'})</option>
+            <option value="tutti">{t.allChaptersOption} ({availableChapters.length} {t.chapter})</option>
             {availableChapters.map((cap) => (
               <option key={cap} value={cap}>
-                {t.chapter || 'Capitolo'} {cap}
+                {t.chapter} {cap}
               </option>
             ))}
           </select>
@@ -335,12 +335,12 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <Search className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>{t.searchKeyword || 'Cerca per Parola Chiave'}</span>
+            <span>{t.searchKeyword}</span>
           </label>
           <div className="relative">
             <input
               type="text"
-              placeholder={t.searchPlaceholderFilter || "es. print, list, dict, class..."}
+              placeholder={t.searchPlaceholderFilter}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full ctp-input rounded-xl pl-3.5 pr-8 py-2.5 text-sm border focus:outline-none transition-colors"
@@ -361,17 +361,17 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider mb-1.5 flex items-center gap-1.5" style={{ color: 'var(--ctp-subtext0)' }}>
             <ArrowUpDown className="w-3.5 h-3.5" style={{ color: 'var(--ctp-mauve)' }} />
-            <span>{t.sortChallenges || 'Ordina Sfide'}</span>
+            <span>{t.sortChallenges}</span>
           </label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
             className="w-full ctp-input rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none transition-colors"
           >
-            <option value="capitolo_asc">{t.sortCapAsc || 'Ordina per Capitolo (Crescente 1 → 15)'}</option>
-            <option value="capitolo_desc">{t.sortCapDesc || 'Ordina per Capitolo (Decrescente 15 → 1)'}</option>
-            <option value="difficolta_asc">{t.sortDiffAsc || 'Ordina per Difficoltà (Facile → Difficile)'}</option>
-            <option value="difficolta_desc">{t.sortDiffDesc || 'Ordina per Difficoltà (Difficile → Facile)'}</option>
+            <option value="capitolo_asc">{t.sortCapAsc}</option>
+            <option value="capitolo_desc">{t.sortCapDesc}</option>
+            <option value="difficolta_asc">{t.sortDiffAsc}</option>
+            <option value="difficolta_desc">{t.sortDiffDesc}</option>
           </select>
         </div>
       </div>
@@ -379,7 +379,7 @@ export default function ChallengeFilter({ allQuestions, onStartGame }: Challenge
       {/* 3. Number of questions for session */}
       <div className="border-t pt-4" style={{ borderColor: 'var(--ctp-border)' }}>
         <label className="block text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--ctp-subtext0)' }}>
-          {t.questionsCountLabel || 'Quante domande vuoi in questa sessione?'}
+          {t.questionsCountLabel}
         </label>
         <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
           {[5, 10, 15, 20].map((n) => (

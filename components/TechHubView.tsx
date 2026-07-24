@@ -7,6 +7,9 @@ import { TrackId, Sfida } from '../lib/types';
 import LearnMode from './LearnMode';
 import ChallengeFilter from './ChallengeFilter';
 import SkillTreeView from './SkillTreeView';
+import TrackLessonPath from './TrackLessonPath';
+import JumpOutModal from './JumpOutModal';
+import { useJumpOutQuiz } from '../hooks/useJumpOutQuiz';
 import { 
   BookOpen, 
   Gamepad2, 
@@ -17,7 +20,8 @@ import {
   CheckCircle2, 
   Trophy, 
   Terminal,
-  Zap
+  Zap,
+  MapPin
 } from 'lucide-react';
 
 interface TechHubViewProps {
@@ -36,7 +40,9 @@ export default function TechHubView({
   onOpenAiTutor
 }: TechHubViewProps) {
   const { language, t } = useLanguage();
-  const [subTab, setSubTab] = useState<'overview' | 'learn' | 'quests' | 'skill_tree'>('overview');
+  const [subTab, setSubTab] = useState<'overview' | 'path' | 'learn' | 'quests' | 'skill_tree'>('path');
+
+  const jumpOutQuiz = useJumpOutQuiz(allQuestions);
 
   const track = getTrackById(trackId);
   const trackQuestions = allQuestions.filter(q => q.trackId === trackId);
@@ -58,7 +64,7 @@ export default function TechHubView({
                 {track.badge}
               </span>
               <span className="text-xs font-mono text-[var(--ctp-subtext0)] font-semibold">
-                {progressPercent}% {t.completed || 'Completato'}
+                {progressPercent}% {t.completed}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black font-mono tracking-tight" style={{ color: 'var(--ctp-text)' }}>
@@ -91,6 +97,18 @@ export default function TechHubView({
 
       {/* Sub-Navigation Tabs */}
       <div className="flex items-center gap-1.5 border-b border-[var(--ctp-surface1)] pb-2 overflow-x-auto no-scrollbar font-mono text-xs">
+        <button
+          onClick={() => setSubTab('path')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all cursor-pointer shrink-0 ${
+            subTab === 'path'
+              ? 'bg-[var(--ctp-surface0)] text-[var(--ctp-mauve)] border border-[var(--ctp-mauve)]/40 shadow-sm'
+              : 'text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)] hover:bg-[var(--ctp-surface0)]/50'
+          }`}
+        >
+          <MapPin className="w-4 h-4" />
+          <span>{language === 'en' ? 'Lesson Path' : language === 'es' ? 'Ruta de Aprendizaje' : 'Percorso Lezioni'}</span>
+        </button>
+
         <button
           onClick={() => setSubTab('overview')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all cursor-pointer shrink-0 ${
@@ -136,9 +154,40 @@ export default function TechHubView({
           }`}
         >
           <GitBranch className="w-4 h-4" />
-          <span>{t.skillTreeMap || 'Skill Tree'}</span>
+          <span>{t.skillTreeMap}</span>
         </button>
       </div>
+
+      {/* Sub-Tab Content Rendering */}
+      {subTab === 'path' && (
+        <TrackLessonPath
+          trackId={trackId}
+          completedIds={completedIds}
+          allQuestions={allQuestions}
+          onSelectNode={(chapterNum) => {
+            const chQuestions = trackQuestions.filter(q => q.capitolo === chapterNum);
+            if (chQuestions.length > 0) {
+              onStartMatch(chQuestions);
+            }
+          }}
+          onOpenJumpOutModal={() => jumpOutQuiz.startJumpOut(trackId)}
+        />
+      )}
+
+      {/* Jump-Out Test Modal */}
+      <JumpOutModal
+        isOpen={jumpOutQuiz.isOpen}
+        onClose={jumpOutQuiz.closeModal}
+        trackId={jumpOutQuiz.trackId}
+        currentQuestion={jumpOutQuiz.currentQuestion}
+        currentIndex={jumpOutQuiz.currentIndex}
+        totalQuestions={jumpOutQuiz.questions.length}
+        correctAnswers={jumpOutQuiz.correctAnswers}
+        isFinished={jumpOutQuiz.isFinished}
+        resultSuccess={jumpOutQuiz.resultSuccess}
+        promotedLeague={jumpOutQuiz.promotedLeague}
+        onSelectOption={jumpOutQuiz.handleAnswerOption}
+      />
 
       {/* Sub-Tab Content Rendering */}
       {subTab === 'overview' && (

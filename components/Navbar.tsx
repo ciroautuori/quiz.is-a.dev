@@ -56,7 +56,7 @@ export default function Navbar({
               <Terminal className="w-4 h-4 text-[var(--ctp-crust)]" />
             </div>
             <span className="text-base font-black tracking-tight text-[var(--ctp-text)] hidden xs:inline">
-              {t.appName || 'DevQuest'}
+              {t.appName}
             </span>
           </div>
 

@@ -79,10 +79,10 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
               </div>
               <div>
                 <h2 className="font-mono font-bold text-base flex items-center gap-2" style={{ color: 'var(--ctp-text)' }}>
-                  {t.leaguesStreaks || 'Leghe & Serie'}
+                  {t.leaguesStreaks}
                 </h2>
                 <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-                  {t.streakSubtitle || 'Gareggia ogni settimana, mantieni lo Streak e sblocca Freeze!'}
+                  {t.streakSubtitle}
                 </p>
               </div>
             </div>
@@ -104,10 +104,10 @@ export default function LeaguesAndStreakModal({ isOpen, onClose }: LeaguesAndStr
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-mono font-bold text-[var(--ctp-subtext0)] flex items-center gap-1.5">
                     <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    {t.streak || 'Serie Attuale'}
+                    {t.streak}
                   </span>
                   <span className="text-2xl font-black font-mono text-[var(--ctp-peach)]">
-                    {stats.streakCount} <span className="text-xs font-normal">{t.days || 'giorni'}</span>
+                    {stats.streakCount} <span className="text-xs font-normal">{t.days}</span>
                   </span>
                 </div>
 

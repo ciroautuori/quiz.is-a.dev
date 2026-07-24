@@ -116,6 +116,7 @@ export interface Translations {
   // Radar & Zen Mode
   radarTitle: string;
   radarSubtitle: string;
+  radarShort: string;
   radarCompetency: string;
   levelMaster: string;
   levelSenior: string;
@@ -158,6 +159,7 @@ export interface Translations {
   goalZeroMsg: string;
   goalProgressMsg: string;
   goalRemainingMsg: string;
+  goalExtraPractice: string;
   quickChallengeBtn: string;
   selectDailyGoal: string;
   filterSectionTitle: string;
@@ -340,6 +342,7 @@ export interface Translations {
   availableTracks: string;
   selectTechHubHint: string;
   questsShort: string;
+  questsPerDay: string;
   enterHub: string;
   fullstackRadar: string;
   communityFeed: string;
@@ -572,6 +575,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
 
     radarTitle: "Mappa delle Competenze & Radar",
     radarSubtitle: "Analisi visiva della padronanza sui tracciati Python, TypeScript e Git",
+    radarShort: "Python · TS · Git",
     radarCompetency: "Dev Competency Radar",
     levelMaster: "Maestro",
     levelSenior: "Senior",
@@ -611,6 +615,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     goalZeroMsg: "Non hai ancora completato nessuna sfida oggi!",
     goalProgressMsg: "Hai completato {count} su {goal} sfide oggi!",
     goalRemainingMsg: "Ti mancano ancora {count} domande per completare il tuo obiettivo.",
+    goalExtraPractice: "Hai già mantenuto attiva la tua streak. Vuoi continuare a fare pratica?",
     quickChallengeBtn: "Sfida Veloce ({count} domande)",
     selectDailyGoal: "Scegli il tuo obiettivo giornaliero:",
     filterSectionTitle: "Filtra & Configura le Sfide",
@@ -777,6 +782,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     availableTracks: "Tracciati Tecnici Disponibili (5)",
     selectTechHubHint: "Seleziona una tecnologia per entrare nell'Hub dedicato",
     questsShort: "Sfide",
+    questsPerDay: "{count} sfide/giorno",
     enterHub: "Entra Hub",
     fullstackRadar: "Full-Stack Competency Radar",
     communityFeed: "Community Feed & Discussioni",
@@ -995,6 +1001,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
 
     radarTitle: "Proficiency Radar Map",
     radarSubtitle: "Visual proficiency breakdown across Python, TypeScript & Git",
+    radarShort: "Python · TS · Git",
     radarCompetency: "Dev Competency Radar",
     levelMaster: "Master",
     levelSenior: "Senior",
@@ -1034,6 +1041,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     goalZeroMsg: "You haven't completed any challenges today!",
     goalProgressMsg: "You completed {count} of {goal} challenges today!",
     goalRemainingMsg: "You still need {count} more questions to complete your goal.",
+    goalExtraPractice: "You already kept your streak active. Want to keep practicing?",
     quickChallengeBtn: "Quick Challenge ({count} questions)",
     selectDailyGoal: "Choose your daily goal:",
     filterSectionTitle: "Filter & Configure Challenges",
@@ -1200,6 +1208,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     availableTracks: "Available Tech Tracks (5)",
     selectTechHubHint: "Select a technology to enter its dedicated Hub",
     questsShort: "Quests",
+    questsPerDay: "{count} quests/day",
     enterHub: "Enter Hub",
     fullstackRadar: "Full-Stack Competency Radar",
     communityFeed: "Community Feed & Discussions",
@@ -1418,6 +1427,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
 
     radarTitle: "Mapa de Competencias Radar",
     radarSubtitle: "Análisis visual de competencia en Python, TypeScript y Git",
+    radarShort: "Python · TS · Git",
     radarCompetency: "Dev Competency Radar",
     levelMaster: "Maestro",
     levelSenior: "Senior",
@@ -1457,6 +1467,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     goalZeroMsg: "¡Aún no has completado ningún desafío hoy!",
     goalProgressMsg: "¡Has completato {count} de {goal} desafíos hoy!",
     goalRemainingMsg: "Te faltan {count} preguntas para completar tu objetivo diario.",
+    goalExtraPractice: "Ya mantuviste tu racha activa. ¿Quieres seguir practicando?",
     quickChallengeBtn: "Desafío Rápido ({count} preguntas)",
     selectDailyGoal: "Elige tu objetivo diario:",
     filterSectionTitle: "Filtrar y Configurar Desafíos",
@@ -1623,6 +1634,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     availableTracks: "Rutas Técnicas Disponibles (5)",
     selectTechHubHint: "Selecciona una tecnología para entrar en su Centro dedicado",
     questsShort: "Desafíos",
+    questsPerDay: "{count} desafíos/día",
     enterHub: "Entrar al Centro",
     fullstackRadar: "Radar de Competencias Full-Stack",
     communityFeed: "Feed de la Comunidad y Discusiones",

@@ -170,7 +170,7 @@ export default function PwaInstallPrompt() {
               onClick={handleDismiss}
               className="py-2.5 px-3 rounded-xl text-xs font-mono font-medium ctp-card-surface border text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)] transition-colors cursor-pointer"
             >
-              {t.cancel || 'Annulla'}
+              {t.cancel}
             </button>
           </div>
         </div>

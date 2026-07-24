@@ -56,6 +56,7 @@ export default function PvPDuelModal({ isOpen, onClose }: PvPDuelModalProps) {
   const [roomId, setRoomId] = useState('');
   const [isPvP, setIsPvP] = useState(false);
   const [isMatchmaking, setIsMatchmaking] = useState(false);
+  const [duelMode, setDuelMode] = useState<'speed' | 'reverse' | 'golf'>('speed');
 
   const currentQ = DUEL_QUESTIONS[currentQIndex];
 
@@ -227,6 +228,40 @@ export default function PvPDuelModal({ isOpen, onClose }: PvPDuelModalProps) {
                 <p className="text-xs max-w-md mx-auto mt-2" style={{ color: 'var(--ctp-subtext0)' }}>
                   Metti alla prova i tuoi riflessi di debugging. Rispondi più velocemente dell'avversario prima che scada il tempo!
                 </p>
+              </div>
+
+              {/* Mode Selector Tabs */}
+              <div className="flex items-center gap-2 p-1 rounded-2xl bg-[var(--ctp-surface0)] border border-[var(--ctp-surface1)] font-mono text-xs">
+                <button
+                  onClick={() => setDuelMode('speed')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                    duelMode === 'speed'
+                      ? 'bg-[var(--ctp-mauve)] text-white shadow'
+                      : 'text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)]'
+                  }`}
+                >
+                  ⚡ Speed Bug-Hunt
+                </button>
+                <button
+                  onClick={() => setDuelMode('reverse')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                    duelMode === 'reverse'
+                      ? 'bg-[var(--ctp-mauve)] text-white shadow'
+                      : 'text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)]'
+                  }`}
+                >
+                  🔄 Reverse Mode
+                </button>
+                <button
+                  onClick={() => setDuelMode('golf')}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                    duelMode === 'golf'
+                      ? 'bg-[var(--ctp-mauve)] text-white shadow'
+                      : 'text-[var(--ctp-subtext0)] hover:text-[var(--ctp-text)]'
+                  }`}
+                >
+                  ⛳ Code Golf (Bytes)
+                </button>
               </div>
 
               <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">

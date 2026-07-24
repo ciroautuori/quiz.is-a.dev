@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '../lib/LanguageContext';
-import { TRACKS } from '../lib/tracks';
+import { TRACKS, getTrackDescription } from '../lib/tracks';
 import { TrackId, Sfida } from '../lib/types';
 import { StreakInfo } from '../lib/storage';
 import DailyGoalBanner from './DailyGoalBanner';
@@ -111,7 +111,7 @@ export default function GeneralHomeView({
                       {track.name}
                     </h3>
                     <p className="text-xs text-[var(--ctp-subtext0)] line-clamp-2 mt-1">
-                      {track.description}
+                      {getTrackDescription(track, language)}
                     </p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function GeneralHomeView({
               <BarChart3 className="w-4 h-4 text-[var(--ctp-sky)]" />
               {t.fullstackRadar}
             </h3>
-            <span className="text-xs text-[var(--ctp-subtext0)]">Python • TS • Git</span>
+            <span className="text-xs text-[var(--ctp-subtext0)]">{t.radarShort}</span>
           </div>
 
           <ProficiencyRadarChart 

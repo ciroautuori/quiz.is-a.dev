@@ -238,7 +238,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
               <div className="p-4 rounded-xl border ctp-card-mantle text-xs leading-relaxed space-y-3" style={{ borderColor: 'var(--ctp-border)', color: 'var(--ctp-text)' }}>
                 <div className="font-bold text-xs font-mono uppercase tracking-wider flex items-center gap-2 text-[var(--ctp-mauve)]">
                   <BookOpen className="w-4 h-4" />
-                  <span>{t.theoryExplanation || 'Spiegazione Teorica'}</span>
+                  <span>{t.theoryExplanation}</span>
                 </div>
                 <div className="whitespace-pre-line font-sans text-xs sm:text-sm">
                   {currentLesson.theory}
@@ -263,7 +263,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs font-bold font-mono text-[var(--ctp-mauve)]">
                   <Terminal className="w-4 h-4" />
-                  <span>{t.liveSandboxTitle || 'Sandbox di Codice Live'}</span>
+                  <span>{t.liveSandboxTitle}</span>
                 </div>
                 <button
                   onClick={handleRunSandbox}
@@ -272,7 +272,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
                   style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>{isRunningCode ? (t.executing || 'Esecuzione...') : (t.runCode || 'Esegui Codice')}</span>
+                  <span>{isRunningCode ? (t.executing) : (t.runCode)}</span>
                 </button>
               </div>
 
@@ -281,7 +281,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
                 onChange={(e) => setSandboxCode(e.target.value)}
                 rows={4}
                 className="w-full font-mono text-xs sm:text-sm p-3 rounded-xl border ctp-input focus:outline-none focus:border-[var(--ctp-mauve)] transition-colors"
-                placeholder={t.sandboxPlaceholder || 'Scrivi o modifica il codice qui...'}
+                placeholder={t.sandboxPlaceholder}
               />
 
               {sandboxOutput && (
@@ -336,7 +336,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
                   style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>{t.verifyAnswer || 'Verifica Risposta'}</span>
+                  <span>{t.verifyAnswer}</span>
                 </button>
               ) : (
                 <div className={`p-4 rounded-xl border text-xs space-y-2 ${
@@ -344,7 +344,7 @@ export default function LearnMode({ trackId, activeTrackId = 'python', onOpenAiT
                 }`}>
                   <div className="font-bold flex items-center gap-2 text-sm">
                     {isQuizCorrect ? <CheckCircle2 className="w-5 h-5" /> : <RotateCcw className="w-5 h-5" />}
-                    <span>{isQuizCorrect ? (t.correctAnswerMsg || 'Risposta Esatta! 🎉') : (t.wrongAnswerMsg || 'Risposta Errata. Riprova!')}</span>
+                    <span>{isQuizCorrect ? (t.correctAnswerMsg) : (t.wrongAnswerMsg)}</span>
                   </div>
                   <p className="text-xs text-[var(--ctp-text)] leading-relaxed">
                     {currentLesson.checkpointQuiz.explanation}

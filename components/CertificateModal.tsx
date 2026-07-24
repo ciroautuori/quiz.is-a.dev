@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Award, Download, Share2, X, ShieldCheck, QrCode, Github } from 'lucide-react';
 import { soundEngine } from '../lib/soundEngine';
 import { useLanguage } from '../lib/LanguageContext';
+import { generateOpenBadgeAssertion, embedOpenBadgeInPngBlob } from '../lib/openBadgesPng';
 
 interface CertificateModalProps {
   isOpen: boolean;

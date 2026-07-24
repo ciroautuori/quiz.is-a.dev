@@ -53,7 +53,7 @@ export default function Sidebar({
         {/* General Home Link */}
         <div>
           <div className="px-2 mb-2 text-[10px] uppercase font-bold tracking-widest text-[var(--ctp-subtext0)]">
-            {t.appName || 'DevQuest Platform'}
+            {t.appName}
           </div>
           <button
             onClick={() => onSelectView('home')}

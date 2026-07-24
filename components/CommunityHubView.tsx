@@ -147,10 +147,10 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
           </div>
           <div>
             <h2 className="text-lg sm:text-xl font-black text-[var(--ctp-text)]">
-              Community Challenge Hub (UGC)
+              {t.communityTitle}
             </h2>
             <p className="text-xs text-[var(--ctp-subtext0)]">
-              Crea sfide, condividi test case con gli sviluppatori della community e vota i quiz più astuti!
+              {t.communitySubtitle}
             </p>
           </div>
         </div>

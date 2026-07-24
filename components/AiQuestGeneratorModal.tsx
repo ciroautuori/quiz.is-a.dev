@@ -126,7 +126,7 @@ export default function AiQuestGeneratorModal({
                         : 'ctp-card'
                     }`}
                   >
-                    {lvl === 'facile' ? (t.facile || 'Facile') : lvl === 'media' ? (t.media || 'Media') : (t.difficile || 'Difficile')}
+                    {lvl === 'facile' ? (t.facile) : lvl === 'media' ? (t.media) : (t.difficile)}
                   </button>
                 ))}
               </div>
@@ -155,7 +155,7 @@ export default function AiQuestGeneratorModal({
               ) : (
                 <>
                   <Wand2 className="w-4 h-4 text-amber-300" />
-                  <span>{t.generateAiQuestNow || 'Genera Sfida AI ora'}</span>
+                  <span>{t.generateAiQuestNow}</span>
                 </>
               )}
             </button>
