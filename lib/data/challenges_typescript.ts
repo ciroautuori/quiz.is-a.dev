@@ -13,7 +13,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["string", "any", "text", "String"],
     indice_corretto: 0,
     suggerimento: "TypeScript inferisce automaticamente il tipo dalle virgolette.",
-    spiegazione: "In TypeScript le stringhe tra apici hanno il tipo primitivo 'string' (in minuscolo)."
+    spiegazione: "In TypeScript le stringhe tra apici hanno il tipo primitivo 'string' (in minuscolo).",
+    domanda_en: "What is the inferred type for the variable 'messaggio'?",
+    domanda_es: "¿Cuál es el tipo inferido para la variable 'messaggio'?",
+    risposte_en: ["string", "any", "text", "String"],
+    risposte_es: ["string", "any", "text", "String"],
+    suggerimento_en: "TypeScript automatically infers the type from the quotes.",
+    suggerimento_es: "TypeScript infiere automáticamente el tipo a partir de las comillas.",
+    spiegazione_en: "In TypeScript, strings in quotes have the primitive type 'string' (lowercase).",
+    spiegazione_es: "En TypeScript, las cadenas entre comillas tienen el tipo primitivo 'string' (en minúsculas).",
   },
   {
     id: "ts-02",
@@ -26,7 +34,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["let punteggio: number = 100;", "let punteggio: int = 100;", "let number punteggio = 100;", "let punteggio = (number)100;"],
     indice_corretto: 0,
     suggerimento: "La sintassi di annotazione usa il carattere due punti (:).",
-    spiegazione: "In TypeScript si scrive 'nome: tipo'. Il tipo per i numeri (interi e decimali) è 'number'."
+    spiegazione: "In TypeScript si scrive 'nome: tipo'. Il tipo per i numeri (interi e decimali) è 'number'.",
+    domanda_en: "How do you explicitly annotate the number type for a variable?",
+    domanda_es: "¿Cómo se anota explícitamente el tipo número para una variable?",
+    risposte_en: ["let punteggio: number = 100;", "let punteggio: int = 100;", "let number punteggio = 100;", "let punteggio = (number)100;"],
+    risposte_es: ["let punteggio: number = 100;", "let punteggio: int = 100;", "let number punteggio = 100;", "let punteggio = (number)100;"],
+    suggerimento_en: "The annotation syntax uses the colon (:) character.",
+    suggerimento_es: "La sintaxis de anotación utiliza el carácter de dos puntos (:).",
+    spiegazione_en: "In TypeScript, you write 'name: type'. The type for numbers (integers and decimals) is 'number'.",
+    spiegazione_es: "En TypeScript se escribe 'nombre: tipo'. El tipo para los números (enteros y decimales) es 'number'.",
   },
   {
     id: "ts-03",
@@ -39,7 +55,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["Errore di compilazione TypeScript", "Funziona senza problemi", "La variabile diventa una stringa", "Lancia un'eccezione a runtime"],
     indice_corretto: 0,
     suggerimento: "TypeScript impedisce l'assegnazione di tipi incompatibili al momento della compilazione.",
-    spiegazione: "TypeScript segnala 'Type string is not assignable to type boolean' durante la compilazione."
+    spiegazione: "TypeScript segnala 'Type string is not assignable to type boolean' durante la compilazione.",
+    domanda_en: "What happens if you try to assign a string to a boolean variable?",
+    domanda_es: "¿Qué sucede si intentas asignar una cadena a una variable booleana?",
+    risposte_en: ["TypeScript compilation error", "It works without issues", "The variable becomes a string", "It throws a runtime exception"],
+    risposte_es: ["Error de compilación de TypeScript", "Funciona sin problemas", "La variable se convierte en una cadena", "Lanza una excepción en tiempo de ejecución"],
+    suggerimento_en: "TypeScript prevents the assignment of incompatible types at compile time.",
+    suggerimento_es: "TypeScript impide la asignación de tipos incompatibles en el momento de la compilación.",
+    spiegazione_en: "TypeScript reports 'Type string is not assignable to type boolean' during compilation.",
+    spiegazione_es: "TypeScript señala 'Type string is not assignable to type boolean' durante la compilación.",
   },
   {
     id: "ts-04",
@@ -52,7 +76,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["number[]", "Array<number>", "Entrambe le risposte precedenti", "List<number>"],
     indice_corretto: 2,
     suggerimento: "Sia 'number[]' che 'Array<number>' sono sintassi valide ed equivalenti.",
-    spiegazione: "In TypeScript si possono usare sia i parentesi quadre 'number[]' che il generico 'Array<number>'."
+    spiegazione: "In TypeScript si possono usare sia i parentesi quadre 'number[]' che il generico 'Array<number>'.",
+    domanda_en: "What is the correct syntax to define an array of numbers only?",
+    domanda_es: "¿Cuál es la sintaxis correcta para definir un array de solo números?",
+    risposte_en: ["number[]", "Array<number>", "Both of the previous answers", "List<number>"],
+    risposte_es: ["number[]", "Array<number>", "Ambas respuestas anteriores", "List<number>"],
+    suggerimento_en: "Both 'number[]' and 'Array<number>' are valid and equivalent syntaxes.",
+    suggerimento_es: "Tanto 'number[]' como 'Array<number>' son sintaxis válidas y equivalentes.",
+    spiegazione_en: "In TypeScript, you can use either the square brackets 'number[]' or the generic 'Array<number>'.",
+    spiegazione_es: "En TypeScript se pueden usar tanto los corchetes 'number[]' como el genérico 'Array<number>'.",
   },
 
   // Capitolo 2: Functions & Optional Parameters
@@ -67,7 +99,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["I parametri hanno tipo number e il ritorno è number", "Errore di sintassi", "Il ritorno è void", "I parametri sono di tipo any"],
     indice_corretto: 0,
     suggerimento: "Il tipo di ritorno si posiziona dopo le parentesi tonde dei parametri.",
-    spiegazione: ": number dopo le parentesi indica che la funzione deve restituire un numero."
+    spiegazione: ": number dopo le parentesi indica che la funzione deve restituire un numero.",
+    domanda_en: "How are parameter types and the return value defined in a function?",
+    domanda_es: "¿Cómo se definen los tipos de los parámetros y del valor de retorno en una función?",
+    risposte_en: ["The parameters are of type number and the return is number", "Syntax error", "The return is void", "The parameters are of type any"],
+    risposte_es: ["Los parámetros tienen tipo number y el retorno es number", "Error de sintaxis", "El retorno es void", "Los parámetros son de tipo any"],
+    suggerimento_en: "The return type is placed after the parentheses of the parameters.",
+    suggerimento_es: "El tipo de retorno se coloca después de los paréntesis de los parámetros.",
+    spiegazione_en: ": number after the parentheses indicates that the function must return a number.",
+    spiegazione_es: ": number después de los paréntesis indica que la función debe devolver un número.",
   },
   {
     id: "ts-06",
@@ -80,7 +120,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["Il punto interrogativo (?)", "L'asterisco (*)", "Il punto esclamativo (!)", "La parola chiave optional"],
     indice_corretto: 0,
     suggerimento: "Aggiungendo ? dopo il nome del parametro si indica che può essere undefined.",
-    spiegazione: "In 'titolo?: string', il tipo effettivo diventa 'string | undefined'."
+    spiegazione: "In 'titolo?: string', il tipo effettivo diventa 'string | undefined'.",
+    domanda_en: "Which symbol makes a parameter optional in a function?",
+    domanda_es: "¿Qué símbolo hace que un parámetro sea opcional en una función?",
+    risposte_en: ["The question mark (?)", "The asterisk (*)", "The exclamation mark (!)", "The optional keyword"],
+    risposte_es: ["El signo de interrogación (?)", "El asterisco (*)", "El signo de exclamación (!)", "La palabra clave optional"],
+    suggerimento_en: "Adding ? after the parameter name indicates that it can be undefined.",
+    suggerimento_es: "Al añadir ? después del nombre del parámetro se indica que puede ser undefined.",
+    spiegazione_en: "In 'titolo?: string', the actual type becomes 'string | undefined'.",
+    spiegazione_es: "En 'titolo?: string', el tipo efectivo se convierte en 'string | undefined'.",
   },
   {
     id: "ts-07",
@@ -93,7 +141,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["void", "null", "undefined", "never"],
     indice_corretto: 0,
     suggerimento: "Significa 'vuoto' in inglese ed è comune nei metodi di log o side-effect.",
-    spiegazione: "'void' indica che la funzione esegue istruzioni ma non restituisce un valore con return."
+    spiegazione: "'void' indica che la funzione esegue istruzioni ma non restituisce un valore con return.",
+    domanda_en: "What is the return type of a function that does not return any value?",
+    domanda_es: "¿Cuál es el tipo de retorno de una función que no devuelve ningún valor?",
+    risposte_en: ["void", "null", "undefined", "never"],
+    risposte_es: ["void", "null", "undefined", "never"],
+    suggerimento_en: "It means 'empty' in English and is common in log or side-effect methods.",
+    suggerimento_es: "Significa 'vacío' en inglés y es común en métodos de log o efectos secundarios.",
+    spiegazione_en: "'void' indicates that the function executes instructions but does not return a value with return.",
+    spiegazione_es: "'void' indica que la función ejecuta instrucciones pero no devuelve un valor con return.",
   },
 
   // Capitolo 3: Interfaces & Type Aliases
@@ -113,7 +169,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "readonly blocca la riassegnazione, ? rende il campo opzionale.",
-    spiegazione: "'readonly' impedisce modifiche dopo la creazione, nome è obbligatorio ed email? è opzionale."
+    spiegazione: "'readonly' impedisce modifiche dopo la creazione, nome è obbligatorio ed email? è opzionale.",
+    domanda_en: "What does this interface define for a User object?",
+    domanda_es: "¿Qué define esta interfaz para un objeto Usuario?",
+    risposte_en: ["id is immutable, nome is mandatory, email is optional", "all fields are mandatory and mutable", "id is private and not visible outside the object", "email is of type string | null"],
+    risposte_es: ["id no es modificable, nombre es obligatorio, email es opcional", "todos los campos son obligatorios y modificables", "id es privado y no visible fuera del objeto", "email es de tipo string | null"],
+    suggerimento_en: "readonly prevents reassignment, ? makes the field optional.",
+    suggerimento_es: "readonly bloquea la reasignación, ? hace que el campo sea opcional.",
+    spiegazione_en: "'readonly' prevents changes after creation, nome is mandatory, and email? is optional.",
+    spiegazione_es: "'readonly' impide modificaciones después de la creación, nombre es obligatorio y email? es opcional.",
   },
   {
     id: "ts-09",
@@ -131,7 +195,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "La parola chiave 'type' permette di definire anche Unioni di Literal Types.",
-    spiegazione: "I 'type' alias consentono di unire tipi primitivi e literal types con la barra verticale (|)."
+    spiegazione: "I 'type' alias consentono di unire tipi primitivi e literal types con la barra verticale (|).",
+    domanda_en: "How do you create a Type Alias for a Union combination?",
+    domanda_es: "¿Cómo se crea un alias de tipo (Type Alias) para una combinación Union?",
+    risposte_en: ["type Stato = 'pending' | 'success' | 'error';", "interface Stato = 'pending' | 'success' | 'error';", "enum Stato = 'pending' | 'success' | 'error';", "union Stato = ['pending', 'success', 'error'];"],
+    risposte_es: ["type Stato = 'pending' | 'success' | 'error';", "interface Stato = 'pending' | 'success' | 'error';", "enum Stato = 'pending' | 'success' | 'error';", "union Stato = ['pending', 'success', 'error'];"],
+    suggerimento_en: "The 'type' keyword also allows defining Unions of Literal Types.",
+    suggerimento_es: "La palabra clave 'type' permite definir también Uniones de Literal Types.",
+    spiegazione_en: "'type' aliases allow you to combine primitive types and literal types using the vertical bar (|).",
+    spiegazione_es: "Los 'type' alias permiten unir tipos primitivos y literal types con la barra vertical (|).",
   },
 
   // Capitolo 4: Union, Intersection & Narrowing
@@ -151,7 +223,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "Il Type Narrowing permette a TypeScript di conoscere il tipo esatto dentro un blocco condizionale.",
-    spiegazione: "Grazie al controllo typeof, TypeScript abilita i metodi delle stringhe (.toUpperCase()) solo nel ramo if."
+    spiegazione: "Grazie al controllo typeof, TypeScript abilita i metodi delle stringhe (.toUpperCase()) solo nel ramo if.",
+    domanda_en: "What does the 'typeof x === string' block do in this code?",
+    domanda_es: "¿Qué hace el bloque 'typeof x === string' en este código?",
+    risposte_en: ["It narrows the type of x to 'string' inside the if block and to 'number' in the else block", "It causes an error because x can be a number", "It converts x to a string before execution", "It has no effect on type checking"],
+    risposte_es: ["Restringe (narrow) el tipo de x a 'string' dentro del if y a 'number' en el else", "Provoca un error porque x puede ser un número", "Convierte x a cadena antes de la ejecución", "No tiene ningún efecto en las comprobaciones de tipo"],
+    suggerimento_en: "Type Narrowing allows TypeScript to know the exact type within a conditional block.",
+    suggerimento_es: "El Type Narrowing permite a TypeScript conocer el tipo exacto dentro de un bloque condicional.",
+    spiegazione_en: "Thanks to the typeof check, TypeScript enables string methods (like .toUpperCase()) only within the if branch.",
+    spiegazione_es: "Gracias a la comprobación typeof, TypeScript habilita los métodos de cadena (.toUpperCase()) solo en la rama if.",
   },
   {
     id: "ts-11",
@@ -169,7 +249,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "L'operatore & (Intersection) combina più tipi in un unico tipo risultante.",
-    spiegazione: "L'intersezione (&) unisce i campi di Persona con { token: string } richiederà tutti i campi di entrambi."
+    spiegazione: "L'intersezione (&) unisce i campi di Persona con { token: string } richiederà tutti i campi di entrambi.",
+    domanda_en: "What type represents the union of two interfaces using the & symbol?",
+    domanda_es: "¿Qué tipo representa la unión de dos interfaces con el símbolo &?",
+    risposte_en: ["A type that possesses all properties of Persona AND the token property", "A type that possesses either Persona or token", "A compilation error", "A type with overwritten properties"],
+    risposte_es: ["Un tipo que posee todas las propiedades de Persona Y la propiedad token", "Un tipo que posee o Persona o token", "Un error de compilación", "Un tipo con propiedades sobrescritas"],
+    suggerimento_en: "The & (Intersection) operator combines multiple types into a single resulting type.",
+    suggerimento_es: "El operador & (Intersection) combina múltiples tipos en un único tipo resultante.",
+    spiegazione_en: "The intersection (&) merges the fields of Persona with { token: string }, requiring all fields from both.",
+    spiegazione_es: "La intersección (&) une los campos de Persona con { token: string } y requerirá todos los campos de ambos.",
   },
 
   // Capitolo 5: Generici (Generics)
@@ -189,7 +277,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "I Generics riutilizzano componenti preservando la type safety senza ricorrere ad 'any'.",
-    spiegazione: "Se chiami identita<string>('test'), T diventa 'string' sia per l'argomento che per il ritorno."
+    spiegazione: "Se chiami identita<string>('test'), T diventa 'string' sia per l'argomento che per il ritorno.",
+    domanda_en: "What is the purpose of the <T> type parameter in this function?",
+    domanda_es: "¿Para qué sirve el parámetro de tipo <T> en esta función?",
+    risposte_en: ["It allows the function to accept and return any type while maintaining type correspondence", "It is a shortcut to replace T with 'any'", "It declares a global variable named T", "It limits the function to numeric types only"],
+    risposte_es: ["Permite a la función aceptar y devolver cualquier tipo manteniendo la correspondencia de tipos", "Es un atajo para reemplazar T con 'any'", "Declara una variable global llamada T", "Limita la función solo a tipos numéricos"],
+    suggerimento_en: "Generics reuse components while preserving type safety without resorting to 'any'.",
+    suggerimento_es: "Los Generics reutilizan componentes preservando la type safety sin recurrir a 'any'.",
+    spiegazione_en: "If you call identita<string>('test'), T becomes 'string' for both the argument and the return value.",
+    spiegazione_es: "Si llamas a identita<string>('test'), T se convierte en 'string' tanto para el argumento como para el retorno.",
   },
   {
     id: "ts-13",
@@ -207,7 +303,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "'extends' impone un vincolo (constraint) sul tipo generico.",
-    spiegazione: "Il vincolo garantisce che qualsiasi tipo passato a T abbia la proprietà .length."
+    spiegazione: "Il vincolo garantisce che qualsiasi tipo passato a T abbia la proprietà .length.",
+    domanda_en: "What does the clause 'extends { length: number }' indicate?",
+    domanda_es: "¿Qué indica la cláusula 'extends { length: number }'?",
+    risposte_en: ["T must be a type that has a numeric 'length' property (e.g., string, array)", "T will inherit from a class named length", "The function only works with numbers", "Without extends, the argument would be converted to a string"],
+    risposte_es: ["T debe ser un tipo que posea la propiedad 'length' numérica (ej. string, array)", "T heredará de una clase llamada length", "La función solo funciona con números", "Sin extends el argumento sería convertido a string"],
+    suggerimento_en: "'extends' imposes a constraint on the generic type.",
+    suggerimento_es: "'extends' impone una restricción (constraint) sobre el tipo genérico.",
+    spiegazione_en: "The constraint ensures that any type passed to T has the .length property.",
+    spiegazione_es: "La restricción garantiza que cualquier tipo pasado a T tenga la propiedad .length.",
   },
 
   // Capitolo 6: Utility Types
@@ -227,7 +331,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "Partial rende facoltative tutte le proprietà di un tipo.",
-    spiegazione: "UtenteParziale equivale a { nome?: string; eta?: number; }."
+    spiegazione: "UtenteParziale equivale a { nome?: string; eta?: number; }.",
+    domanda_en: "What does the Utility Type 'Partial<Utente>' do?",
+    domanda_es: "¿Qué hace el Utility Type 'Partial<Utente>'?",
+    risposte_en: ["Makes all fields of the Utente interface optional (?)", "Makes all fields of Utente mandatory", "Makes all fields of Utente readonly", "Removes the first field of the interface"],
+    risposte_es: ["Hace que todos los campos de la interfaz Utente sean opcionales (?)", "Hace que todos los campos de Utente sean obligatorios", "Hace que todos los campos de Utente sean readonly", "Elimina el primer campo de la interfaz"],
+    suggerimento_en: "Partial makes all properties of a type optional.",
+    suggerimento_es: "Partial hace facultativas todas las propiedades de un tipo.",
+    spiegazione_en: "PartialUtente is equivalent to { nome?: string; eta?: number; }.",
+    spiegazione_es: "UtenteParziale equivale a { nome?: string; eta?: number; }.",
   },
   {
     id: "ts-15",
@@ -245,7 +357,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "Readonly vieta qualsiasi riassegnazione alle proprietà dell'oggetto.",
-    spiegazione: "In TypeScript, Readonly<T> blocca le modifiche al momento della compilazione."
+    spiegazione: "In TypeScript, Readonly<T> blocca le modifiche al momento della compilazione.",
+    domanda_en: "What is the result of using 'Readonly<T>'?",
+    domanda_es: "¿Qué implica el uso de 'Readonly<T>'?",
+    risposte_en: ["Compilation error: Cannot assign to 'host' because it is a read-only property", "It works correctly by modifying the configuration", "The value is automatically saved to localStorage", "The object is frozen at runtime with Object.freeze"],
+    risposte_es: ["Error de compilación: Cannot assign to 'host' because it is a read-only property", "Funciona correctamente modificando la configuración", "El valor se guarda en localStorage automáticamente", "El objeto se congela en tiempo de ejecución con Object.freeze"],
+    suggerimento_en: "Readonly forbids any reassignment to the object's properties.",
+    suggerimento_es: "Readonly prohíbe cualquier reasignación a las propiedades del objeto.",
+    spiegazione_en: "In TypeScript, Readonly<T> blocks modifications at compile time.",
+    spiegazione_es: "En TypeScript, Readonly<T> bloquea las modificaciones en el momento de la compilación.",
   },
   {
     id: "ts-16",
@@ -263,7 +383,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "Pick = prendi solo queste; Omit = prendi tutte tranne queste.",
-    spiegazione: "Pick costruisce un tipo estraendo K da T; Omit costruisce un tipo rimuovendo K da T."
+    spiegazione: "Pick costruisce un tipo estraendo K da T; Omit costruisce un tipo rimuovendo K da T.",
+    domanda_en: "What is the difference between Pick<T, K> and Omit<T, K>?",
+    domanda_es: "¿Cuál es la diferencia entre Pick<T, K> y Omit<T, K>?",
+    risposte_en: ["Pick SELECTS only the specified keys; Omit EXCLUDES the specified keys", "Pick converts to strings; Omit deletes the type", "They perform exactly the same function", "Pick only works on arrays; Omit on objects"],
+    risposte_es: ["Pick SELECCIONA solo las claves indicadas; Omit EXCLUYE las claves indicadas", "Pick convierte a cadenas; Omit borra el tipo", "Realizan exactamente la misma función", "Pick funciona solo en arrays; Omit en objetos"],
+    suggerimento_en: "Pick = take only these; Omit = take all except these.",
+    suggerimento_es: "Pick = toma solo estas; Omit = toma todas excepto estas.",
+    spiegazione_en: "Pick constructs a type by extracting K from T; Omit constructs a type by removing K from T.",
+    spiegazione_es: "Pick construye un tipo extrayendo K de T; Omit construye un tipo eliminando K de T.",
   },
 
   // Capitolo 7: Enums & Unknown/Never
@@ -278,7 +406,15 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     risposte: ["0", "1", "undefined", "'Admin'"],
     indice_corretto: 0,
     suggerimento: "Gli enum numerici contano da 0 se non specificato diversamente.",
-    spiegazione: "In TypeScript gli enum numerici partono da 0. Ruolo.Admin è 0, Ruolo.User è 1, ecc."
+    spiegazione: "In TypeScript gli enum numerici partono da 0. Ruolo.Admin è 0, Ruolo.User è 1, ecc.",
+    domanda_en: "What is the default value of the first element in a Numeric Enum?",
+    domanda_es: "¿Cuál es el valor predeterminado del primer elemento en un Numeric Enum?",
+    risposte_en: ["0", "1", "undefined", "'Admin'"],
+    risposte_es: ["0", "1", "undefined", "'Admin'"],
+    suggerimento_en: "Numeric enums count from 0 unless specified otherwise.",
+    suggerimento_es: "Los enums numéricos cuentan desde 0 si no se especifica lo contrario.",
+    spiegazione_en: "In TypeScript, numeric enums start at 0. Ruolo.Admin is 0, Ruolo.User is 1, etc.",
+    spiegazione_es: "En TypeScript, los enums numéricos comienzan desde 0. Ruolo.Admin es 0, Ruolo.User es 1, etc.",
   },
   {
     id: "ts-18",
@@ -296,6 +432,14 @@ export const SFIDE_TYPESCRIPT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "unknown è la variante 'type-safe' di any.",
-    spiegazione: "Con unknown TypeScript ti costringe a fare Type Narrowing prima di accedere a metodi o proprietà."
+    spiegazione: "Con unknown TypeScript ti costringe a fare Type Narrowing prima di accedere a metodi o proprietà.",
+    domanda_en: "Why is it preferable to use 'unknown' instead of 'any'?",
+    domanda_es: "¿Por qué es preferible usar 'unknown' en lugar de 'any'?",
+    risposte_en: ["unknown requires a type check before performing operations, preventing runtime errors", "unknown is faster at runtime", "any no longer exists in recent versions of TypeScript", "unknown only accepts null values"],
+    risposte_es: ["unknown requiere una comprobación de tipo antes de poder realizar operaciones, previniendo errores en tiempo de ejecución", "unknown es más rápido en tiempo de ejecución", "any ya no existe en las versiones recientes de TypeScript", "unknown acepta solo valores nulos"],
+    suggerimento_en: "unknown is the 'type-safe' variant of any.",
+    suggerimento_es: "unknown es la variante 'type-safe' de any.",
+    spiegazione_en: "With unknown, TypeScript forces you to perform Type Narrowing before accessing methods or properties.",
+    spiegazione_es: "Con unknown, TypeScript te obliga a realizar Type Narrowing antes de acceder a métodos o propiedades.",
   }
 ];

@@ -13,7 +13,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git init", "git start", "git new", "git create"],
     indice_corretto: 0,
     suggerimento: "Inizializza una nuova sottocartella nascosta .git.",
-    spiegazione: "'git init' crea il repository Git vuoto creando la directory nascosta '.git'."
+    spiegazione: "'git init' crea il repository Git vuoto creando la directory nascosta '.git'.",
+    domanda_en: "Which command initializes a new Git repository in the current folder?",
+    domanda_es: "¿Qué comando inicializa un nuevo repositorio Git en la carpeta actual?",
+    risposte_en: ["git init", "git start", "git new", "git create"],
+    risposte_es: ["git init", "git start", "git new", "git create"],
+    suggerimento_en: "It initializes a new hidden .git subdirectory.",
+    suggerimento_es: "Inicializa una nueva subcarpeta oculta .git.",
+    spiegazione_en: "'git init' creates an empty Git repository by creating the hidden '.git' directory.",
+    spiegazione_es: "'git init' crea el repositorio Git vacío creando el directorio oculto '.git'.",
   },
   {
     id: "git-02",
@@ -26,7 +34,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git add .", "git stage all", "git commit -a", "git save"],
     indice_corretto: 0,
     suggerimento: "Il punto (.) rappresenta la directory corrente.",
-    spiegazione: "'git add .' (o 'git add -A') sposta tutte le modifiche correnti nella staging area pronte per il commit."
+    spiegazione: "'git add .' (o 'git add -A') sposta tutte le modifiche correnti nella staging area pronte per il commit.",
+    domanda_en: "Which command adds all modified and new files to the Staging Area?",
+    domanda_es: "¿Qué comando añade todos los archivos modificados y nuevos al Staging Area?",
+    risposte_en: ["git add .", "git stage all", "git commit -a", "git save"],
+    risposte_es: ["git add .", "git stage all", "git commit -a", "git save"],
+    suggerimento_en: "The dot (.) represents the current directory.",
+    suggerimento_es: "El punto (.) representa el directorio actual.",
+    spiegazione_en: "'git add .' (or 'git add -A') moves all current changes into the staging area, ready for commit.",
+    spiegazione_es: "'git add .' (o 'git add -A') mueve todos los cambios actuales al staging area listos para el commit.",
   },
   {
     id: "git-03",
@@ -39,7 +55,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git status", "git check", "git info", "git log -s"],
     indice_corretto: 0,
     suggerimento: "Mostra sia la Staging Area sia la Working Directory.",
-    spiegazione: "'git status' fornisce una panoramica istantanea del branch corrente e dello stato dei file."
+    spiegazione: "'git status' fornisce una panoramica istantanea del branch corrente e dello stato dei file.",
+    domanda_en: "Which command shows the status of files (untracked, modified, staged)?",
+    domanda_es: "¿Qué comando muestra el estado de los archivos (untracked, modified, staged)?",
+    risposte_en: ["git status", "git check", "git info", "git log -s"],
+    risposte_es: ["git status", "git check", "git info", "git log -s"],
+    suggerimento_en: "It shows both the Staging Area and the Working Directory.",
+    suggerimento_es: "Muestra tanto el Staging Area como el Working Directory.",
+    spiegazione_en: "'git status' provides an instant overview of the current branch and the status of the files.",
+    spiegazione_es: "'git status' proporciona una visión general instantánea de la rama actual y del estado de los archivos.",
   },
   {
     id: "git-04",
@@ -52,7 +76,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git commit -m \"messaggio\"", "git commit \"messaggio\"", "git save -m \"messaggio\"", "git push -m \"messaggio\""],
     indice_corretto: 0,
     suggerimento: "Il flag -m sta per 'message'.",
-    spiegazione: "'-m' permette di inserire il messaggio di commit direttamente senza aprire l'editor di testo."
+    spiegazione: "'-m' permette di inserire il messaggio di commit direttamente senza aprire l'editor di testo.",
+    domanda_en: "How do you create a commit by specifying the message directly from the command line?",
+    domanda_es: "¿Cómo se crea un commit especificando directamente el mensaje desde la línea de comandos?",
+    risposte_en: ["git commit -m \"messaggio\"", "git commit \"messaggio\"", "git save -m \"messaggio\"", "git push -m \"messaggio\""],
+    risposte_es: ["git commit -m \"messaggio\"", "git commit \"messaggio\"", "git save -m \"messaggio\"", "git push -m \"messaggio\""],
+    suggerimento_en: "The -m flag stands for 'message'.",
+    suggerimento_es: "El flag -m significa 'message'.",
+    spiegazione_en: "'-m' allows you to enter the commit message directly without opening the text editor.",
+    spiegazione_es: "'-m' permite insertar el mensaje de commit directamente sin abrir el editor de texto.",
   },
 
   // Capitolo 2: Storia, Log & Diff
@@ -67,7 +99,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git log --oneline", "git history --short", "git list --one", "git commits -s"],
     indice_corretto: 0,
     suggerimento: "Il flag si chiama --oneline.",
-    spiegazione: "'git log --oneline' mostra l'hash abbreviato a 7 caratteri e il messaggio di ogni commit."
+    spiegazione: "'git log --oneline' mostra l'hash abbreviato a 7 caratteri e il messaggio di ogni commit.",
+    domanda_en: "Which command shows the commit history in a compact format on a single line?",
+    domanda_es: "¿Qué comando muestra el historial de commits de forma compacta en una sola línea?",
+    risposte_en: ["git log --oneline", "git history --short", "git list --one", "git commits -s"],
+    risposte_es: ["git log --oneline", "git history --short", "git list --one", "git commits -s"],
+    suggerimento_en: "The flag is called --oneline.",
+    suggerimento_es: "El flag se llama --oneline.",
+    spiegazione_en: "'git log --oneline' shows the 7-character abbreviated hash and the message for each commit.",
+    spiegazione_es: "'git log --oneline' muestra el hash abreviado a 7 caracteres y el mensaje de cada commit.",
   },
   {
     id: "git-06",
@@ -80,7 +120,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git diff", "git compare", "git status --diff", "git log -p"],
     indice_corretto: 0,
     suggerimento: "Per vedere le modifiche già staged si usa invece 'git diff --staged'.",
-    spiegazione: "'git diff' senza parametri mostra le differenze non ancora aggiunte alla staging area."
+    spiegazione: "'git diff' senza parametri mostra le differenze non ancora aggiunte alla staging area.",
+    domanda_en: "How do you view the changes between the modified lines in the Working Directory and the Staging Area?",
+    domanda_es: "¿Cómo se visualizan los cambios entre las líneas modificadas en el Working Directory y el Staging Area?",
+    risposte_en: ["git diff", "git compare", "git status --diff", "git log -p"],
+    risposte_es: ["git diff", "git compare", "git status --diff", "git log -p"],
+    suggerimento_en: "To see changes that are already staged, you use 'git diff --staged' instead.",
+    suggerimento_es: "Para ver los cambios ya preparados (staged) se utiliza 'git diff --staged'.",
+    spiegazione_en: "'git diff' without parameters shows the differences that have not yet been added to the staging area.",
+    spiegazione_es: "'git diff' sin parámetros muestra las diferencias que aún no se han añadido al staging area.",
   },
 
   // Capitolo 3: Branching & Merging
@@ -95,7 +143,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git switch -c nome-branch", "git branch --goto nome-branch", "git create branch nome-branch", "git new-branch nome-branch"],
     indice_corretto: 0,
     suggerimento: "Nelle versioni recenti di Git, 'switch -c' ha sostituito 'checkout -b'.",
-    spiegazione: "'git switch -c' (o 'git checkout -b') crea il branch specificato e sposta HEAD su di esso."
+    spiegazione: "'git switch -c' (o 'git checkout -b') crea il branch specificato e sposta HEAD su di esso.",
+    domanda_en: "What is the modern command to create and immediately switch to a new branch?",
+    domanda_es: "¿Cuál es el comando moderno para crear y posicionarse inmediatamente en una nueva rama?",
+    risposte_en: ["git switch -c nome-branch", "git branch --goto nome-branch", "git create branch nome-branch", "git new-branch nome-branch"],
+    risposte_es: ["git switch -c nome-branch", "git branch --goto nome-branch", "git create branch nome-branch", "git new-branch nome-branch"],
+    suggerimento_en: "In recent versions of Git, 'switch -c' has replaced 'checkout -b'.",
+    suggerimento_es: "En las versiones recientes de Git, 'switch -c' ha reemplazado a 'checkout -b'.",
+    spiegazione_en: "'git switch -c' (or 'git checkout -b') creates the specified branch and moves HEAD to it.",
+    spiegazione_es: "'git switch -c' (o 'git checkout -b') crea la rama especificada y mueve HEAD a ella.",
   },
   {
     id: "git-08",
@@ -108,7 +164,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["main", "feature", "Su un qualsiasi branch terzo", "Non ha importanza"],
     indice_corretto: 0,
     suggerimento: "Il merge unisce il ramo target NEL ramo in cui ti trovi attualmente.",
-    spiegazione: "Devi prima spostarti sul ramo di destinazione ('main') e poi eseguire 'git merge feature'."
+    spiegazione: "Devi prima spostarti sul ramo di destinazione ('main') e poi eseguire 'git merge feature'.",
+    domanda_en: "To merge the 'feature' branch into the 'main' branch, which branch must you be on before running 'git merge feature'?",
+    domanda_es: "Para fusionar la rama 'feature' en la rama 'main', ¿en qué rama debes estar antes de ejecutar 'git merge feature'?",
+    risposte_en: ["main", "feature", "On any third branch", "It does not matter"],
+    risposte_es: ["main", "feature", "En cualquier rama tercera", "No importa"],
+    suggerimento_en: "Merging joins the target branch INTO the branch you are currently on.",
+    suggerimento_es: "El merge fusiona la rama objetivo EN la rama en la que te encuentras actualmente.",
+    spiegazione_en: "You must first switch to the destination branch ('main') and then run 'git merge feature'.",
+    spiegazione_es: "Primero debes moverte a la rama de destino ('main') y luego ejecutar 'git merge feature'.",
   },
   {
     id: "git-09",
@@ -126,7 +190,15 @@ export const SFIDE_GIT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "HEAD indica sempre il punto in cui ti trovi ora.",
-    spiegazione: "Tra '<<<<<<< HEAD' e '=======' ci sono le righe del tuo ramo corrente; dopo '=======' ci sono quelle del ramo in arrivo."
+    spiegazione: "Tra '<<<<<<< HEAD' e '=======' ci sono le righe del tuo ramo corrente; dopo '=======' ci sono quelle del ramo in arrivo.",
+    domanda_en: "What do the '<<<<<<< HEAD' markers indicate during a merge conflict?",
+    domanda_es: "¿Qué indican los marcadores '<<<<<<< HEAD' durante un conflicto de fusión (merge conflict)?",
+    risposte_en: ["The changes present in the current branch (HEAD) before the ======= divider", "A critical Git memory error", "The changes coming from the branch being merged", "The files to be deleted"],
+    risposte_es: ["Los cambios presentes en la rama actual (HEAD) antes del divisor =======", "Un error crítico de memoria de Git", "Los cambios provenientes de la rama a fusionar", "Los archivos a eliminar"],
+    suggerimento_en: "HEAD always indicates the point where you are currently located.",
+    suggerimento_es: "HEAD indica siempre el punto en el que te encuentras ahora.",
+    spiegazione_en: "Between '<<<<<<< HEAD' and '=======' are the lines from your current branch; after '=======' are the lines from the incoming branch.",
+    spiegazione_es: "Entre '<<<<<<< HEAD' y '=======' se encuentran las líneas de tu rama actual; después de '=======' están las de la rama entrante.",
   },
 
   // Capitolo 4: Undo, Reset, Revert & Stash
@@ -141,7 +213,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["git stash", "git save-temp", "git hide", "git pause"],
     indice_corretto: 0,
     suggerimento: "Salva le modifiche in una pila (stack) temporanea.",
-    spiegazione: "'git stash' accantona le modifiche locali non committate. Puoi ripristinarle in seguito con 'git stash pop'."
+    spiegazione: "'git stash' accantona le modifiche locali non committate. Puoi ripristinarle in seguito con 'git stash pop'.",
+    domanda_en: "Which command temporarily saves uncompleted changes, cleaning the working directory?",
+    domanda_es: "¿Qué comando guarda temporalmente los cambios no completados limpiando el working directory?",
+    risposte_en: ["git stash", "git save-temp", "git hide", "git pause"],
+    risposte_es: ["git stash", "git save-temp", "git hide", "git pause"],
+    suggerimento_en: "It saves changes to a temporary stack.",
+    suggerimento_es: "Guarda los cambios en una pila (stack) temporal.",
+    spiegazione_en: "'git stash' shelves uncommitted local changes. You can restore them later using 'git stash pop'.",
+    spiegazione_es: "'git stash' aparta los cambios locales no confirmados. Puedes restaurarlos más tarde con 'git stash pop'.",
   },
   {
     id: "git-11",
@@ -159,7 +239,15 @@ export const SFIDE_GIT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "'revert' è sicuro sui branch condivisi perché non distrugge la cronologia dei commit.",
-    spiegazione: "'git revert' crea un commit trasparente che inverte i cambiamenti. 'git reset' riscrive la storia del branch."
+    spiegazione: "'git revert' crea un commit trasparente che inverte i cambiamenti. 'git reset' riscrive la storia del branch.",
+    domanda_en: "What is the fundamental difference between 'git revert' and 'git reset'?",
+    domanda_es: "¿Cuál es la diferencia fundamental entre 'git revert' y 'git reset'?",
+    risposte_en: ["git revert creates a new opposite commit to undo; git reset moves the pointer back, rewriting history", "git revert deletes files from the disk; git reset restores them", "git revert only works on GitHub; git reset only locally", "They are synonymous commands"],
+    risposte_es: ["git revert crea un nuevo commit opuesto para deshacer; git reset mueve el puntero hacia atrás reescribiendo la historia", "git revert borra los archivos del disco; git reset los restaura", "git revert solo funciona en GitHub; git reset solo localmente", "Son comandos sinónimos"],
+    suggerimento_en: "'revert' is safe on shared branches because it does not destroy commit history.",
+    suggerimento_es: "'revert' es seguro en ramas compartidas porque no destruye el historial de commits.",
+    spiegazione_en: "'git revert' creates a transparent commit that reverses changes. 'git reset' rewrites the branch history.",
+    spiegazione_es: "'git revert' crea un commit transparente que invierte los cambios. 'git reset' reescribe la historia de la rama.",
   },
 
   // Capitolo 5: Remote Repositories & GitHub
@@ -179,7 +267,15 @@ export const SFIDE_GIT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "Il nome convenzionale per il server remoto principale è 'origin'.",
-    spiegazione: "'git remote add origin <URL>' associa l'alias 'origin' all'indirizzo remoto specificato."
+    spiegazione: "'git remote add origin <URL>' associa l'alias 'origin' all'indirizzo remoto specificato.",
+    domanda_en: "How do you link a local repository to a remote server on GitHub?",
+    domanda_es: "¿Cómo se conecta un repositorio local a un servidor remoto en GitHub?",
+    risposte_en: ["git remote add origin <URL>", "git connect origin <URL>", "git github link <URL>", "git push --set-remote <URL>"],
+    risposte_es: ["git remote add origin <URL>", "git connect origin <URL>", "git github link <URL>", "git push --set-remote <URL>"],
+    suggerimento_en: "The conventional name for the main remote server is 'origin'.",
+    suggerimento_es: "El nombre convencional para el servidor remoto principal es 'origin'.",
+    spiegazione_en: "'git remote add origin <URL>' associates the alias 'origin' with the specified remote address.",
+    spiegazione_es: "'git remote add origin <URL>' asocia el alias 'origin' a la dirección remota especificada.",
   },
   {
     id: "git-13",
@@ -192,7 +288,15 @@ export const SFIDE_GIT: Sfida[] = [
     risposte: ["-u (o --set-upstream)", "-f (force)", "-m (message)", "-a (all)"],
     indice_corretto: 0,
     suggerimento: "-u imposta l'upstream tracking del branch.",
-    spiegazione: "Il flag -u collegare il branch locale al ramo remoto origin/main, consentendo di fare successivamente solo 'git push'."
+    spiegazione: "Il flag -u collegare il branch locale al ramo remoto origin/main, consentendo di fare successivamente solo 'git push'.",
+    domanda_en: "Which flag in 'git push -u origin main' sets the default tracking for future pushes?",
+    domanda_es: "¿Qué flag en 'git push -u origin main' establece el seguimiento predeterminado para futuros push?",
+    risposte_en: ["-u (or --set-upstream)", "-f (force)", "-m (message)", "-a (all)"],
+    risposte_es: ["-u (o --set-upstream)", "-f (force)", "-m (message)", "-a (all)"],
+    suggerimento_en: "-u sets the upstream tracking for the branch.",
+    suggerimento_es: "-u establece el seguimiento upstream de la rama.",
+    spiegazione_en: "The -u flag links the local branch to the remote origin/main branch, allowing you to simply use 'git push' in the future.",
+    spiegazione_es: "El flag -u vincula la rama local con la rama remota origin/main, permitiendo ejecutar solo 'git push' en el futuro.",
   },
   {
     id: "git-14",
@@ -210,7 +314,15 @@ export const SFIDE_GIT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "git pull = git fetch + git merge.",
-    spiegazione: "'git fetch' aggiorna i puntatori remoti in modo sicuro. 'git pull' scarica e fonde subito le modifiche nel branch attivo."
+    spiegazione: "'git fetch' aggiorna i puntatori remoti in modo sicuro. 'git pull' scarica e fonde subito le modifiche nel branch attivo.",
+    domanda_en: "What is the difference between 'git fetch' and 'git pull'?",
+    domanda_es: "¿Cuál es la diferencia entre 'git fetch' y 'git pull'?",
+    risposte_en: ["git fetch downloads changes without applying them; git pull downloads and automatically merges them", "git fetch deletes unused remote branches", "git pull sends local files; git fetch downloads them", "There is no difference"],
+    risposte_es: ["git fetch descarga las novedades sin aplicarlas; git pull descarga y ejecuta el merge automáticamente", "git fetch elimina las ramas remotas no utilizadas", "git pull envía los archivos locales; git fetch los descarga", "No hay ninguna diferencia"],
+    suggerimento_en: "git pull = git fetch + git merge.",
+    suggerimento_es: "git pull = git fetch + git merge.",
+    spiegazione_en: "'git fetch' updates remote pointers safely. 'git pull' downloads and immediately merges the changes into the active branch.",
+    spiegazione_es: "'git fetch' actualiza los punteros remotos de forma segura. 'git pull' descarga y fusiona inmediatamente los cambios en la rama activa.",
   },
 
   // Capitolo 6: Workflows Avanzati & Cherry Pick
@@ -230,6 +342,14 @@ export const SFIDE_GIT: Sfida[] = [
     ],
     indice_corretto: 0,
     suggerimento: "'Cogliere la ciliegina' significa prelevare un solo commit mirato.",
-    spiegazione: "'git cherry-pick' copia e riapplica un commit prescelto da qualsiasi branch sul ramo corrente."
+    spiegazione: "'git cherry-pick' copia e riapplica un commit prescelto da qualsiasi branch sul ramo corrente.",
+    domanda_en: "What is the purpose of the 'git cherry-pick <hash-commit>' command?",
+    domanda_es: "¿Para qué sirve el comando 'git cherry-pick <hash-commit>'?",
+    risposte_en: ["Applies the changes from a specific single commit to the current branch", "Deletes an incorrect commit from the repository", "Displays who wrote a specific commit", "Rebases all commits"],
+    risposte_es: ["Aplica los cambios de un único commit específico a la rama actual", "Elimina un commit erróneo del repositorio", "Muestra quién escribió un determinado commit", "Ejecuta el rebase de todos los commits"],
+    suggerimento_en: "'Cherry-picking' means selecting one specific commit.",
+    suggerimento_es: "'Elegir la cereza' significa tomar un solo commit específico.",
+    spiegazione_en: "'git cherry-pick' copies and reapplies a chosen commit from any branch onto the current branch.",
+    spiegazione_es: "'git cherry-pick' copia y vuelve a aplicar un commit seleccionado desde cualquier rama a la rama actual.",
   }
 ];
