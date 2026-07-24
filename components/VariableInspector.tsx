@@ -124,11 +124,14 @@ function parseCodeExecutionSteps(code: string): StepFrame[] {
   return steps;
 }
 
+import { useLanguage } from '../lib/LanguageContext';
+
 export default function VariableInspector({
   code,
   isOpen,
   onToggle
 }: VariableInspectorProps) {
+  const { language } = useLanguage();
   const steps = useMemo(() => parseCodeExecutionSteps(code), [code]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
@@ -191,7 +194,7 @@ export default function VariableInspector({
                   onClick={() => setCurrentStepIndex(0)}
                   disabled={currentStepIndex === 0}
                   className="p-1.5 rounded-lg bg-[var(--ctp-surface0)] hover:bg-[var(--ctp-surface1)] disabled:opacity-40 text-[var(--ctp-text)] cursor-pointer disabled:cursor-not-allowed transition-colors"
-                  title="Reset al primo step"
+                  title={language === 'en' ? 'Reset to first step' : language === 'es' ? 'Restablecer al primer paso' : 'Reset al primo step'}
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
@@ -202,7 +205,7 @@ export default function VariableInspector({
                   className="p-1.5 rounded-lg bg-[var(--ctp-surface0)] hover:bg-[var(--ctp-surface1)] disabled:opacity-40 text-[var(--ctp-text)] cursor-pointer disabled:cursor-not-allowed transition-colors flex items-center gap-1 text-[11px]"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
-                  <span>Passo Prev</span>
+                  <span>{language === 'en' ? 'Prev Step' : language === 'es' ? 'Paso Ant' : 'Passo Prev'}</span>
                 </button>
                 <button
                   type="button"
@@ -210,7 +213,7 @@ export default function VariableInspector({
                   disabled={currentStepIndex >= steps.length - 1}
                   className="px-2.5 py-1.5 rounded-lg bg-[var(--ctp-mauve)] text-white font-bold hover:opacity-90 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-colors flex items-center gap-1 text-[11px] shadow-sm"
                 >
-                  <span>Passo Succ</span>
+                  <span>{language === 'en' ? 'Next Step' : language === 'es' ? 'Paso Sig' : 'Passo Succ'}</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -243,7 +246,7 @@ export default function VariableInspector({
               <div className="p-2.5 rounded-xl bg-[var(--ctp-crust)] border border-[var(--ctp-surface1)] overflow-x-auto space-y-1">
                 <div className="text-[10px] uppercase tracking-wider text-[var(--ctp-overlay0)] font-bold mb-1.5 flex items-center gap-1">
                   <Play className="w-3 h-3 text-[var(--ctp-mauve)]" />
-                  <span>Esecuzione Codice</span>
+                  <span>{language === 'en' ? 'Code Execution' : language === 'es' ? 'Ejecución de Código' : 'Esecuzione Codice'}</span>
                 </div>
                 {lines.map((l, idx) => {
                   const isActive = idx === currentStep.lineIndex;

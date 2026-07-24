@@ -33,10 +33,10 @@ export default function Sidebar({
   onOpenGithubSync,
   streakCount
 }: SidebarProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <aside className="hidden md:flex flex-col w-64 border-r ctp-card-mantle border-[var(--ctp-surface1)] min-h-screen p-4 sticky top-0 h-screen overflow-y-auto shrink-0 font-mono text-xs select-none">
+    <aside className="hidden md:flex flex-col w-56 lg:w-64 border-r ctp-card-mantle border-[var(--ctp-surface1)] min-h-screen p-3 lg:p-4 sticky top-0 h-screen overflow-y-auto shrink-0 font-mono text-xs select-none">
       {/* Brand Header */}
       <div className="flex items-center gap-3 px-2 py-3 mb-4 border-b border-[var(--ctp-surface1)]">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/20 font-black text-lg">
@@ -101,7 +101,7 @@ export default function Sidebar({
         {/* Tools & Leaderboard */}
         <div>
           <div className="px-2 mb-2 text-[10px] uppercase font-bold tracking-widest text-[var(--ctp-subtext0)]">
-            Strumenti & Community
+            {language === 'en' ? 'Tools & Community' : language === 'es' ? 'Herramientas y Comunidad' : 'Strumenti & Community'}
           </div>
           <div className="space-y-1">
             <button
@@ -113,7 +113,7 @@ export default function Sidebar({
               }`}
             >
               <Trophy className="w-4 h-4 text-yellow-400" />
-              <span>{t.leaderboardTab || 'Classifica'}</span>
+              <span>{t.leaderboardTab || (language === 'en' ? 'Leaderboard' : language === 'es' ? 'Clasificación' : 'Classifica')}</span>
             </button>
 
             <button
@@ -146,7 +146,7 @@ export default function Sidebar({
         >
           <div className="flex items-center gap-2.5">
             <Settings className="w-4 h-4 text-[var(--ctp-subtext0)]" />
-            <span>Impostazioni</span>
+            <span>{language === 'en' ? 'Settings' : language === 'es' ? 'Configuración' : 'Impostazioni'}</span>
           </div>
           <span className="flex items-center gap-1 text-[10px] text-amber-400 font-bold">
             🔥 {streakCount}d

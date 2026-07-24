@@ -308,11 +308,11 @@ export default function GameMode({
               <div className="text-2xl font-extrabold font-mono mt-0.5" style={{ color: 'var(--ctp-peach)' }}>{punti} pt</div>
             </div>
             <div className="ctp-card-mantle p-4 rounded-xl border">
-              <div className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>Risposte Esatte</div>
+              <div className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>{language === 'en' ? 'Correct Answers' : language === 'es' ? 'Respuestas Correctas' : 'Risposte Esatte'}</div>
               <div className="text-2xl font-extrabold font-mono mt-0.5 text-[var(--ctp-green)]">{risposteCorrette} / {activeQuestions.length}</div>
             </div>
             <div className="ctp-card-mantle p-4 rounded-xl border">
-              <div className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>{t.accuracy}</div>
+              <div className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>{t.accuracy || (language === 'en' ? 'Accuracy' : language === 'es' ? 'Precisión' : 'Accuratezza')}</div>
               <div className="text-2xl font-extrabold font-mono mt-0.5" style={{ color: 'var(--ctp-blue)' }}>{percentuale}%</div>
             </div>
           </div>
@@ -321,12 +321,12 @@ export default function GameMode({
           {!saved ? (
             <form onSubmit={handleSaveScore} className="ctp-card-mantle p-5 rounded-xl border mb-6">
               <label className="block text-xs font-semibold uppercase tracking-wider text-left mb-2" style={{ color: 'var(--ctp-subtext0)' }}>
-                Salva il tuo punteggio in Classifica
+                {language === 'en' ? 'Save your score in Leaderboard' : language === 'es' ? 'Guarda tu puntuación en la clasificación' : 'Salva il tuo punteggio in Classifica'}
               </label>
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="Inserisci il tuo nome (es. Dev)"
+                  placeholder={language === 'en' ? 'Enter your nickname (e.g. Dev)' : language === 'es' ? 'Ingresa tu apodo (ej. Dev)' : 'Inserisci il tuo nome (es. Dev)'}
                   maxLength={32}
                   value={nomeGiocatore}
                   onChange={(e) => setNomeGiocatore(e.target.value)}
@@ -433,7 +433,7 @@ export default function GameMode({
                 )}
               </div>
             ) : (
-              <span className="text-[11px]" style={{ color: 'var(--ctp-overlay0)' }}>Timer OFF</span>
+              <span className="text-[11px]" style={{ color: 'var(--ctp-overlay0)' }}>{language === 'en' ? 'Timer OFF' : language === 'es' ? 'Temporizador OFF' : 'Timer OFF'}</span>
             )}
           </div>
         </div>

@@ -84,7 +84,7 @@ export default function TechHubView({
             className="px-5 py-2.5 rounded-xl border border-purple-500/30 bg-purple-500/10 text-purple-300 font-mono font-bold text-xs flex items-center justify-center gap-2 hover:bg-purple-500/20 transition-all cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Chiedi a DevBot IA</span>
+            <span>{language === 'en' ? 'Ask AI DevBot' : language === 'es' ? 'Preguntar a DevBot IA' : 'Chiedi a DevBot IA'}</span>
           </button>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function TechHubView({
           }`}
         >
           <BarChart2 className="w-4 h-4" />
-          <span>Panoramica</span>
+          <span>{language === 'en' ? 'Overview' : language === 'es' ? 'Resumen' : 'Panoramica'}</span>
         </button>
 
         <button
@@ -112,7 +112,7 @@ export default function TechHubView({
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>{t.learnTab || 'Modalità Impara'}</span>
+          <span>{t.learnTab || (language === 'en' ? 'Learn Mode' : language === 'es' ? 'Modo Aprender' : 'Modalità Impara')}</span>
         </button>
 
         <button
@@ -124,7 +124,7 @@ export default function TechHubView({
           }`}
         >
           <Gamepad2 className="w-4 h-4" />
-          <span>Gioca & Sfida</span>
+          <span>{language === 'en' ? 'Play & Challenge' : language === 'es' ? 'Jugar y Desafiar' : 'Gioca & Sfida'}</span>
         </button>
 
         <button
@@ -147,8 +147,8 @@ export default function TechHubView({
             {/* Track Progress Card */}
             <div className="p-6 rounded-2xl ctp-card border space-y-4" style={{ borderColor: 'var(--ctp-border)' }}>
               <h3 className="font-mono font-bold text-sm text-[var(--ctp-text)] flex items-center justify-between">
-                <span>Stato di Avanzamento {track.name}</span>
-                <span className="text-xs text-[var(--ctp-mauve)]">{trackCompletedCount} / {trackTotalCount} Sfide</span>
+                <span>{language === 'en' ? 'Progress Status' : language === 'es' ? 'Estado de Progreso' : 'Stato di Avanzamento'} {track.name}</span>
+                <span className="text-xs text-[var(--ctp-mauve)]">{trackCompletedCount} / {trackTotalCount} {language === 'en' ? 'Challenges' : language === 'es' ? 'Desafíos' : 'Sfide'}</span>
               </h3>
               <div className="w-full h-3 rounded-full bg-[var(--ctp-surface0)] overflow-hidden">
                 <div 
@@ -157,8 +157,8 @@ export default function TechHubView({
                 />
               </div>
               <p className="text-xs text-[var(--ctp-subtext0)] leading-relaxed">
-                {track.bookRef ? `Riferimento didattico principale: ${track.bookRef}. ` : ''}
-                Completa le lezioni teoriche nella scheda Impara ed esegui i checkpoint quiz per avanzare di livello.
+                {track.bookRef ? `${language === 'en' ? 'Main educational reference:' : language === 'es' ? 'Referencia didáctica principal:' : 'Riferimento didattico principale:'} ${track.bookRef}. ` : ''}
+                {language === 'en' ? 'Complete theory lessons in the Learn tab and run checkpoint quizzes to level up.' : language === 'es' ? 'Completa lecciones teóricas en la pestaña Aprender y ejecuta cuestionarios para subir de nivel.' : 'Completa lezioni teoriche nella scheda Impara ed esegui checkpoint quiz per avanzare di livello.'}
               </p>
             </div>
 
@@ -172,8 +172,8 @@ export default function TechHubView({
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
                   <BookOpen className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </div>
-                <h4 className="font-mono font-bold text-sm text-[var(--ctp-text)]">Lezioni & Code Sandbox</h4>
-                <p className="text-xs text-[var(--ctp-subtext0)]">Esplora la teoria passo-passo ed esegui codice reale in-browser.</p>
+                <h4 className="font-mono font-bold text-sm text-[var(--ctp-text)]">{language === 'en' ? 'Lessons & Code Sandbox' : language === 'es' ? 'Lecciones y Code Sandbox' : 'Lezioni & Code Sandbox'}</h4>
+                <p className="text-xs text-[var(--ctp-subtext0)]">{language === 'en' ? 'Explore theory step-by-step and run real code in-browser.' : language === 'es' ? 'Explora la teoría paso a paso y ejecuta código real en el navegador.' : 'Esplora la teoria passo-passo ed esegui codice reale in-browser.'}</p>
               </button>
 
               <button
@@ -184,8 +184,8 @@ export default function TechHubView({
                 <div className="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center font-bold">
                   <Gamepad2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </div>
-                <h4 className="font-mono font-bold text-sm text-[var(--ctp-text)]">Sfide Quiz Filtrabili</h4>
-                <p className="text-xs text-[var(--ctp-subtext0)]">Configura sessioni di test per argomento e difficoltà per guadagnare XP.</p>
+                <h4 className="font-mono font-bold text-sm text-[var(--ctp-text)]">{language === 'en' ? 'Filterable Quiz Challenges' : language === 'es' ? 'Desafíos de Cuestionarios Filtrables' : 'Sfide Quiz Filtrabili'}</h4>
+                <p className="text-xs text-[var(--ctp-subtext0)]">{language === 'en' ? 'Configure quiz sessions by topic and difficulty to earn XP.' : language === 'es' ? 'Configura sesiones de prueba por tema y dificultad para ganar XP.' : 'Configura sessioni di test per argomento e difficoltà per guadagnare XP.'}</p>
               </button>
             </div>
           </div>
@@ -193,17 +193,17 @@ export default function TechHubView({
           {/* Sidebar Stats & Info */}
           <div className="space-y-6">
             <div className="p-5 rounded-2xl ctp-card border space-y-3 font-mono text-xs" style={{ borderColor: 'var(--ctp-border)' }}>
-              <div className="font-bold text-xs uppercase text-[var(--ctp-subtext0)]">Info Tracciato</div>
+              <div className="font-bold text-xs uppercase text-[var(--ctp-subtext0)]">{language === 'en' ? 'Track Info' : language === 'es' ? 'Información del Trac' : 'Info Tracciato'}</div>
               <div className="flex items-center justify-between py-2 border-b border-[var(--ctp-surface1)]">
-                <span className="text-[var(--ctp-subtext0)]">Tecnologia:</span>
+                <span className="text-[var(--ctp-subtext0)]">{language === 'en' ? 'Technology:' : language === 'es' ? 'Tecnología:' : 'Tecnologia:'}</span>
                 <span className="font-bold text-[var(--ctp-text)]">{track.name}</span>
               </div>
               <div className="flex items-center justify-between py-2 border-b border-[var(--ctp-surface1)]">
-                <span className="text-[var(--ctp-subtext0)]">Linguaggio Sandbox:</span>
+                <span className="text-[var(--ctp-subtext0)]">{language === 'en' ? 'Sandbox Language:' : language === 'es' ? 'Lenguaje Sandbox:' : 'Linguaggio Sandbox:'}</span>
                 <span className="font-bold text-[var(--ctp-mauve)]">{track.codeLang}</span>
               </div>
               <div className="flex items-center justify-between py-2">
-                <span className="text-[var(--ctp-subtext0)]">Totale Domande:</span>
+                <span className="text-[var(--ctp-subtext0)]">{language === 'en' ? 'Total Questions:' : language === 'es' ? 'Total de Preguntas:' : 'Totale Domande:'}</span>
                 <span className="font-bold text-[var(--ctp-text)]">{trackTotalCount}</span>
               </div>
             </div>

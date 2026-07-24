@@ -141,21 +141,21 @@ export default function SettingsDrawerModal({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs font-mono font-bold" style={{ color: 'var(--ctp-text)' }}>
                   {isMocha ? <Moon className="w-4 h-4 text-[var(--ctp-mauve)]" /> : <Sun className="w-4 h-4 text-[var(--ctp-peach)]" />}
-                  <span>Tema Sintassi: <strong>{isMocha ? 'Catppuccin Mocha (Scuro)' : 'Catppuccin Latte (Chiaro)'}</strong></span>
+                  <span>{language === 'en' ? 'Syntax Theme:' : language === 'es' ? 'Tema Sintaxis:' : 'Tema Sintassi:'} <strong>{isMocha ? (language === 'en' ? 'Catppuccin Mocha (Dark)' : language === 'es' ? 'Catppuccin Mocha (Oscuro)' : 'Catppuccin Mocha (Scuro)') : (language === 'en' ? 'Catppuccin Latte (Light)' : language === 'es' ? 'Catppuccin Latte (Claro)' : 'Catppuccin Latte (Chiaro)')}</strong></span>
                 </div>
                 <button
                   onClick={toggleSyntaxTheme}
                   className="px-3 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer"
                   style={{ backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface2)' }}
                 >
-                  Cambia
+                  {language === 'en' ? 'Change' : language === 'es' ? 'Cambiar' : 'Cambia'}
                 </button>
               </div>
 
               <div className="border-t pt-3 flex items-center justify-between" style={{ borderColor: 'var(--ctp-surface1)' }}>
                 <div className="flex items-center gap-2 text-xs font-mono font-bold" style={{ color: 'var(--ctp-text)' }}>
                   {soundMuted ? <VolumeX className="w-4 h-4 text-[var(--ctp-overlay0)]" /> : <Volume2 className="w-4 h-4 text-[var(--ctp-green)]" />}
-                  <span>Effetti Sonori: <strong>{soundMuted ? 'Disattivati' : 'Attivi'}</strong></span>
+                  <span>{language === 'en' ? 'Sound Effects:' : language === 'es' ? 'Efectos de Sonido:' : 'Effetti Sonori:'} <strong>{soundMuted ? (language === 'en' ? 'Muted' : language === 'es' ? 'Desactivados' : 'Disattivati') : (language === 'en' ? 'Active' : language === 'es' ? 'Activos' : 'Attivi')}</strong></span>
                 </div>
                 <button
                   onClick={handleToggleSound}
@@ -166,7 +166,7 @@ export default function SettingsDrawerModal({
                     borderColor: soundMuted ? 'var(--ctp-surface2)' : 'var(--ctp-green)'
                   }}
                 >
-                  {soundMuted ? 'Attiva' : 'Disattiva'}
+                  {soundMuted ? (language === 'en' ? 'Enable' : language === 'es' ? 'Activar' : 'Attiva') : (language === 'en' ? 'Mute' : language === 'es' ? 'Desactivar' : 'Disattiva')}
                 </button>
               </div>
             </div>
@@ -176,11 +176,11 @@ export default function SettingsDrawerModal({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs font-mono font-bold" style={{ color: 'var(--ctp-mauve)' }}>
                   <Github className="w-4 h-4" />
-                  <span>Sincronizzazione GitHub</span>
+                  <span>{language === 'en' ? 'GitHub Sync' : language === 'es' ? 'Sincronización GitHub' : 'Sincronizzazione GitHub'}</span>
                 </div>
               </div>
               <p className="text-[11px] leading-relaxed" style={{ color: 'var(--ctp-subtext0)' }}>
-                Pubblica le sfide completate direttamente sul tuo account GitHub tramite OAuth ufficiale.
+                {language === 'en' ? 'Publish completed challenges directly to your GitHub account via official OAuth.' : language === 'es' ? 'Publica desafíos completados directamente en tu cuenta de GitHub mediante OAuth oficial.' : 'Pubblica le sfide completate direttamente sul tuo account GitHub tramite OAuth ufficiale.'}
               </p>
               <button
                 onClick={() => {
@@ -191,7 +191,7 @@ export default function SettingsDrawerModal({
                 style={{ backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-crust)', borderColor: 'var(--ctp-mauve)' }}
               >
                 <Github className="w-4 h-4" />
-                <span>Apri Sincronizzazione GitHub</span>
+                <span>{language === 'en' ? 'Open GitHub Sync' : language === 'es' ? 'Abrir Sincronización GitHub' : 'Apri Sincronizzazione GitHub'}</span>
               </button>
             </div>
 
@@ -200,14 +200,14 @@ export default function SettingsDrawerModal({
               <div className="flex items-center justify-between text-xs font-mono font-bold" style={{ color: 'var(--ctp-text)' }}>
                 <span className="flex items-center gap-1.5">
                   <Flame className="w-4 h-4 text-[var(--ctp-peach)] fill-current" />
-                  <span>Streak Attiva: <strong>{streakInfo?.count || 0} Giorni</strong></span>
+                  <span>{language === 'en' ? 'Active Streak:' : language === 'es' ? 'Racha Activa:' : 'Streak Attiva:'} <strong>{streakInfo?.count || 0} {language === 'en' ? 'Days' : language === 'es' ? 'Días' : 'Giorni'}</strong></span>
                 </span>
               </div>
 
               <div className="flex items-center justify-between border-t pt-3" style={{ borderColor: 'var(--ctp-surface1)' }}>
                 <span className="flex items-center gap-1.5 text-xs font-mono font-bold" style={{ color: 'var(--ctp-text)' }}>
                   <Award className="w-4 h-4 text-[var(--ctp-yellow)]" />
-                  <span>Badge Sbloccati: <strong>{unlockedBadgesCount}</strong></span>
+                  <span>{language === 'en' ? 'Unlocked Badges:' : language === 'es' ? 'Insignias Desbloqueadas:' : 'Badge Sbloccati:'} <strong>{unlockedBadgesCount}</strong></span>
                 </span>
                 <button
                   onClick={() => {

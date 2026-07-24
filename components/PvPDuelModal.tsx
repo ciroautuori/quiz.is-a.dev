@@ -39,7 +39,10 @@ print(func(2))`,
   }
 ];
 
+import { useLanguage } from '../lib/LanguageContext';
+
 export default function PvPDuelModal({ isOpen, onClose }: PvPDuelModalProps) {
+  const { language } = useLanguage();
   const [stage, setStage] = useState<'lobby' | 'fighting' | 'result'>('lobby');
   const [selectedBotDifficulty, setSelectedBotDifficulty] = useState<'easy' | 'hard'>('easy');
   const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -229,7 +232,7 @@ export default function PvPDuelModal({ isOpen, onClose }: PvPDuelModalProps) {
               <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
                 <input 
                   type="text" 
-                  placeholder="Codice (vuoto per creare)"
+                  placeholder={language === 'en' ? 'Room Code (leave empty to create)' : language === 'es' ? 'Código de Sala (vacío para crear)' : 'Codice (vuoto per creare)'}
                   value={roomCode}
                   onChange={(e) => setRoomCode(e.target.value)}
                   className="px-4 py-2 rounded-xl border bg-[var(--ctp-crust)] text-center text-sm font-mono focus:outline-none focus:border-[var(--ctp-mauve)] transition-all"

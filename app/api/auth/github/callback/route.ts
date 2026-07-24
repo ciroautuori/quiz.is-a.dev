@@ -9,8 +9,8 @@ export async function GET(req: NextRequest) {
       `<html>
         <body style="font-family: sans-serif; background: #1e1e2e; color: #f38ba8; display: flex; align-items: center; justify-content: center; height: 100vh;">
           <div style="text-align: center;">
-            <h2>Autenticazione GitHub Annullata o Fallita</h2>
-            <p>${error || 'Codice di autorizzazione mancante.'}</p>
+            <h2>GitHub Authentication Cancelled or Failed</h2>
+            <p>${error || 'Missing authorization code.'}</p>
             <script>
               if (window.opener) {
                 window.opener.postMessage({ type: 'GITHUB_AUTH_ERROR', error: '${error || 'Mancante'}' }, '*');
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     const tokenData = await tokenRes.json();
 
     if (tokenData.error || !tokenData.access_token) {
-      throw new Error(tokenData.error_description || tokenData.error || 'Impossibile ottenere l access token da GitHub');
+      throw new Error(tokenData.error_description || tokenData.error || 'Failed to retrieve access token from GitHub');
     }
 
     const accessToken = tokenData.access_token;
@@ -111,9 +111,9 @@ export async function GET(req: NextRequest) {
         <body>
           <div class="card">
             <img src="${userData.avatar_url}" class="avatar" alt="Avatar" />
-            <h3>Autenticazione GitHub Riuscita!</h3>
-            <p>Connesso come @${userData.login}</p>
-            <p style="margin-top: 12px; font-size: 12px; color: #cba6f7;">Chiusura della finestra in corso...</p>
+            <h3>GitHub Authentication Successful!</h3>
+            <p>Connected as @${userData.login}</p>
+            <p style="margin-top: 12px; font-size: 12px; color: #cba6f7;">Closing window...</p>
           </div>
           <script>
             try {
@@ -140,9 +140,9 @@ export async function GET(req: NextRequest) {
     return new Response(
       `<html>
         <body style="font-family: sans-serif; background: #1e1e2e; color: #f38ba8; padding: 30px;">
-          <h2>Errore di autenticazione GitHub</h2>
+          <h2>GitHub Authentication Error</h2>
           <p>${err.message || String(err)}</p>
-          <p>Assicurati che GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET siano configurati correttamente.</p>
+          <p>Please ensure GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET are configured.</p>
         </body>
       </html>`,
       { headers: { 'Content-Type': 'text/html; charset=utf-8' } }

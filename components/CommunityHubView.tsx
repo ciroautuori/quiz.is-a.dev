@@ -57,7 +57,10 @@ interface CommunityHubViewProps {
   onPlayChallenge: (sfida: Sfida) => void;
 }
 
+import { useLanguage } from '../lib/LanguageContext';
+
 export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewProps) {
+  const { language } = useLanguage();
   const [challenges, setChallenges] = useState<CommunityChallenge[]>(INITIAL_COMMUNITY_CHALLENGES);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -157,7 +160,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
           className="px-5 py-2.5 rounded-xl bg-[var(--ctp-mauve)] text-white font-bold text-xs flex items-center gap-2 shadow-lg hover:opacity-90 cursor-pointer transition-transform hover:scale-105 active:scale-95 shrink-0"
         >
           <Plus className="w-4 h-4" />
-          <span>Crea Nuova Sfida</span>
+          <span>{language === 'en' ? 'Create New Challenge' : language === 'es' ? 'Crear Nueva Desafío' : 'Crea Nuova Sfida'}</span>
         </button>
       </div>
 
@@ -168,7 +171,7 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Cerca sfide create dalla community..."
+          placeholder={language === 'en' ? 'Search community challenges...' : language === 'es' ? 'Buscar desafíos de la comunidad...' : 'Cerca sfide create dalla community...'}
           className="w-full ctp-input pl-10 pr-4 py-3 rounded-xl text-xs border focus:outline-none"
         />
       </div>
@@ -186,8 +189,8 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                   {item.argomento}
                 </span>
                 <span className="text-xs text-[var(--ctp-subtext0)] flex items-center gap-1">
-                  Autore: <strong className="text-[var(--ctp-text)]">{item.author}</strong>
-                  {item.isCreator && <span className="bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] ml-1" title="Creator Badge">🏆</span>}
+                  {language === 'en' ? 'Author:' : language === 'es' ? 'Autor:' : 'Autore:'} <strong className="text-[var(--ctp-text)]">{item.author}</strong>
+                  {item.isCreator && <span className="bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] ml-1" title={language === 'en' ? 'Creator Badge' : language === 'es' ? 'Insignia de Creador' : 'Creator Badge'}>🏆</span>}
                 </span>
               </div>
 
@@ -220,14 +223,14 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
                   onClick={() => handleClone(item.id)}
                   className="px-3 py-1.5 rounded-xl border border-[var(--ctp-surface1)] text-[var(--ctp-subtext0)] text-xs font-bold hover:text-white transition-colors cursor-pointer"
                 >
-                  Clona
+                  {language === 'en' ? 'Clone' : language === 'es' ? 'Clonar' : 'Clona'}
                 </button>
                 <button
                   onClick={() => onPlayChallenge(item)}
                   className="px-4 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <Play className="w-3.5 h-3.5 fill-emerald-300" />
-                  <span>Gioca Ora</span>
+                  <span>{language === 'en' ? 'Play Now' : language === 'es' ? 'Jugar Ahora' : 'Gioca Ora'}</span>
                 </button>
               </div>
             </div>
@@ -235,12 +238,11 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
         ))}
       </div>
 
-      
       {filtered.length === 0 && (
         <div className="p-8 text-center ctp-card border border-[var(--ctp-surface1)] rounded-2xl">
           <div className="text-4xl mb-4">📭</div>
-          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">Nessuna sfida trovata</h3>
-          <p className="text-sm text-[var(--ctp-subtext0)]">Non ci sono sfide che corrispondono ai tuoi criteri. Prova a creare una nuova sfida!</p>
+          <h3 className="text-lg font-bold text-[var(--ctp-text)] mb-2">{language === 'en' ? 'No challenges found' : language === 'es' ? 'No se encontraron desafíos' : 'Nessuna sfida trovata'}</h3>
+          <p className="text-sm text-[var(--ctp-subtext0)]">{language === 'en' ? 'No challenges match your criteria. Try creating a new one!' : language === 'es' ? 'No hay desafíos que coincidan con tus criterios. ¡Intenta crear uno nuevo!' : 'Non ci sono sfide che corrispondono ai tuoi criteri. Prova a creare una nuova sfida!'}</p>
         </div>
       )}
 

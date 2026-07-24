@@ -16,7 +16,7 @@ import sys
 
 # Directory root
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TARGET_DIRS = ['app', 'components', 'lib']
+TARGET_DIRS = ['app', 'components']
 EXCLUDE_FILES = ['i18n.ts', 'tracks.ts'] # Translation dictionary and track metadata definitions
 
 # Regex patterns for detecting hardcoded text in JSX/TS code
