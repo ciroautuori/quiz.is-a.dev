@@ -14,6 +14,12 @@ export interface LearningTrack {
   codeLang: 'python' | 'typescript' | 'bash';
   bookRef: string;
   description: string;
+  title_en?: string;
+  title_es?: string;
+  subtitle_en?: string;
+  subtitle_es?: string;
+  description_en?: string;
+  description_es?: string;
 }
 
 export interface Challenge {
@@ -33,6 +39,24 @@ export interface Challenge {
   author?: string;
   upvotes?: number;
   isCreator?: boolean;
+
+  // Multilingual fields
+  question_en?: string;
+  question_es?: string;
+  options_en?: string[];
+  options_es?: string[];
+  hint_en?: string;
+  hint_es?: string;
+  explanation_en?: string;
+  explanation_es?: string;
+  domanda_en?: string;
+  domanda_es?: string;
+  risposte_en?: string[];
+  risposte_es?: string[];
+  suggerimento_en?: string;
+  suggerimento_es?: string;
+  spiegazione_en?: string;
+  spiegazione_es?: string;
   
   // Backward compatibility fields for legacy code
   capitolo?: number;
@@ -57,11 +81,21 @@ export interface Concept {
   text?: string;
   codeSnippet?: string;
 
+  // Multilingual fields
+  title_en?: string;
+  title_es?: string;
+  text_en?: string;
+  text_es?: string;
+
   // Backward compatibility fields
   titolo?: string;
   nome?: string;
   capitolo?: number;
   testo?: string;
+  titolo_en?: string;
+  titolo_es?: string;
+  testo_en?: string;
+  testo_es?: string;
 }
 
 export type Concetto = Concept;
@@ -118,7 +152,9 @@ export function getChallengeDifficulty(c: Challenge): 'easy' | 'medium' | 'hard'
   return 'easy';
 }
 
-export function getChallengeQuestion(c: Challenge): string {
+export function getChallengeQuestion(c: Challenge, lang: string = 'it'): string {
+  if (lang === 'en' && (c.question_en || c.domanda_en)) return c.question_en || c.domanda_en!;
+  if (lang === 'es' && (c.question_es || c.domanda_es)) return c.question_es || c.domanda_es!;
   return c.question ?? c.domanda ?? '';
 }
 
@@ -126,7 +162,9 @@ export function getChallengeCode(c: Challenge): string {
   return c.code ?? c.codice ?? '';
 }
 
-export function getChallengeOptions(c: Challenge): string[] {
+export function getChallengeOptions(c: Challenge, lang: string = 'it'): string[] {
+  if (lang === 'en' && (c.options_en || c.risposte_en)) return c.options_en || c.risposte_en!;
+  if (lang === 'es' && (c.options_es || c.risposte_es)) return c.options_es || c.risposte_es!;
   return c.options ?? c.risposte ?? [];
 }
 
@@ -134,11 +172,15 @@ export function getChallengeCorrectIndex(c: Challenge): number {
   return c.correctIndex ?? c.indice_corretto ?? 0;
 }
 
-export function getChallengeHint(c: Challenge): string {
+export function getChallengeHint(c: Challenge, lang: string = 'it'): string {
+  if (lang === 'en' && (c.hint_en || c.suggerimento_en)) return c.hint_en || c.suggerimento_en!;
+  if (lang === 'es' && (c.hint_es || c.suggerimento_es)) return c.hint_es || c.suggerimento_es!;
   return c.hint ?? c.suggerimento ?? '';
 }
 
-export function getChallengeExplanation(c: Challenge): string {
+export function getChallengeExplanation(c: Challenge, lang: string = 'it'): string {
+  if (lang === 'en' && (c.explanation_en || c.spiegazione_en)) return c.explanation_en || c.spiegazione_en!;
+  if (lang === 'es' && (c.explanation_es || c.spiegazione_es)) return c.explanation_es || c.spiegazione_es!;
   return c.explanation ?? c.spiegazione ?? '';
 }
 
@@ -179,7 +221,9 @@ export function normalizeChallenge(c: any): Challenge {
   };
 }
 
-export function getConceptTitle(c: Concept): string {
+export function getConceptTitle(c: Concept, lang: string = 'it'): string {
+  if (lang === 'en' && (c.title_en || c.titolo_en)) return c.title_en || c.titolo_en!;
+  if (lang === 'es' && (c.title_es || c.titolo_es)) return c.title_es || c.titolo_es!;
   return c.title ?? c.titolo ?? c.nome ?? 'Concept';
 }
 
@@ -187,7 +231,9 @@ export function getConceptChapter(c: Concept): number {
   return c.chapter ?? c.capitolo ?? 1;
 }
 
-export function getConceptText(c: Concept): string {
+export function getConceptText(c: Concept, lang: string = 'it'): string {
+  if (lang === 'en' && (c.text_en || c.testo_en)) return c.text_en || c.testo_en!;
+  if (lang === 'es' && (c.text_es || c.testo_es)) return c.text_es || c.testo_es!;
   return c.text ?? c.testo ?? '';
 }
 

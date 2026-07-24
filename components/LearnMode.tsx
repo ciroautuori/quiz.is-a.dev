@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { getConceptsForTrack } from '../lib/concepts';
-import { getTrackById } from '../lib/tracks';
-import { TrackId, Concetto } from '../lib/types';
+import { getTrackById, getTrackTitle } from '../lib/tracks';
+import { TrackId, Concetto, getConceptTitle, getConceptText } from '../lib/types';
 import { useLanguage } from '../lib/LanguageContext';
 import { BookOpen, Search, Filter, Lightbulb, ChevronRight, Sparkles } from 'lucide-react';
 
@@ -13,7 +13,7 @@ interface LearnModeProps {
 }
 
 export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithConcept }: LearnModeProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [chapterFilter, setChapterFilter] = useState<number | 'tutti'>('tutti');
   const [selectedConcept, setSelectedConcept] = useState<string | null>(null);
@@ -22,12 +22,11 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
   const concetti = getConceptsForTrack(activeTrackId);
 
   const filtered = concetti.filter((c) => {
-    const title = (c.title || c.titolo || c.nome || '').toLowerCase();
-    const text = (c.text || c.testo || '').toLowerCase();
-    const name = (c.nome || c.title || '').toLowerCase();
+    const title = getConceptTitle(c, language).toLowerCase();
+    const text = getConceptText(c, language).toLowerCase();
     const query = searchTerm.toLowerCase();
 
-    const matchesSearch = title.includes(query) || text.includes(query) || name.includes(query);
+    const matchesSearch = title.includes(query) || text.includes(query);
     
     const chapter = c.chapter ?? c.capitolo ?? 1;
     const matchesChapter = chapterFilter === 'tutti' || chapter === chapterFilter;
@@ -50,14 +49,14 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
-                {t.learnTab} ({track.title})
+                {t.learnTab} ({getTrackTitle(track, language)})
               </h2>
               <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border font-mono" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface1)' }}>
                 {track.badge}
               </span>
             </div>
             <p className="text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-              Esplora e ripassa le nozioni fondamentali basate su {track.bookRef}
+              {track.bookRef}
             </p>
           </div>
         </div>
@@ -123,7 +122,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold font-mono" style={{ color: 'var(--ctp-text)' }}>
-                      {concetto.title || concetto.titolo || concetto.nome || 'Concept'}
+                      {getConceptTitle(concetto, language)}
                     </h3>
                     <span className="text-[11px]" style={{ color: 'var(--ctp-subtext0)' }}>{t.chapter} {concetto.chapter ?? concetto.capitolo ?? 1} • {track.name}</span>
                   </div>
@@ -136,7 +135,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
                 <div className="px-4 pb-4 pt-2 border-t ctp-card-mantle text-xs leading-relaxed space-y-3" style={{ borderColor: 'var(--ctp-border)', color: 'var(--ctp-text)' }}>
                   <div className="flex items-start gap-2 pt-1">
                     <Lightbulb className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--ctp-peach)' }} />
-                    <p className="flex-1">{concetto.text || concetto.testo || ''}</p>
+                    <p className="flex-1">{getConceptText(concetto, language)}</p>
                   </div>
 
                   {onOpenAiTutorWithConcept && (
@@ -158,7 +157,7 @@ export default function LearnMode({ activeTrackId = 'python', onOpenAiTutorWithC
 
         {filtered.length === 0 && (
           <div className="p-8 text-center ctp-card rounded-xl border text-xs" style={{ color: 'var(--ctp-subtext0)' }}>
-            Nessun concetto trovato per la ricerca inserita.
+            {t.noConceptsFound}
           </div>
         )}
       </div>

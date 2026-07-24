@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sfida, DifficoltaType } from '../lib/types';
+import { Sfida, DifficoltaType, getChallengeQuestion, getChallengeOptions, getChallengeHint, getChallengeExplanation } from '../lib/types';
 import { salvaPunteggio, getQuestionBestTimes, saveQuestionBestTime } from '../lib/storage';
 import { calculateSM2, SM2Data } from '../lib/spacedRepetition';
 import { useLanguage } from '../lib/LanguageContext';
@@ -116,7 +116,7 @@ export default function GameMode({
 
   // Shuffle answers & select question
   const prepareQuestion = (sfida: Sfida) => {
-    const rawOptions = sfida.options || sfida.risposte || [];
+    const rawOptions = getChallengeOptions(sfida, language);
     const correctIdx = sfida.correctIndex ?? sfida.indice_corretto ?? 0;
     const indexed = rawOptions.map((r, i) => ({ text: r, originalIndex: i }));
     // Shuffle
@@ -550,7 +550,7 @@ export default function GameMode({
 
             {/* Question prompt */}
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--ctp-text)' }}>
-              {currentSfida.domanda}
+              {getChallengeQuestion(currentSfida, language)}
             </h3>
 
             {/* Code Snippet */}
@@ -639,7 +639,7 @@ export default function GameMode({
                   <div className="p-3.5 border rounded-xl text-xs flex items-start gap-2.5" style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-peach)', borderColor: 'var(--ctp-surface1)' }}>
                     <Sparkles className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--ctp-peach)' }} />
                     <div>
-                      <strong>{t.hint}:</strong> {currentSfida.suggerimento}
+                      <strong>{t.hint}:</strong> {getChallengeHint(currentSfida, language)}
                     </div>
                   </div>
                 )}
@@ -690,7 +690,7 @@ export default function GameMode({
                   )}
                 </div>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--ctp-text)' }}>
-                  {currentSfida.spiegazione}
+                  {getChallengeExplanation(currentSfida, language)}
                 </p>
 
                 <div className="mt-4 flex justify-end">

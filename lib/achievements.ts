@@ -48,7 +48,42 @@ function saveStoredUnlocks(map: Record<string, string>) {
   }
 }
 
-export function evaluateAchievements(): { achievements: Achievement[]; newlyUnlocked: Achievement[] } {
+const LOCALIZED_ACHIEVEMENTS: Record<string, { en: { title: string; description: string }; es: { title: string; description: string } }> = {
+  first_code: {
+    en: { title: 'First Code', description: 'Complete your first coding challenge successfully.' },
+    es: { title: 'Primer Código', description: 'Completa tu primer desafío de código con éxito.' }
+  },
+  three_day_streak: {
+    en: { title: 'Fire Trio (3 Days)', description: 'Maintain a 3-day consecutive study streak.' },
+    es: { title: 'Trío de Fuego (3 Días)', description: 'Mantén una racha de estudio de 3 días consecutivos.' }
+  },
+  ten_day_streak: {
+    en: { title: 'Ten-Day Streak (10 Days)', description: 'Reach an extraordinary 10-day streak!' },
+    es: { title: 'Racha de 10 Días (10 Días)', description: '¡Alcanza una racha de 10 días consecutivos!' }
+  },
+  logic_master: {
+    en: { title: 'Logic Master', description: 'Complete at least 10 coding challenges.' },
+    es: { title: 'Maestro de la Lógica', description: 'Completa al menos 10 desafíos de programación.' }
+  },
+  python_guru: {
+    en: { title: 'Python Guru', description: 'Complete 25 challenges to master the track.' },
+    es: { title: 'Gurú de Python', description: 'Completa 25 desafíos para dominar la ruta.' }
+  },
+  challenge_creator: {
+    en: { title: 'Challenge Architect', description: 'Create and add at least 1 custom question to the lab.' },
+    es: { title: 'Arquitecto de Desafíos', description: 'Crea y añade al menos 1 pregunta personalizada al laboratorio.' }
+  },
+  leaderboard_hero: {
+    en: { title: 'Leaderboard Hero', description: 'Record a score of at least 150 points on the leaderboard.' },
+    es: { title: 'Héroe de la Clasificación', description: 'Registra una puntuación de al menos 150 puntos en la clasificación.' }
+  },
+  advanced_master: {
+    en: { title: 'Advanced Master', description: 'Correctly answer at least 3 Hard difficulty challenges.' },
+    es: { title: 'Dominador Avanzado', description: 'Responde correctamente al menos a 3 desafíos de dificultad Difícil.' }
+  }
+};
+
+export function evaluateAchievements(lang: string = 'it'): { achievements: Achievement[]; newlyUnlocked: Achievement[] } {
   const completedIds = getCompletedQuestionIds();
   const streak = getDailyStreak();
   const punteggi = getPunteggi();
@@ -58,7 +93,7 @@ export function evaluateAchievements(): { achievements: Achievement[]; newlyUnlo
   // Calculate difficult questions completed
   const allQuestionsMap = new Map();
   [...TUTTE_LE_SFIDE, ...customQuestions].forEach((q) => allQuestionsMap.set(q.id, q));
-  
+
   let hardCount = 0;
   completedIds.forEach((id) => {
     const q = allQuestionsMap.get(id);
@@ -164,8 +199,20 @@ export function evaluateAchievements(): { achievements: Achievement[]; newlyUnlo
       });
     }
 
+    let title = item.title;
+    let description = item.description;
+    if (lang === 'en' && LOCALIZED_ACHIEVEMENTS[item.id]?.en) {
+      title = LOCALIZED_ACHIEVEMENTS[item.id].en.title;
+      description = LOCALIZED_ACHIEVEMENTS[item.id].en.description;
+    } else if (lang === 'es' && LOCALIZED_ACHIEVEMENTS[item.id]?.es) {
+      title = LOCALIZED_ACHIEVEMENTS[item.id].es.title;
+      description = LOCALIZED_ACHIEVEMENTS[item.id].es.description;
+    }
+
     return {
       ...item,
+      title,
+      description,
       unlocked: isRequirementMet || previouslyUnlocked,
       unlockedAt: unlockedAt || undefined,
     };

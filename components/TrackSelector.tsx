@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { TRACKS } from '../lib/tracks';
+import { TRACKS, getTrackTitle, getTrackSubtitle, getTrackDescription } from '../lib/tracks';
 import { TrackId } from '../lib/types';
+import { useLanguage } from '../lib/LanguageContext';
 import { motion } from 'framer-motion';
 import { Check, Sparkles, BookOpen } from 'lucide-react';
 
@@ -17,17 +18,19 @@ export default function TrackSelector({
   onSelectTrack,
   questionsCounts
 }: TrackSelectorProps) {
+  const { t, language } = useLanguage();
+
   return (
     <div className="w-full mb-6">
       <div className="flex items-center justify-between mb-3 px-1">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-[var(--ctp-peach)]" />
           <h2 className="text-xs font-bold uppercase tracking-wider font-mono text-[var(--ctp-subtext0)]">
-            Seleziona Linguaggio / Tecnologia
+            {t.trackSelectorTitle}
           </h2>
         </div>
         <span className="text-[11px] font-mono text-[var(--ctp-overlay0)]">
-          3 Tracciati Disponibili
+          3 {t.tracksAvailable}
         </span>
       </div>
 
@@ -71,16 +74,16 @@ export default function TrackSelector({
                   </span>
                   <div>
                     <h3 className="text-base font-bold font-mono" style={{ color: 'var(--ctp-text)' }}>
-                      {track.title}
+                      {getTrackTitle(track, language)}
                     </h3>
                     <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border" style={{ backgroundColor: 'var(--ctp-crust)', color: 'var(--ctp-mauve)', borderColor: 'var(--ctp-surface1)' }}>
-                      {track.subtitle}
+                      {getTrackSubtitle(track, language)}
                     </span>
                   </div>
                 </div>
 
                 <p className="text-xs mb-3 line-clamp-2 leading-relaxed" style={{ color: 'var(--ctp-subtext0)' }}>
-                  {track.description}
+                  {getTrackDescription(track, language)}
                 </p>
               </div>
 

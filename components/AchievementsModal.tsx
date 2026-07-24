@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { evaluateAchievements } from '../lib/achievements';
+import { useLanguage } from '../lib/LanguageContext';
 import { Award, X, Sparkles, CheckCircle2, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -11,7 +12,8 @@ interface AchievementsModalProps {
 }
 
 export default function AchievementsModal({ isOpen, onClose }: AchievementsModalProps) {
-  const { achievements } = useMemo(() => evaluateAchievements(), [isOpen]);
+  const { t, language } = useLanguage();
+  const { achievements } = useMemo(() => evaluateAchievements(language), [isOpen, language]);
 
   const unlockedCount = achievements.filter((a) => a.unlocked).length;
   const totalCount = achievements.length;
