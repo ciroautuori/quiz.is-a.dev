@@ -87,7 +87,7 @@ export default function GeneralHomeView({
           <span className="text-xs text-[var(--ctp-subtext0)]">{language === 'en' ? 'Select a technology to enter its dedicated Hub' : language === 'es' ? 'Selecciona una tecnología para entrar en su Hub dedicado' : "Seleziona una tecnologia per entrare nell'Hub dedicato"}</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {TRACKS.map((track) => {
             const trackQuestions = allQuestions.filter(q => q.trackId === track.id);
             const trackCompleted = trackQuestions.filter(q => completedIds.includes(q.id)).length;
@@ -134,7 +134,7 @@ export default function GeneralHomeView({
       </div>
 
       {/* Global Full-Stack Proficiency Radar Chart & Analytics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="p-6 rounded-2xl ctp-card border shadow-xl space-y-4" style={{ borderColor: 'var(--ctp-border)' }}>
           <div className="flex items-center justify-between font-mono">
             <h3 className="font-bold text-sm text-[var(--ctp-text)] flex items-center gap-2">

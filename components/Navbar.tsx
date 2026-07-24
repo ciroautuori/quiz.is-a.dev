@@ -50,7 +50,7 @@ export default function Navbar({
         <div className="flex items-center gap-3">
           <div 
             onClick={() => onSelectView('home')} 
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex md:hidden items-center gap-2 cursor-pointer group"
           >
             <div className="w-8 h-8 rounded-xl p-0.5 shadow-md bg-[var(--ctp-mauve)] flex items-center justify-center text-white font-black text-sm">
               <Terminal className="w-4 h-4 text-[var(--ctp-crust)]" />

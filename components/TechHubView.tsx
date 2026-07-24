@@ -142,7 +142,7 @@ export default function TechHubView({
 
       {/* Sub-Tab Content Rendering */}
       {subTab === 'overview' && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="md:col-span-2 space-y-6">
             {/* Track Progress Card */}
             <div className="p-6 rounded-2xl ctp-card border space-y-4" style={{ borderColor: 'var(--ctp-border)' }}>
