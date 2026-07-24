@@ -155,10 +155,10 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                 onClick={() => setShowGoalSettings(!showGoalSettings)}
                 className="p-2.5 rounded-xl border text-xs font-mono flex items-center gap-1 hover:opacity-80 transition-colors cursor-pointer"
                 style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)', borderColor: 'var(--ctp-surface1)' }}
-                title="Modifica Obiettivo Giornaliero"
+                title={language === 'en' ? 'Edit Daily Goal' : language === 'es' ? 'Editar Objetivo Diario' : 'Modifica Obiettivo Giornaliero'}
               >
                 <Sliders className="w-4 h-4" />
-                <span className="hidden sm:inline">Obiettivo: {goal}</span>
+                <span className="hidden sm:inline">{language === 'en' ? 'Goal:' : language === 'es' ? 'Objetivo:' : 'Obiettivo:'} {goal}</span>
               </button>
 
               {/* Dismiss button */}
@@ -167,7 +167,7 @@ export default function DailyGoalBanner({ onStartQuickGame }: DailyGoalBannerPro
                 onClick={() => setDismissed(true)}
                 className="p-2.5 rounded-xl border text-xs hover:opacity-80 transition-colors cursor-pointer"
                 style={{ backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-subtext0)', borderColor: 'var(--ctp-surface1)' }}
-                title="Nascondi Notifica"
+                title={language === 'en' ? 'Hide Notification' : language === 'es' ? 'Ocultar Notificación' : 'Nascondi Notifica'}
               >
                 <X className="w-4 h-4" />
               </button>

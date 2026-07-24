@@ -216,10 +216,10 @@ export default function AiTutorWidget({
               </div>
 
               <div className="flex items-center gap-2">
-                <button onClick={() => setTtsEnabled(!ttsEnabled)} className={`p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${ttsEnabled ? 'text-indigo-500' : 'text-gray-500'}`} title="Toggle TTS"><Volume2 className="w-4 h-4" /></button>
+                <button onClick={() => setTtsEnabled(!ttsEnabled)} className={`p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${ttsEnabled ? 'text-indigo-500' : 'text-gray-500'}`} title={language === 'en' ? 'Toggle TTS' : language === 'es' ? 'Alternar TTS' : 'Attiva/Disattiva Lettura Vocale'}><Volume2 className="w-4 h-4" /></button>
                 <button
                   onClick={clearChat}
-                  title="Pulisci chat"
+                  title={language === 'en' ? 'Clear chat' : language === 'es' ? 'Limpiar chat' : 'Pulisci chat'}
                   className="p-2 rounded-lg hover:bg-[var(--ctp-surface0)] transition-colors"
                   style={{ color: 'var(--ctp-subtext0)' }}
                 >

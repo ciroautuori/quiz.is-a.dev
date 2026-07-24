@@ -86,7 +86,7 @@ export default function Navbar({
             onClick={onOpenAchievements}
             type="button"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-mono transition-all ctp-card-surface border border-[var(--ctp-surface1)] hover:opacity-90 shrink-0 cursor-pointer shadow-sm"
-            title="Badge e Traguardi"
+            title={language === 'en' ? 'Badges & Achievements' : language === 'es' ? 'Insignias y Logros' : 'Badge e Traguardi'}
           >
             <Award className="w-4 h-4 text-yellow-400" />
             <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[var(--ctp-surface1)] text-yellow-400">

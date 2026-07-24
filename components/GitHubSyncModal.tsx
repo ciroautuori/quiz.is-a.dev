@@ -211,7 +211,7 @@ export default function GitHubSyncModal({ isOpen, onClose }: GitHubSyncModalProp
                 {isConnecting ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Connessione in corso...</span>
+                    <span>{language === 'en' ? 'Connecting...' : language === 'es' ? 'Conectando...' : 'Connessione in corso...'}</span>
                   </>
                 ) : (
                   <>
