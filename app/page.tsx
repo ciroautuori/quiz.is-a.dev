@@ -74,7 +74,7 @@ import CertificateModal from '../components/CertificateModal';
 import CommunityHubView from '../components/CommunityHubView';
 import AnalyticsDashboardModal from '../components/AnalyticsDashboardModal';
 import CommandPaletteModal, { CommandPaletteAction } from '../components/CommandPaletteModal';
-import { soundEngine } from '../lib/soundEngine';
+import SettingsDrawerModal from '../components/SettingsDrawerModal';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'gioca' | 'impara' | 'classifica' | 'personalizza' | 'skill_tree' | 'community'>('gioca');
@@ -84,6 +84,7 @@ export default function Home() {
   const [streakInfo, setStreakInfo] = useState<StreakInfo>({ count: 0, lastDate: '', completedToday: false });
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
   const [isGithubSyncOpen, setIsGithubSyncOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [unlockedCount, setUnlockedCount] = useState(0);
   const [latestUnlockedBadge, setLatestUnlockedBadge] = useState<Achievement | null>(null);
   const [isZenMode, setIsZenMode] = useState(false);
@@ -229,6 +230,7 @@ export default function Home() {
                 onOpenAchievements={() => setIsAchievementsOpen(true)}
                 onOpenAiTutor={() => openAiTutor()}
                 onOpenGithubSync={() => setIsGithubSyncOpen(true)}
+                onOpenSettings={() => setIsSettingsOpen(true)}
               />
             )}
 
@@ -552,6 +554,16 @@ export default function Home() {
                 perform: () => setIsZenMode((prev) => !prev)
               }
             ]}
+          />
+
+          {/* Settings & Tools Drawer Modal */}
+          <SettingsDrawerModal
+            isOpen={isSettingsOpen}
+            onClose={() => setIsSettingsOpen(false)}
+            streakInfo={streakInfo}
+            unlockedBadgesCount={unlockedCount}
+            onOpenAchievements={() => setIsAchievementsOpen(true)}
+            onOpenGithubSync={() => setIsGithubSyncOpen(true)}
           />
 
           {/* GitHub OAuth & Code Sync Modal */}
