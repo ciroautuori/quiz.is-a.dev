@@ -7,6 +7,7 @@ import { Sfida, normalizeChallenge, getChallengeQuestion, getChallengeTopic, get
 import { soundEngine } from '../lib/soundEngine';
 import { useLanguage } from '../lib/LanguageContext';
 
+import CodeBlock from './CodeBlock';
 import { saveCustomQuestion } from '../lib/storage';
 
 interface CommunityChallenge extends Sfida {
@@ -215,9 +216,31 @@ export default function CommunityHubView({ onPlayChallenge }: CommunityHubViewPr
               </h3>
 
               {getChallengeCode(item) && (
-                <pre className="p-2.5 rounded-lg bg-slate-950 text-emerald-300 font-mono text-[11px] overflow-x-auto border border-slate-800">
-                  {getChallengeCode(item)}
-                </pre>
+                <CodeBlock code={getChallengeCode(item)} language={(item.trackId as any) || 'python'} />
+              )}
+
+              {/* Options & Explanation */}
+              {getChallengeOptions(item, language).length > 0 && (
+                <div className="grid grid-cols-2 gap-1.5 pt-1">
+                  {getChallengeOptions(item, language).map((opt, oIdx) => (
+                    <div 
+                      key={oIdx}
+                      className={`text-[10px] p-2 rounded-lg border font-mono truncate ${
+                        oIdx === (item.correctIndex ?? item.indice_corretto ?? 0)
+                          ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                          : 'bg-[var(--ctp-surface0)] border-[var(--ctp-surface1)] text-[var(--ctp-subtext0)]'
+                      }`}
+                    >
+                      <span className="font-bold mr-1 opacity-70">{oIdx + 1}.</span> {opt}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {getChallengeExplanation(item, language) && (
+                <p className="text-[11px] italic text-[var(--ctp-subtext0)] bg-[var(--ctp-surface0)]/50 p-2 rounded-lg border border-[var(--ctp-surface1)]/50">
+                  💡 {getChallengeExplanation(item, language)}
+                </p>
               )}
             </div>
 
