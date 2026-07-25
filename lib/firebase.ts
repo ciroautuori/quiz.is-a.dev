@@ -16,15 +16,37 @@ import {
   updateDoc
 } from 'firebase/firestore';
 
+// Fail-loud: nessun fallback hardcoded. Se le env mancano, l'app non parte.
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyDemoKeyForPublicQuizPlatform",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "quiz-is-a-dev.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "quiz-is-a-dev",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "quiz-is-a-dev.appspot.com",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:123456789:web:abcdef123456",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   firestoreDatabaseId: "(default)",
 };
+
+// Verifica che tutte le env Firebase siano presenti
+const requiredFirebaseEnv = [
+  'NEXT_PUBLIC_FIREBASE_API_KEY',
+  'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
+  'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+  'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET',
+  'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
+  'NEXT_PUBLIC_FIREBASE_APP_ID',
+];
+
+const missingEnv = requiredFirebaseEnv.filter((key) => !process.env[key]);
+if (missingEnv.length > 0) {
+  const msg = `[Firebase] Variabili d'ambiente mancanti: ${missingEnv.join(', ')}. ` +
+    `Configura .env.local (dev) o le env del container (prod).`;
+  // In produzione blocca, in dev avvisa solo in console
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(msg);
+  }
+  console.warn(msg);
+}
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 export const db = getFirestore(app);
@@ -65,9 +87,10 @@ export interface FirestoreErrorInfo {
 }
 
 export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
-  const message = error instanceof Error ? error.message : String(error);
-  console.error('Firestore Error:', operationType, path, message);
-  throw new Error(message);
+  // Log sanitizzato: operation type e path (non contengono dati sensibili),
+  // ma non loggare il message raw che potrebbe contenere token o dettagli interni
+  console.error('Firestore Error:', operationType, path);
+  throw new Error('Database operation failed. Please try again.');
 }
 
 // Test connection on boot

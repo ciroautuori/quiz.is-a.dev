@@ -20,10 +20,11 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    // Leaderboard
+    // Leaderboard: lettura pubblica, scrittura solo autenticati
     match /leaderboard/{recordId} {
       allow read: if true;
-      allow create: if isValidId(recordId) 
+      allow create: if isSignedIn()
+        && isValidId(recordId) 
         && request.resource.data.keys().hasAll(['id', 'nomeUtente', 'punteggio', 'data'])
         && request.resource.data.nomeUtente is string
         && request.resource.data.nomeUtente.size() > 0
@@ -34,14 +35,16 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
-    // PvP Duels Matchmaking
+    // PvP Duels Matchmaking: lettura e scrittura solo autenticati
     match /duels/{duelId} {
-      allow read: if true;
-      allow create: if isValidId(duelId)
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && isValidId(duelId)
         && request.resource.data.p1Hp == 100
         && request.resource.data.p2Hp == 100
         && request.resource.data.status == 'waiting';
-      allow update: if isValidId(duelId)
+      allow update: if isSignedIn()
+        && isValidId(duelId)
         && request.resource.data.p1Hp is number
         && request.resource.data.p1Hp >= 0
         && request.resource.data.p1Hp <= 100
@@ -51,7 +54,8 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    // Custom Questions
+    // Custom Questions: lettura pubblica (contenuti educativi condivisi),
+    // scrittura solo autenticati e owner
     match /custom_questions/{questionId} {
       allow read: if true;
       allow create: if isSignedIn()
@@ -67,7 +71,7 @@ service cloud.firestore {
       allow delete: if isSignedIn() && resource.data.authorId == request.auth.uid;
     }
 
-    // User progress
+    // User progress: solo l'owner puo' leggere e scrivere
     match /users/{userId}/progress/main {
       allow read: if isOwner(userId);
       allow create, update: if isOwner(userId)

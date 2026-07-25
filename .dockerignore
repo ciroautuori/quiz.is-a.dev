@@ -36,3 +36,9 @@ ATTRIBUTION.md
 PRODUCT.md
 DESIGN.md
 IDEA.md
+
+# ── AI game dev notes (non deve finire nel container) ──
+aigame/
+
+# ── Gemini / Claude config ───────────────────
+.gemini/

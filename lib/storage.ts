@@ -155,8 +155,9 @@ export function salvaPunteggio(nome: string, punti: number, difficolta: string, 
     }
   }
 
-  // Cloud async publish
+  // Cloud async publish: solo se autenticato, mai come 'guest'
   (async () => {
+    if (!auth.currentUser) return;
     try {
       await setDoc(doc(db, 'leaderboard', recordId), {
         id: recordId,
@@ -164,10 +165,11 @@ export function salvaPunteggio(nome: string, punti: number, difficolta: string, 
         punteggio: nuovo.punti,
         data: nuovo.data,
         trackId: nuovo.difficolta,
-        userId: auth.currentUser?.uid || 'guest'
+        userId: auth.currentUser.uid
       });
     } catch (err) {
-      console.warn('Failed to save score to Firebase cloud', err);
+      // Log sanitizzato: nessun dato utente sensibile
+      console.warn('Failed to save score to Firebase cloud');
     }
   })();
 
