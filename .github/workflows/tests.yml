@@ -17,6 +17,6 @@ jobs:
 
       - name: Type Check & Build
         run: |
-          npm install --no-audit --no-fund
-          npx tsc --noEmit
-          npm run build
+          bun install --frozen-lockfile
+          bunx tsc --noEmit
+          bun run build
