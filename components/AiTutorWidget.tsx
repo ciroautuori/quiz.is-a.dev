@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, Send, Bot, User, RefreshCw, AlertCircle, Code, HelpCircle, Lightbulb, Volume2 } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
 import { Sfida, Concetto } from '../lib/types';
+import { getAiHeaders } from '../lib/storage';
 
 interface AiTutorWidgetProps {
   isOpen: boolean;
@@ -98,7 +99,7 @@ export default function AiTutorWidget({
     try {
       const res = await fetch('/api/gemini/tutor', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAiHeaders(),
         body: JSON.stringify({
           messages: newHistory.map(m => ({ role: m.role, content: m.content })),
           questionContext: activeQuestion

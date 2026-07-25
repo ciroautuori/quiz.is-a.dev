@@ -466,3 +466,47 @@ export function resetCompletedQuestions(): string[] {
   }
   return [];
 }
+
+// --- BYOK: Bring Your Own Key (Gemini API) ---
+const GEMINI_API_KEY_STORAGE = 'devquest_gemini_api_key';
+
+export function getGeminiApiKey(): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    return localStorage.getItem(GEMINI_API_KEY_STORAGE);
+  } catch {
+    return null;
+  }
+}
+
+export function setGeminiApiKey(key: string): void {
+  if (typeof window === 'undefined') return;
+  try {
+    if (key.trim()) {
+      localStorage.setItem(GEMINI_API_KEY_STORAGE, key.trim());
+    } else {
+      localStorage.removeItem(GEMINI_API_KEY_STORAGE);
+    }
+  } catch (e) {
+    console.warn('Impossibile salvare la Gemini API key', e);
+  }
+}
+
+export function clearGeminiApiKey(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.removeItem(GEMINI_API_KEY_STORAGE);
+  } catch {
+    // ignore
+  }
+}
+
+// Helper per costruire gli headers delle fetch AI con la key utente se presente
+export function getAiHeaders(): Record<string, string> {
+  const userKey = getGeminiApiKey();
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (userKey && userKey.startsWith('AIza')) {
+    headers['x-user-api-key'] = userKey;
+  }
+  return headers;
+}

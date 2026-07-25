@@ -20,7 +20,7 @@ import { useTheme } from '../lib/ThemeContext';
 import { useLanguage } from '../lib/LanguageContext';
 import { Language } from '../lib/i18n';
 import { soundEngine } from '../lib/soundEngine';
-import { StreakInfo } from '../lib/storage';
+import { StreakInfo, getGeminiApiKey, setGeminiApiKey } from '../lib/storage';
 
 interface SettingsDrawerModalProps {
   isOpen: boolean;
@@ -42,6 +42,8 @@ export default function SettingsDrawerModal({
   const isMocha = syntaxTheme === 'mocha';
 
   const [soundMuted, setSoundMuted] = useState<boolean>(() => soundEngine.getMuted());
+  const [geminiKey, setGeminiKey] = useState<string>(() => getGeminiApiKey() || '');
+  const [keySaved, setKeySaved] = useState(false);
 
   const handleToggleSound = () => {
     const isMutedNow = soundEngine.toggleMute();
@@ -194,6 +196,64 @@ export default function SettingsDrawerModal({
                   Vedi Badge
                 </button>
               </div>
+            </div>
+
+            {/* BYOK: Gemini API Key */}
+            <div className="p-4 rounded-xl border space-y-3" style={{ backgroundColor: 'var(--ctp-surface0)', borderColor: 'var(--ctp-surface1)' }}>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold" style={{ color: 'var(--ctp-blue)' }}>
+                <Sparkles className="w-4 h-4" />
+                <span>AI API Key (BYOK)</span>
+              </div>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'var(--ctp-subtext0)' }}>
+                Usa la tua Gemini API key gratuita per le funzioni AI. Ottienila gratis su{' '}
+                <a
+                  href="https://aistudio.google.com/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-bold"
+                  style={{ color: 'var(--ctp-blue)' }}
+                >
+                  aistudio.google.com/apikey
+                </a>
+                . La key resta nel tuo browser, non viene mai inviata al server se non per le chiamate AI.
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="password"
+                  value={geminiKey}
+                  onChange={(e) => {
+                    setGeminiKey(e.target.value);
+                    setKeySaved(false);
+                  }}
+                  placeholder="AIza..."
+                  className="flex-1 px-3 py-2 rounded-lg border text-xs font-mono"
+                  style={{
+                    backgroundColor: 'var(--ctp-mantle)',
+                    color: 'var(--ctp-text)',
+                    borderColor: 'var(--ctp-surface2)'
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    setGeminiApiKey(geminiKey);
+                    setKeySaved(true);
+                    soundEngine.playTick();
+                  }}
+                  className="px-3 py-2 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1"
+                  style={{
+                    backgroundColor: keySaved ? 'rgba(64, 160, 43, 0.15)' : 'var(--ctp-surface1)',
+                    color: keySaved ? 'var(--ctp-green)' : 'var(--ctp-blue)',
+                    borderColor: keySaved ? 'var(--ctp-green)' : 'var(--ctp-surface2)'
+                  }}
+                >
+                  {keySaved ? <Check className="w-3.5 h-3.5" /> : 'Salva'}
+                </button>
+              </div>
+              {keySaved && (
+                <p className="text-[11px] font-mono" style={{ color: 'var(--ctp-green)' }}>
+                  Key salvata. Le funzioni AI useranno la tua key.
+                </p>
+              )}
             </div>
           </div>
         </motion.div>

@@ -22,12 +22,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    // BYOK: l'utente puo fornire la propria Gemini API key (free da aistudio.google.com)
+    // Fallback sulla key server se non presente
+    const userApiKey = req.headers.get('x-user-api-key');
+    const apiKey = (userApiKey && userApiKey.startsWith('AIza')) ? userApiKey : process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error("GEMINI_API_KEY not configured in environment");
       return NextResponse.json(
-        { error: "NO_API_KEY", message: "AI service is not configured." },
+        { error: "NO_API_KEY", message: "AI service is not configured. Add your free Gemini API key in Settings or contact the admin." },
         { status: 503 }
       );
     }

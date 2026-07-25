@@ -6,6 +6,7 @@ import { Sparkles, Wand2, X, AlertCircle, Play, CheckCircle2 } from 'lucide-reac
 import { useLanguage } from '../lib/LanguageContext';
 import { Sfida } from '../lib/types';
 import { soundEngine } from '../lib/soundEngine';
+import { getAiHeaders } from '../lib/storage';
 
 interface AiQuestGeneratorModalProps {
   isOpen: boolean;
@@ -33,7 +34,7 @@ export default function AiQuestGeneratorModal({
     try {
       const res = await fetch('/api/gemini/generate-quest', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAiHeaders(),
         body: JSON.stringify({
           topic,
           difficulty,
