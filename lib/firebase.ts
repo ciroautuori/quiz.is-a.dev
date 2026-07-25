@@ -17,13 +17,17 @@ import {
 } from 'firebase/firestore';
 
 // Fail-loud: nessun fallback hardcoded. Se le env mancano, l'app non parte.
+const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build';
+const placeholder = (val: string | undefined, key: string) =>
+  val || (isBuildPhase ? `build-placeholder-${key}` : '');
+
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: placeholder(process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 'apiKey'),
+  authDomain: placeholder(process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, 'authDomain'),
+  projectId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID, 'projectId'),
+  storageBucket: placeholder(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET, 'storageBucket'),
+  messagingSenderId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID, 'senderId'),
+  appId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_APP_ID, 'appId'),
   firestoreDatabaseId: "(default)",
 };
 
@@ -42,8 +46,6 @@ if (missingEnv.length > 0) {
   const msg = `[Firebase] Variabili d'ambiente mancanti: ${missingEnv.join(', ')}. ` +
     `Configura .env.local (dev) o le env del container (prod).`;
   // Fail-loud solo a runtime (browser/server), mai durante next build
-  // next build setta NEXT_PHASE === 'phase-production-build'
-  const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build';
   if (process.env.NODE_ENV === 'production' && !isBuildPhase) {
     throw new Error(msg);
   }
