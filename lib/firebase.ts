@@ -45,8 +45,9 @@ const missingEnv = requiredFirebaseEnv.filter((key) => !process.env[key]);
 if (missingEnv.length > 0) {
   const msg = `[Firebase] Variabili d'ambiente mancanti: ${missingEnv.join(', ')}. ` +
     `Configura .env.local (dev) o le env del container (prod).`;
-  // Fail-loud solo a runtime (browser/server), mai durante next build
-  if (process.env.NODE_ENV === 'production' && !isBuildPhase) {
+  // Fail-loud solo lato server in produzione, mai nel browser o durante next build
+  const isServer = typeof window === 'undefined';
+  if (process.env.NODE_ENV === 'production' && !isBuildPhase && isServer) {
     throw new Error(msg);
   }
   console.warn(msg);
