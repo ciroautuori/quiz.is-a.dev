@@ -1,18 +1,62 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, BookOpen, BarChart3, Download } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
+import { db } from '../lib/firebase';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 
-const MOCK_STUDENTS = [
-  { id: 1, name: 'Alice Smith', progress: 85, assignments: 12, grade: 'A' },
-  { id: 2, name: 'Bob Johnson', progress: 42, assignments: 5, grade: 'C' },
-  { id: 3, name: 'Charlie Davis', progress: 100, assignments: 15, grade: 'A+' },
-];
+interface StudentData {
+  id: string;
+  name: string;
+  progress: number;
+  assignments: number;
+  grade: string;
+}
+
+// Converte un punteggio in lettera voto
+function scoreToGrade(score: number): string {
+  if (score >= 95) return 'A+';
+  if (score >= 85) return 'A';
+  if (score >= 75) return 'B';
+  if (score >= 60) return 'C';
+  if (score >= 50) return 'D';
+  return 'F';
+}
 
 export default function ClassroomDashboard() {
-  const { language, t } = useLanguage();
-  const [students] = useState(MOCK_STUDENTS);
+  const { t } = useLanguage();
+  const [students, setStudents] = useState<StudentData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadStudents() {
+      try {
+        const q = query(collection(db, 'leaderboard'), orderBy('punteggio', 'desc'), limit(50));
+        const snapshot = await getDocs(q);
+        const data: StudentData[] = snapshot.docs.map((doc, idx) => {
+          const d = doc.data();
+          const punteggio = (d.punteggio as number) || 0;
+          const accuratezza = (d.accuratezza as number) || 0;
+          const nome = (d.nome as string) || (d.nome as string) || `Student ${idx + 1}`;
+          return {
+            id: doc.id,
+            name: nome,
+            progress: Math.round(accuratezza),
+            assignments: Math.floor(punteggio / 100),
+            grade: scoreToGrade(accuratezza),
+          };
+        });
+        setStudents(data);
+      } catch (err) {
+        setError('Unable to load classroom data');
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadStudents();
+  }, []);
 
   const exportCSV = () => {
     const headers = ['ID', 'Name', 'Progress (%)', 'Assignments', 'Grade'];
@@ -29,6 +73,42 @@ export default function ClassroomDashboard() {
     a.click();
     window.URL.revokeObjectURL(url);
   };
+
+  if (loading) {
+    return (
+      <div className="p-6 max-w-7xl mx-auto">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow border h-24"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6 max-w-7xl mx-auto">
+        <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+          <p className="text-red-600 font-medium">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (students.length === 0) {
+    return (
+      <div className="p-6 max-w-7xl mx-auto">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-12 text-center">
+          <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-500 text-lg">{t.noStudents || 'No students enrolled yet'}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
