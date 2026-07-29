@@ -11,7 +11,7 @@
 [![WASM Engine](https://img.shields.io/badge/Pyodide-WASM-blue)](https://pyodide.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-[🌐 Live App (DuckDNS)](http://questdev.duckdns.org) · [🌐 Live App (IP)](http://51.89.43.46) · [⭐ Star this Repo](https://github.com/ciroautuori/quiz.is-a.dev)
+[🌐 Live App](http://questdev.duckdns.org) · [⭐ Star this Repo](https://github.com/ciroautuori/quiz.is-a.dev)
 
 </div>
 
