@@ -35,6 +35,7 @@ export default function Navbar({
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
+    if (!auth || !auth.app) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });

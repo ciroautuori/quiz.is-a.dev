@@ -33,6 +33,10 @@ export default function ClassroomDashboard() {
   useEffect(() => {
     async function loadStudents() {
       try {
+        if (!db || !db.type) {
+          setLoading(false);
+          return;
+        }
         const q = query(collection(db, 'leaderboard'), orderBy('punteggio', 'desc'), limit(50));
         const snapshot = await getDocs(q);
         const data: StudentData[] = snapshot.docs.map((doc, idx) => {

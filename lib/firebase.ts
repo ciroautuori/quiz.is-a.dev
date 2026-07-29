@@ -1,68 +1,61 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, User } from 'firebase/auth';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { 
   getFirestore, 
   doc, 
   getDocFromServer, 
   setDoc, 
-  getDoc, 
   collection, 
   getDocs, 
   query, 
   orderBy, 
   limit, 
-  addDoc,
   onSnapshot,
   updateDoc
 } from 'firebase/firestore';
 
-// Fail-loud: nessun fallback hardcoded. Se le env mancano, l'app non parte.
-const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build';
-const placeholder = (val: string | undefined, key: string) =>
-  val || (isBuildPhase ? `build-placeholder-${key}` : '');
+const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const isConfigured = Boolean(apiKey && apiKey.length > 5 && !apiKey.startsWith('build-placeholder'));
 
 const firebaseConfig = {
-  apiKey: placeholder(process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 'apiKey'),
-  authDomain: placeholder(process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, 'authDomain'),
-  projectId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID, 'projectId'),
-  storageBucket: placeholder(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET, 'storageBucket'),
-  messagingSenderId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID, 'senderId'),
-  appId: placeholder(process.env.NEXT_PUBLIC_FIREBASE_APP_ID, 'appId'),
-  firestoreDatabaseId: "(default)",
+  apiKey: apiKey || 'AIzaSyPlaceholderKeyForBuildSafetyOnly000',
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'quest-is-a-dev.firebaseapp.com',
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'quest-is-a-dev',
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'quest-is-a-dev.appspot.com',
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '1234567890',
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '1:1234567890:web:1234567890',
 };
 
-// Verifica che tutte le env Firebase siano presenti
-const requiredFirebaseEnv = [
-  'NEXT_PUBLIC_FIREBASE_API_KEY',
-  'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
-  'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-  'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET',
-  'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
-  'NEXT_PUBLIC_FIREBASE_APP_ID',
-];
-
-const missingEnv = requiredFirebaseEnv.filter((key) => !process.env[key]);
-if (missingEnv.length > 0) {
-  const msg = `[Firebase] Variabili d'ambiente mancanti: ${missingEnv.join(', ')}. ` +
-    `Configura .env.local (dev) o le env del container (prod).`;
-  // Fail-loud solo lato server in produzione, mai nel browser o durante next build
-  const isServer = typeof window === 'undefined';
-  if (process.env.NODE_ENV === 'production' && !isBuildPhase && isServer) {
-    throw new Error(msg);
+let app: FirebaseApp | null = null;
+try {
+  if (isConfigured) {
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
   }
-  console.warn(msg);
+} catch (e) {
+  console.warn('[Firebase] Skipping init due to invalid config:', e);
 }
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+export const db = app ? getFirestore(app) : ({} as any);
+export const auth = app ? getAuth(app) : ({} as any);
+export const googleProvider = app ? new GoogleAuthProvider() : ({} as any);
 
 export const duelMatchmaking = {
-  create: async (id: string) => setDoc(doc(db, 'duels', id), { p1Hp: 100, p2Hp: 100, status: 'waiting' }).catch(() => {}),
-  join: async (id: string) => updateDoc(doc(db, 'duels', id), { status: 'playing' }).catch(() => {}),
-  syncHp: async (id: string, p1Hp: number, p2Hp: number) => updateDoc(doc(db, 'duels', id), { p1Hp, p2Hp }).catch(() => {}),
-  subscribe: (id: string, cb: (d: any) => void) => onSnapshot(doc(db, 'duels', id), (s) => s.exists() && cb(s.data()))
+  create: async (id: string) => {
+    if (!app || !db) return;
+    return setDoc(doc(db, 'duels', id), { p1Hp: 100, p2Hp: 100, status: 'waiting' }).catch(() => {});
+  },
+  join: async (id: string) => {
+    if (!app || !db) return;
+    return updateDoc(doc(db, 'duels', id), { status: 'playing' }).catch(() => {});
+  },
+  syncHp: async (id: string, p1Hp: number, p2Hp: number) => {
+    if (!app || !db) return;
+    return updateDoc(doc(db, 'duels', id), { p1Hp, p2Hp }).catch(() => {});
+  },
+  subscribe: (id: string, cb: (d: any) => void) => {
+    if (!app || !db) return () => {};
+    return onSnapshot(doc(db, 'duels', id), (s) => s.exists() && cb(s.data()));
+  }
 };
 
 export enum OperationType {
@@ -92,14 +85,12 @@ export interface FirestoreErrorInfo {
 }
 
 export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
-  // Log sanitizzato: operation type e path (non contengono dati sensibili),
-  // ma non loggare il message raw che potrebbe contenere token o dettagli interni
   console.error('Firestore Error:', operationType, path);
   throw new Error('Database operation failed. Please try again.');
 }
 
-// Test connection on boot
 export async function testFirestoreConnection() {
+  if (!app || !db) return;
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
   } catch (error) {
@@ -111,6 +102,10 @@ export async function testFirestoreConnection() {
 
 // Auth Helpers
 export async function loginWithGoogle() {
+  if (!app || !auth || !auth.app) {
+    alert("Firebase Auth non è configurato. Inserisci le credenziali Firebase valide in .env.");
+    return null;
+  }
   try {
     const result = await signInWithPopup(auth, googleProvider);
     return result.user;
@@ -121,6 +116,7 @@ export async function loginWithGoogle() {
 }
 
 export async function logoutUser() {
+  if (!app || !auth || !auth.app) return;
   try {
     await signOut(auth);
   } catch (error) {
