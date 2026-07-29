@@ -16,12 +16,39 @@ interface CertificateModalProps {
   totalCount?: number;
 }
 
+async function safeSha256(input: string): Promise<string> {
+  if (typeof window !== 'undefined' && window.crypto && window.crypto.subtle) {
+    try {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(input);
+      const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
+    } catch {
+      // Fallback below
+    }
+  }
+
+  let h1 = 0x811c9dc5;
+  let h2 = 0x01000193;
+  for (let i = 0; i < input.length; i++) {
+    const charCode = input.charCodeAt(i);
+    h1 = Math.imul(h1 ^ charCode, 0x01000193);
+    h2 = Math.imul(h2 ^ charCode, 0x811c9dc5);
+  }
+  const part1 = (h1 >>> 0).toString(16).padStart(8, '0');
+  const part2 = (h2 >>> 0).toString(16).padStart(8, '0');
+  const part3 = ((h1 ^ h2) >>> 0).toString(16).padStart(8, '0');
+  const part4 = ((h1 + h2) >>> 0).toString(16).padStart(8, '0');
+  return `${part1}${part2}${part3}${part4}`;
+}
+
 export default function CertificateModal({
   isOpen,
   onClose,
   studentName = 'DevQuest Master Student',
   trackName = 'Python Master Developer Track',
-  // completedCount and totalCount are optional and kept for interface compliance
 }: CertificateModalProps) {
   const { language, t } = useLanguage();
   const [nameInput, setNameInput] = useState(studentName);
@@ -30,11 +57,7 @@ export default function CertificateModal({
 
   useEffect(() => {
     async function generateHash() {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(`${nameInput}-${trackName}-${new Date().toISOString()}`);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const hashHex = await safeSha256(`${nameInput}-${trackName}-${new Date().toISOString()}`);
       setHash(hashHex.substring(0, 16).toUpperCase());
     }
     generateHash();
@@ -47,10 +70,7 @@ export default function CertificateModal({
   const generateOpenBadgeJSON = async () => {
     try {
       const salt = "devquest_salt_2026";
-      const encoder = new TextEncoder();
-      const recipientData = encoder.encode(`${nameInput.toLowerCase()}$${salt}`);
-      const recipientBuffer = await crypto.subtle.digest('SHA-256', recipientData);
-      const recipientHex = Array.from(new Uint8Array(recipientBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+      const recipientHex = await safeSha256(`${nameInput.toLowerCase()}$${salt}`);
 
     const badge = {
       "@context": "https://w3id.org/openbadges/v2",
